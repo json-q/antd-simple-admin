@@ -1,0 +1,15 @@
+*.sh
+node_modules
+dist
+*.woff
+*.ttf
+.vscode
+.idea
+.husky
+.local
+/bin
+mock
+
+# cache
+.eslintcache
+.stylelintcache
