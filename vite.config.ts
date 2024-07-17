@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
 import { compression } from "vite-plugin-compression2";
 import { visualizer } from "rollup-plugin-visualizer";
+import { manualChunksPlugin } from "vite-plugin-webpackchunkname";
 
 // https://vitejs.dev/config/
 export default defineConfig((mode) => {
@@ -14,6 +15,7 @@ export default defineConfig((mode) => {
       react(),
       viteEnv.VITE_REPORT && visualizer(),
       viteEnv.VITE_BUILD_GZIP && compression({ threshold: 1025 }),
+      manualChunksPlugin(),
     ],
     resolve: {
       alias: {
@@ -52,7 +54,16 @@ export default defineConfig((mode) => {
           // Static resource classification and packaging
           chunkFileNames: "js/chunk-[name]-[hash].js",
           entryFileNames: "js/[name]-[hash].js",
-          assetFileNames: "[ext]/[name]-[hash].[ext]", // 可自定义生成的文件夹名，可接收函数的返回值
+          assetFileNames: "[ext]/[name]-[hash].[ext]",
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              if (["react", "react-dom", "react-router-dom"].some((item) => id.includes(item))) {
+                return "react";
+              }
+              //最小化拆分包
+              return id.toString().split("node_modules/")[1].split("/")[0].toString();
+            }
+          },
         },
       },
     },
