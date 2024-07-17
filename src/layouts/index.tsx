@@ -1,10 +1,6 @@
 import { memo, Suspense } from "react";
-import { Layout } from "antd";
 import LazyLoading from "./common/LazyLoading";
-import PageSider from "./components/PageSider";
-import PageHeader from "./components/PageHeader";
-
-const { Content } = Layout;
+import PageResponsive from "./components/PageResponsive";
 
 type PageLayoutProps = {
   children?: React.ReactNode;
@@ -21,15 +17,7 @@ const PageLayout: React.FC<PageLayoutProps> = memo((props) => {
     return lazyChildren;
   }
 
-  return (
-    <Layout className="min-h-full flex-row">
-      <PageSider />
-      <Layout>
-        <PageHeader />
-        <Content>{lazyChildren}</Content>
-      </Layout>
-    </Layout>
-  );
+  return <PageResponsive>{lazyChildren}</PageResponsive>;
 });
 
 export default PageLayout;

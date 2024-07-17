@@ -25,16 +25,15 @@ const BaseMenu: React.FC = memo(() => {
         .map((item) => {
           const icon = item.icon;
           const label = item.title || item.meta?.title;
+          const hasChildren = isArray(item.children) && item.children.length > 0;
 
           const menuItem: MenuItemType & Partial<SubMenuType> = {
-            label: item.children ? label : <Link to={item.path}>{label}</Link>,
+            label: hasChildren ? label : <Link to={item.path}>{label}</Link>,
             key: item.path,
             icon: icon ? createElement(icon) : null,
           };
 
-          if (isArray(item.children) && item.children.length > 0) {
-            menuItem.children = convertMenu(item.children);
-          }
+          if (hasChildren) menuItem.children = convertMenu(item.children!);
 
           return menuItem;
         });
@@ -45,14 +44,15 @@ const BaseMenu: React.FC = memo(() => {
   return (
     <div className={styles.menuWrapper}>
       <Menu
-        openKeys={openKeys}
-        selectedKeys={selectedKeys}
-        onSelect={({ key }) => setSelectedKeys([key])}
-        onOpenChange={setOpenKeys}
-        theme="light"
+        theme="dark"
         className="min-h-full"
         mode="inline"
+        inlineIndent={16}
         items={convertMenu(routes)}
+        openKeys={openKeys}
+        onOpenChange={setOpenKeys}
+        selectedKeys={selectedKeys}
+        onSelect={({ key }) => setSelectedKeys([key])}
       />
     </div>
   );

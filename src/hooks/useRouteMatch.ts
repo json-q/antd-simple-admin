@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import routes, { type IRouter } from "@/routes";
 import { has, isArray } from "lodash-es";
+import routes, { type IRouter } from "@/routes";
 
 type TMatchRoute = { matchRoute: IRouter | undefined; treeMatchRoute: IRouter[] };
 
@@ -46,7 +46,7 @@ export default function useRouteMatch(): TMatchRoute {
         continue;
       }
     },
-    [routes],
+    [routes, pathname],
   );
 
   return matchRoute;

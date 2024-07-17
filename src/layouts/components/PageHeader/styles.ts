@@ -6,6 +6,8 @@ const useHeaderStyles = createStyles(({ css, token }) => ({
     top: 0;
     z-index: 100;
     padding: 0 16px;
+    height: ${token.customHeaderHeight}px;
+    line-height: ${token.customHeaderHeight}px;
     background-color: ${token.colorBgContainer};
     border-bottom: 1px solid ${token.colorBorderSecondary};
     backdrop-filter: blur(8px);

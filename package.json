@@ -68,5 +68,11 @@
   "simple-git-hooks": {
     "pre-commit": "npx pretty-quick --staged && npm run eslint && npm run stylelint",
     "commit-msg": "node scripts/verify-commit.js"
-  }
+  },
+  "broserlist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
 }

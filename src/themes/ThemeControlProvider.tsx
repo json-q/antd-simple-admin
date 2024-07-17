@@ -1,6 +1,6 @@
-import useStore from "@/stores";
+import { useEffect } from "react";
 import { ThemeProvider } from "antd-style";
-import React, { useEffect } from "react";
+import useStore from "@/stores";
 
 interface ThemeControlProviderProps {
   children: React.ReactNode;
@@ -13,7 +13,16 @@ const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children })
     document.querySelector("html")?.setAttribute("data-prefers-color", themeMode);
   }, [themeMode]);
 
-  return <ThemeProvider appearance={themeMode}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider
+      appearance={themeMode}
+      customToken={{
+        customHeaderHeight: 48,
+      }}
+    >
+      {children}
+    </ThemeProvider>
+  );
 };
 
 export default ThemeControlProvider;

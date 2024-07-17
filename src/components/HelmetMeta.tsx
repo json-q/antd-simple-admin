@@ -4,12 +4,13 @@ import useRouteMatch from "@/hooks/useRouteMatch";
 
 const HelmetMeta: React.FC = memo(() => {
   const { matchRoute } = useRouteMatch();
+  const title = matchRoute?.title || matchRoute?.meta?.title;
 
   return (
     <HelmetProvider>
       <Helmet>
         <title>
-          {matchRoute?.meta?.title ? `${matchRoute.meta.title} - ` : ""}
+          {title ? `${title} - ` : ""}
           {import.meta.env.VITE_APP_TITLE}
         </title>
       </Helmet>
