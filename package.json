@@ -28,6 +28,7 @@
     "react-fast-compare": "^3.2.2",
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.25.1",
+    "simplebar-react": "^3.2.6",
     "zustand": "^4.5.4"
   },
   "devDependencies": {

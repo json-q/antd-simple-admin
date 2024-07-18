@@ -15,12 +15,12 @@ const useStore = createWithEqualityFn<Store>()(
         }),
         {
           name: "settins-config", // 本地缓存 name=>key 。partialize 函数 => return 缓存内容
-          // partialize: (state) => ({
-          //   // colorPrimary: state.colorPrimary,
-          //   // themeMode: state.themeMode,
-          //   // layoutMode: state.layoutMode,
-          //   // sizeMode: state.sizeMode,
-          // }),
+          partialize: () => ({
+            // colorPrimary: state.colorPrimary,
+            // themeMode: state.themeMode,
+            // layoutMode: state.layoutMode,
+            // sizeMode: state.sizeMode,
+          }),
         },
       ),
       {

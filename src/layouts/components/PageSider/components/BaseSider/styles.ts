@@ -2,7 +2,8 @@ import { createStyles } from "antd-style";
 
 const useSiderStyles = createStyles(({ css, token }) => ({
   sider: css`
-    height: 100vh;
+    height: calc(100vh - ${token.customHeaderHeight}px);
+
     &.ant-layout-sider {
       background: ${token.colorBgContainer};
     }

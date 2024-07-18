@@ -4,12 +4,15 @@ import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
 import { has, isArray } from "lodash-es";
 import routes, { type IRouter } from "@/routes";
-import useMenuWrapperStyles from "./styles";
+import useStore from "@/stores";
 import useRouteMatch from "@/hooks/useRouteMatch";
+import useMenuWrapperStyles from "./styles";
+import SimpleBar from "simplebar-react";
 
 const BaseMenu: React.FC = memo(() => {
-  const { styles } = useMenuWrapperStyles();
+  const { styles, cx } = useMenuWrapperStyles();
   const { matchRoute, treeMatchRoute } = useRouteMatch();
+  const menuMode = useStore((state) => state.menuMode);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
@@ -42,9 +45,9 @@ const BaseMenu: React.FC = memo(() => {
   );
 
   return (
-    <div className={styles.menuWrapper}>
+    <SimpleBar className={cx(styles.menuWrapper)}>
       <Menu
-        theme="dark"
+        theme={menuMode}
         className="min-h-full"
         mode="inline"
         inlineIndent={16}
@@ -54,7 +57,7 @@ const BaseMenu: React.FC = memo(() => {
         selectedKeys={selectedKeys}
         onSelect={({ key }) => setSelectedKeys([key])}
       />
-    </div>
+    </SimpleBar>
   );
 });
 

@@ -1,18 +1,21 @@
+import type { MenuTheme } from "antd";
+import type { ThemeAppearance } from "antd-style";
 import type { StateCreator } from "zustand";
 
-export type GlobalThemeMode = "light" | "dark";
-export type SizeModeType = "default" | "small";
-
 export type LayoutSliceType = {
-  themeMode: GlobalThemeMode;
-  actionThemeMode: (themeMode: GlobalThemeMode) => void;
+  menuMode: MenuTheme;
+  themeMode: ThemeAppearance;
+  actionThemeMode: (themeMode: ThemeAppearance) => void;
+  actionMenuMode: (themeMode: MenuTheme) => void;
 };
 
 // zustand TS 切片用法：https://docs.pmnd.rs/zustand/guides/typescript#slices-pattern
 
-const layoutSlice: StateCreator<LayoutSliceType> = () => ({
+const layoutSlice: StateCreator<LayoutSliceType> = (set) => ({
   themeMode: "light",
-  actionThemeMode: (themeMode) => ({ themeMode }),
+  menuMode: "light",
+  actionThemeMode: (themeMode) => set({ themeMode }),
+  actionMenuMode: (menuMode) => set({ menuMode }),
   // resetSettings: () =>
   //   set(() => ({
   //     colorPrimary: "#1677ff",
