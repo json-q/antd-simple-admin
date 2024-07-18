@@ -2,4 +2,4 @@
 * text=auto eol=lf
 
 # 不修改二进制文件的行尾，被 git 识别为文本文件修改会造成文件损坏
-*.png binary
+*.{ico,png,jpg,jpeg,gif,webp,svg,woff,woff2} binary
