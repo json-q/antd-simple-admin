@@ -7,15 +7,16 @@
   color-scheme: light;
 }
 
-// simplebar css hack
-.simplebar-scrollbar::before {
-  width: 4px;
+[data-prefers-color="dark"] .os-theme-dark {
+  --os-size: 8px;
+  --os-handle-bg: #686868;
+  --os-handle-bg-hover: #7b7b7b;
+  --os-handle-bg-active: #a1a1a1;
 }
 
-[data-prefers-color="light"] .simplebar-scrollbar::before {
-  background-color: #c1c1c1;
-}
-
-[data-prefers-color="dark"] .simplebar-scrollbar::before {
-  background-color: #686868;
+[data-prefers-color="light"] .os-theme-dark {
+  --os-size: 8px;
+  --os-handle-bg: #c1c1c1;
+  --os-handle-bg-hover: #a8a8a8;
+  --os-handle-bg-active: #787878;
 }

@@ -1,5 +1,6 @@
 import { createElement, memo, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
 import { has, isArray } from "lodash-es";
@@ -7,7 +8,6 @@ import routes, { type IRouter } from "@/routes";
 import useStore from "@/stores";
 import useRouteMatch from "@/hooks/useRouteMatch";
 import useMenuWrapperStyles from "./styles";
-import SimpleBar from "simplebar-react";
 
 const BaseMenu: React.FC = memo(() => {
   const { styles, cx } = useMenuWrapperStyles();
@@ -45,7 +45,11 @@ const BaseMenu: React.FC = memo(() => {
   );
 
   return (
-    <SimpleBar className={cx(styles.menuWrapper)}>
+    <OverlayScrollbarsComponent
+      defer
+      options={{ scrollbars: { autoHide: "leave", autoHideDelay: 200 } }}
+      className={cx(styles.menuWrapper)}
+    >
       <Menu
         theme={menuMode}
         className="min-h-full"
@@ -57,7 +61,7 @@ const BaseMenu: React.FC = memo(() => {
         selectedKeys={selectedKeys}
         onSelect={({ key }) => setSelectedKeys([key])}
       />
-    </SimpleBar>
+    </OverlayScrollbarsComponent>
   );
 });
 

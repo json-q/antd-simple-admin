@@ -1,12 +1,8 @@
 import { createStyles } from "antd-style";
 
-const useMenuWrapperStyles = createStyles(({ css }) => ({
+const useMenuWrapperStyles = createStyles(({ css, token }) => ({
   menuWrapper: css`
-    height: 100%;
-
-    .simplebar-content {
-      height: 100%;
-    }
+    height: calc(100vh - ${token.customHeaderHeight}px);
   `,
 }));
 
