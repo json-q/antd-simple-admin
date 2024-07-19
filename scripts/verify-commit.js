@@ -17,7 +17,7 @@ if (!commitRE.test(msg)) {
       pico.red(`  you should submit good message format. Examples:\n\n`) +
       `    ${pico.green(`feat: add a new feature`)}\n` +
       `    ${pico.green(`fix: fixed a logic bug`)}\n\n` +
-      pico.red(`or you can install <git-commit-plugin> to complete commit.\n`),
+      pico.red(`please see scripts/verify-commit.js to complete commit.\n`),
   );
   process.exit(1);
 }
