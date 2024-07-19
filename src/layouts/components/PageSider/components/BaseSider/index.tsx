@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { createContext, memo, useState } from "react";
 import { Layout } from "antd";
 import useSiderStyles from "./styles";
 
@@ -7,6 +7,12 @@ const { Sider } = Layout;
 interface BaseSiderProps {
   children?: React.ReactNode;
 }
+
+export interface SiderContextType {
+  collapsed: boolean;
+}
+
+export const SiderContext = createContext<SiderContextType | null>(null);
 
 const BaseSider: React.FC<BaseSiderProps> = memo(({ children }) => {
   const { styles } = useSiderStyles();
@@ -21,7 +27,7 @@ const BaseSider: React.FC<BaseSiderProps> = memo(({ children }) => {
       breakpoint="lg"
       onBreakpoint={setCollapsed}
     >
-      {children}
+      <SiderContext.Provider value={{ collapsed }}>{children}</SiderContext.Provider>
     </Sider>
   );
 });

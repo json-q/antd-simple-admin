@@ -1,7 +1,5 @@
 /// <reference types="vite/client" />
 
-import "antd-style";
-
 interface ImportMetaEnv {
   /** 网站标题 */
   readonly VITE_APP_TITLE: string;
@@ -23,12 +21,4 @@ interface ImportMetaEnv {
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
-}
-
-interface NewToken {
-  customHeaderHeight: number;
-}
-
-declare module "antd-style" {
-  export interface CustomToken extends NewToken {}
 }

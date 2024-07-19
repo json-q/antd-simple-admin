@@ -9,8 +9,10 @@ import useStore from "@/stores";
 import useRouteMatch from "@/hooks/useRouteMatch";
 import useMenuWrapperStyles from "./styles";
 
+type MenusType = MenuItemType & Partial<SubMenuType>;
+
 const BaseMenu: React.FC = memo(() => {
-  const { styles, cx } = useMenuWrapperStyles();
+  const { styles } = useMenuWrapperStyles();
   const { matchRoute, treeMatchRoute } = useRouteMatch();
   const menuMode = useStore((state) => state.menuMode);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
@@ -21,34 +23,31 @@ const BaseMenu: React.FC = memo(() => {
     setOpenKeys(treeMatchRoute?.map((item) => item.path));
   }, [matchRoute]);
 
-  const convertMenu = useCallback(
-    (routes: IRouter[]) => {
-      return routes
-        .filter((item) => !has(item, "redirect") && item.layout !== false) // 过滤掉非菜单项
-        .map((item) => {
-          const icon = item.icon;
-          const label = item.title || item.meta?.title;
-          const hasChildren = isArray(item.children) && item.children.length > 0;
+  const convertMenu = useCallback((routes: IRouter[]) => {
+    return routes
+      .filter((item) => !has(item, "redirect") && item.layout !== false) // 过滤掉非菜单项
+      .map((item) => {
+        const icon = item.icon;
+        const label = item.title || item.meta?.title;
+        const hasChildren = isArray(item.children) && item.children.length > 0;
 
-          const menuItem: MenuItemType & Partial<SubMenuType> = {
-            label: hasChildren ? label : <Link to={item.path}>{label}</Link>,
-            key: item.path,
-            icon: icon ? createElement(icon) : null,
-          };
+        const menuItem: MenusType = {
+          label: hasChildren ? label : <Link to={item.path}>{label}</Link>,
+          key: item.path,
+          icon: icon ? createElement(icon) : null,
+        };
 
-          if (hasChildren) menuItem.children = convertMenu(item.children!);
+        if (hasChildren) menuItem.children = convertMenu(item.children!);
 
-          return menuItem;
-        });
-    },
-    [routes],
-  );
+        return menuItem;
+      });
+  }, []);
 
   return (
     <OverlayScrollbarsComponent
       defer
       options={{ scrollbars: { autoHide: "leave", autoHideDelay: 200 } }}
-      className={cx(styles.menuWrapper)}
+      className={styles.menuWrapper}
     >
       <Menu
         theme={menuMode}
