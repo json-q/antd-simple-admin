@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
-    "antd": "^5.19.2",
+    "antd": "^5.19.3",
     "antd-style": "^3.6.2",
     "axios": "^1.7.2",
-    "dayjs": "^1.11.11",
+    "dayjs": "^1.11.12",
     "immer": "^10.1.1",
     "keepalive-for-react": "^2.0.8",
     "lodash-es": "^4.17.21",
