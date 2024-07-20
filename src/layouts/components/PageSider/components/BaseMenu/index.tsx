@@ -5,7 +5,7 @@ import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
 import { has, isArray } from "lodash-es";
 import routes, { type IRouter } from "@/routes";
-import useStore from "@/stores";
+import { useSelector } from "@/stores";
 import useRouteMatch from "@/hooks/useRouteMatch";
 import useMenuWrapperStyles from "./styles";
 
@@ -14,7 +14,7 @@ type MenusType = MenuItemType & Partial<SubMenuType>;
 const BaseMenu: React.FC = memo(() => {
   const { styles } = useMenuWrapperStyles();
   const { matchRoute, treeMatchRoute } = useRouteMatch();
-  const menuMode = useStore((state) => state.menuMode);
+  const { menuMode } = useSelector(["menuMode"]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 

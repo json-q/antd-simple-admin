@@ -3,6 +3,7 @@ import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 import layoutSlice, { type LayoutSliceType } from "./modules/layoutSlice";
+import { pick } from "lodash-es";
 
 export type Store = LayoutSliceType;
 
@@ -14,13 +15,8 @@ const useStore = createWithEqualityFn<Store>()(
           ...layoutSlice(...args),
         }),
         {
-          name: "settins-config", // 本地缓存 name=>key 。partialize 函数 => return 缓存内容
-          partialize: () => ({
-            // colorPrimary: state.colorPrimary,
-            // themeMode: state.themeMode,
-            // layoutMode: state.layoutMode,
-            // sizeMode: state.sizeMode,
-          }),
+          name: "settings-config", // 本地缓存 name=>key 。partialize 函数 => return 缓存内容
+          partialize: () => ({}),
         },
       ),
       {
@@ -30,5 +26,9 @@ const useStore = createWithEqualityFn<Store>()(
   ),
   isEqual,
 );
+
+export const useSelector = <K extends keyof Store>(key: K[]) => {
+  return useStore((state) => pick(state, key));
+};
 
 export default useStore;

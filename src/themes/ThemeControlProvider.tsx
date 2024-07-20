@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { ThemeProvider } from "antd-style";
-import useStore from "@/stores";
+import { useSelector } from "@/stores";
 
 interface ThemeControlProviderProps {
   children: React.ReactNode;
 }
 
 const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children }) => {
-  const themeMode = useStore((state) => state.themeMode);
+  const { themeMode } = useSelector(["themeMode"]);
+  console.log("aaa");
 
   useEffect(() => {
     document.querySelector("html")?.setAttribute("data-prefers-color", themeMode);

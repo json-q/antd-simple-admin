@@ -1,6 +1,7 @@
-import { createContext, memo, useState } from "react";
+import { createContext, memo } from "react";
 import { Layout } from "antd";
 import useSiderStyles from "./styles";
+import { useSelector } from "@/stores";
 
 const { Sider } = Layout;
 
@@ -16,18 +17,18 @@ export const SiderContext = createContext<SiderContextType | null>(null);
 
 const BaseSider: React.FC<BaseSiderProps> = memo(({ children }) => {
   const { styles } = useSiderStyles();
-  const [collapsed, setCollapsed] = useState(false);
+  const { collapsed, actionCollapsed } = useSelector(["collapsed", "actionCollapsed"]);
 
   return (
     <Sider
       width={210}
       className={styles.sider}
       collapsed={collapsed}
-      onCollapse={setCollapsed}
+      onCollapse={actionCollapsed}
       breakpoint="lg"
-      onBreakpoint={setCollapsed}
+      onBreakpoint={actionCollapsed}
     >
-      <SiderContext.Provider value={{ collapsed }}>{children}</SiderContext.Provider>
+      {children}
     </Sider>
   );
 });

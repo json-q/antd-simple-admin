@@ -1,16 +1,14 @@
-import { memo, useContext } from "react";
+import { memo } from "react";
 import { Link } from "react-router-dom";
-import { SiderContext } from "../BaseSider";
 import useLogoStyles from "./styles";
-import useStore from "@/stores";
+import { useSelector } from "@/stores";
 
 const title = import.meta.env.VITE_APP_TITLE;
 const baseRouterName = import.meta.env.VITE_BASE_ROUTER_NAME;
 
 const BaseLogo: React.FC = memo(() => {
-  const menuMode = useStore((state) => state.menuMode);
+  const { menuMode, collapsed } = useSelector(["menuMode", "collapsed"]);
   const { styles } = useLogoStyles(menuMode);
-  const store = useContext(SiderContext);
 
   return (
     <div className={styles.logo}>
@@ -21,7 +19,7 @@ const BaseLogo: React.FC = memo(() => {
           src="https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg"
           alt="logo"
         />
-        {!store?.collapsed && <h1>{title}</h1>}
+        {!collapsed && <h1>{title}</h1>}
       </Link>
     </div>
   );

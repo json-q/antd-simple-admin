@@ -1,22 +1,21 @@
 import { Button, Layout } from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { useSelector } from "@/stores";
 import useHeaderStyles from "./styles";
-import useStore from "@/stores";
 
 const { Header } = Layout;
 
 const PageHeader: React.FC = () => {
   const { styles } = useHeaderStyles();
-
-  const { menuMode, themeMode, actionThemeMode, actionMenuMode } = useStore((state) => ({
-    ...state,
-  }));
+  const { collapsed, actionCollapsed } = useSelector(["collapsed", "actionCollapsed"]);
 
   return (
     <Header className={styles.header}>
-      <Button onClick={() => actionMenuMode(menuMode === "dark" ? "light" : "dark")}>Menu</Button>
-      <Button onClick={() => actionThemeMode(themeMode === "dark" ? "light" : "dark")}>
-        Theme
-      </Button>
+      <Button
+        type="text"
+        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        onClick={() => actionCollapsed(!collapsed)}
+      />
     </Header>
   );
 };
