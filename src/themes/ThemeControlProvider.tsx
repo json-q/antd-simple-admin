@@ -8,7 +8,6 @@ interface ThemeControlProviderProps {
 
 const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children }) => {
   const { themeMode } = useSelector(["themeMode"]);
-  console.log("aaa");
 
   useEffect(() => {
     document.querySelector("html")?.setAttribute("data-prefers-color", themeMode);

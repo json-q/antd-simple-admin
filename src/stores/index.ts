@@ -2,8 +2,8 @@ import isEqual from "react-fast-compare";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
-import layoutSlice, { type LayoutSliceType } from "./modules/layoutSlice";
 import { pick } from "lodash-es";
+import layoutSlice, { type LayoutSliceType } from "./modules/layoutSlice";
 
 export type Store = LayoutSliceType;
 

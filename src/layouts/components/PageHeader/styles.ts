@@ -4,13 +4,14 @@ const useHeaderStyles = createStyles(({ css, token }) => ({
   header: css`
     position: sticky;
     top: 0;
-    z-index: 100;
-    padding: 0 16px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 ${token.paddingSM}px;
     height: ${token.customHeaderHeight}px;
     line-height: ${token.customHeaderHeight}px;
     background-color: ${token.colorBgContainer};
     border-bottom: 1px solid ${token.colorBorderSecondary};
-    backdrop-filter: blur(8px);
   `,
 }));
 
