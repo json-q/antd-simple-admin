@@ -14,6 +14,7 @@ const useLogoStyles = createStyles(({ css, token }, menuMode: MenuTheme) => {
       height: ${token.customHeaderHeight}px;
       line-height: ${token.customHeaderHeight}px;
       padding: ${token.paddingContentHorizontal}px ${token.paddingContentVertical}px;
+      border-right: 1px solid ${token.colorBorderSecondary};
       color: ${color};
       background-color: ${bg};
       cursor: pointer;
@@ -48,9 +49,11 @@ const useLogoStyles = createStyles(({ css, token }, menuMode: MenuTheme) => {
               overflow: hidden;
               opacity: 0;
             }
+
             80% {
               overflow: hidden;
             }
+
             100% {
               display: unset;
               opacity: 1;
