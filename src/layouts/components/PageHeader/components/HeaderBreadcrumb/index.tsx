@@ -73,13 +73,9 @@ const HeaderBreadcrumb: React.FC = () => {
     return genBreadcumbsTree(match.treeMatchRoute);
   }, [pathname, routes]);
 
-  function itemRender(currentRoute: ItemType, _param: any, items: ItemType[]) {
-    const isLast = currentRoute?.href === items[items.length - 1]?.href;
-
-    // 最后一个是纯文本，items 是 dropdown，已处理，无需二次处理
-    if (isLast || currentRoute.menu?.items) return currentRoute.title;
-
-    return <Link to={currentRoute.href!}>{currentRoute.title}</Link>;
+  function itemRender(currentRoute: ItemType) {
+    // 生成时已完全处理，这里返回仅仅是为了不让 antd 再二次处理
+    return currentRoute.title;
   }
 
   return <Breadcrumb items={genBreadcumbs} itemRender={itemRender} />;
