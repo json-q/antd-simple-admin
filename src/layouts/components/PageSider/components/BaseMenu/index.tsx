@@ -24,23 +24,26 @@ const BaseMenu: React.FC = memo(() => {
   }, [matchRoute]);
 
   const convertMenu = useCallback((routes: IRouter[]) => {
-    return routes
-      .filter((item) => !has(item, "redirect") && item.layout !== false) // 过滤掉非菜单项
-      .map((item) => {
-        const icon = item.icon;
-        const label = item.title || item.meta?.title;
-        const hasChildren = isArray(item.children) && item.children.length > 0;
+    return (
+      routes
+        // 由于菜单页兼容重定向，index 区分菜单和首页重定向。过滤掉非菜单项和首页重定向
+        .filter((item) => !has(item, "index") && item.layout !== false)
+        .map((item) => {
+          const icon = item.icon;
+          const label = item.title || item.meta?.title;
+          const hasChildren = isArray(item.children) && item.children.length > 0;
 
-        const menuItem: MenusType = {
-          label: hasChildren ? label : <Link to={item.path}>{label}</Link>,
-          key: item.path,
-          icon: icon ? createElement(icon) : null,
-        };
+          const menuItem: MenusType = {
+            label: hasChildren ? label : <Link to={item.path}>{label}</Link>,
+            key: item.path,
+            icon: icon ? createElement(icon) : null,
+          };
 
-        if (hasChildren) menuItem.children = convertMenu(item.children!);
+          if (hasChildren) menuItem.children = convertMenu(item.children!);
 
-        return menuItem;
-      });
+          return menuItem;
+        })
+    );
   }, []);
 
   return (

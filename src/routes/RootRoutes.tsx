@@ -13,6 +13,8 @@ const renderRoutes: TRenderRoutesEl = (routes) => {
   return routes.map((route) => {
     const { component, path, children, redirect, layout } = route;
 
+    if (children) return renderRoutes(children);
+
     if (redirect) {
       return <Route key={path} path={path} element={<Navigate to={redirect} replace />} />;
     }
@@ -27,7 +29,7 @@ const renderRoutes: TRenderRoutesEl = (routes) => {
       );
     }
 
-    return children ? renderRoutes(children) : null;
+    return null;
   });
 };
 

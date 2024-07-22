@@ -15,6 +15,7 @@ const HeaderBreadcrumb: React.FC = () => {
 
     const genBreadcumbsTree = (treeRoutes: IRouter[], isChildren = false): ItemType[] => {
       return treeRoutes.map((item) => {
+        const { redirect, path } = item;
         const title = item.title || item.meta?.title;
         const icon = item.icon ? createElement(item.icon) : null;
         const hasChildren = item.children && isArray(item.children);
@@ -26,26 +27,24 @@ const HeaderBreadcrumb: React.FC = () => {
           </Space>
         );
 
-        /**
-         * 这一部分是为了修正无法正确配置 dropdown 路由链接
-         * 1. 如果该路由有子路由，则该 title 是一个不能跳转路由的 a 标签，作为 dropdown 的 trigger
-         * 2. 如果没有子路由，则分两种情况
-         * 2.1. 该路由是本身就是子路由，则归属于 dropdown，需要添加 Link 标签
-         * 2.2. 如果该路由不属于 dropdown，也没有子路由，则先以文本渲染，后续交给 itemRender 处理
-         */
-        const titleRender = hasChildren ? (
-          <a>{titleBaseEl}</a>
-        ) : (
-          <>{isChildren ? <Link to={item.path}>{titleBaseEl}</Link> : titleBaseEl}</>
-        );
+        let titleRe: JSX.Element | null = null;
+        // dropdown 下拉点击重定向到指定地址（兼容嵌套多层菜单的情况）
+        if (isChildren && redirect) titleRe = <Link to={redirect}>{titleBaseEl}</Link>;
+        // dropdown 的点击默认有跳转能力
+        else if (isChildren) titleRe = <Link to={path}>{titleBaseEl}</Link>;
+        // 平铺的面包屑，无跳转能力
+        else if (hasChildren) titleRe = <a>{titleBaseEl}</a>;
+        // 一般都是最后一个节点，纯文本
+        else titleRe = titleBaseEl;
 
         const breadcumbsItem: ItemType = {
-          href: item.path,
-          title: titleRender,
+          key: path,
+          href: path,
+          title: titleRe,
         };
 
-        if (item.children && isArray(item.children)) {
-          breadcumbsItem.menu = { items: genBreadcumbsTree(item.children, true) };
+        if (hasChildren) {
+          breadcumbsItem.menu = { items: genBreadcumbsTree(item.children!, true) };
         }
 
         return breadcumbsItem;

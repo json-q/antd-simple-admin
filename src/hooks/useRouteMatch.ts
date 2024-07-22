@@ -16,7 +16,7 @@ export const findCurentRoute: TFindCurentRouteFn = (
   treeMatchRoute = [],
 ) => {
   for (let i = 0; i < routes.length; i++) {
-    if (has(routes[i], "redirect")) continue; // redirect 不做匹配
+    if (has(routes[i], "index")) continue; // redirect 不做匹配
 
     if (pathname === routes[i].path) {
       treeMatchRoute.push(routes[i]);

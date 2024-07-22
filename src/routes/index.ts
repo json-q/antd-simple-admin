@@ -12,6 +12,7 @@ const routes: IRouter[] = [
   {
     path: "/",
     redirect: "/dashboard/analysis",
+    index: true,
   },
   ...dashboard,
   ...form,
@@ -35,6 +36,10 @@ export interface IRouter {
    */
   path: string;
   redirect?: string;
+  /**
+   * @description 是否是根路由
+   */
+  index?: boolean;
   component?: React.LazyExoticComponent<React.FC>;
   /**
    * @description 菜单名称/浏览器标题，若 `meta.title` 设置，则浏览器标题优先使用 `meta.title`
