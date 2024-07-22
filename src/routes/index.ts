@@ -7,6 +7,7 @@ import profile from "./modules/profile";
 import result from "./modules/result";
 import exception from "./modules/exception";
 import account from "./modules/account";
+import nested from "./modules/nested";
 
 const routes: IRouter[] = [
   {
@@ -21,6 +22,7 @@ const routes: IRouter[] = [
   ...result,
   ...exception,
   ...account,
+  ...nested,
   {
     path: "*",
     component: lazy(() => import("@/pages/exception/404")),
@@ -35,11 +37,14 @@ export interface IRouter {
    * @description 路由信息，嵌套子路由需写完整路由
    */
   path: string;
+  /**
+   * @description 重定向地址，嵌套菜单情况下，若不手指定，则默认寻找第一个具有页面(component)的子路由作为重定向地址
+   */
   redirect?: string;
   /**
    * @description 是否是根路由
    */
-  index?: boolean;
+  index?: true;
   component?: React.LazyExoticComponent<React.FC>;
   /**
    * @description 菜单名称/浏览器标题，若 `meta.title` 设置，则浏览器标题优先使用 `meta.title`
