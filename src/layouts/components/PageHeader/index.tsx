@@ -1,8 +1,13 @@
-import { Button, Layout, Space } from "antd";
+import { Button, Flex, Layout } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { useSelector } from "@/stores";
-import useHeaderStyles from "./styles";
 import HeaderBreadcrumb from "./components/HeaderBreadcrumb";
+import PersonAction from "./components/PersonAction";
+import LayoutSetting from "./components/LayoutSetting";
+import Notify from "./components/Notify";
+import useHeaderStyles from "./styles";
+import FullScreen from "./components/FullScreen";
+import SearchPage from "./components/SearchPage";
 
 const { Header } = Layout;
 
@@ -12,15 +17,24 @@ const PageHeader: React.FC = () => {
 
   return (
     <Header className={styles.header}>
-      <Space>
+      <Flex gap={8} align="center">
         <Button
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => actionCollapsed(!collapsed)}
         />
         <HeaderBreadcrumb />
-      </Space>
-      <div className="flex-auto" />
+      </Flex>
+
+      <div className="flex-auto"></div>
+
+      <Flex gap={12} align="center">
+        <SearchPage />
+        <Notify />
+        <FullScreen />
+        <PersonAction />
+        <LayoutSetting />
+      </Flex>
     </Header>
   );
 };

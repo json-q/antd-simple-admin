@@ -17,7 +17,7 @@ const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children })
     <ThemeProvider
       appearance={themeMode}
       customToken={{
-        customHeaderHeight: 48,
+        customHeaderHeight: 56,
       }}
     >
       {children}

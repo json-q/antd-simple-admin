@@ -13,12 +13,12 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
+    "ahooks": "^3.8.0",
     "antd": "^5.19.3",
     "antd-style": "^3.6.2",
     "axios": "^1.7.2",
     "dayjs": "^1.11.12",
     "immer": "^10.1.1",
-    "keepalive-for-react": "^2.0.8",
     "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
     "overlayscrollbars-react": "^0.5.6",
@@ -27,7 +27,6 @@
     "react-dom": "^18.3.1",
     "react-error-boundary": "^4.0.13",
     "react-fast-compare": "^3.2.2",
-    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.25.1",
     "zustand": "^4.5.4"
   },

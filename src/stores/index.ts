@@ -5,7 +5,7 @@ import { createWithEqualityFn } from "zustand/traditional";
 import { pick } from "lodash-es";
 import layoutSlice, { type LayoutSliceType } from "./modules/layoutSlice";
 
-export type Store = LayoutSliceType;
+type Store = LayoutSliceType;
 
 const useStore = createWithEqualityFn<Store>()(
   immer(
