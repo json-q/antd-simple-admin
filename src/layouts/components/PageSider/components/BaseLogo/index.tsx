@@ -1,14 +1,15 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import useLogoStyles from "./styles";
 import { useSelector } from "@/stores";
+import useLogoStyles from "./styles";
 
 const title = import.meta.env.VITE_APP_TITLE;
 const baseRouterName = import.meta.env.VITE_BASE_ROUTER_NAME;
 
 const BaseLogo: React.FC = memo(() => {
+  const { responseMd } = useSelector(["responseMd"]);
   const { menuMode, collapsed } = useSelector(["menuMode", "collapsed"]);
-  const { styles } = useLogoStyles(menuMode);
+  const { styles } = useLogoStyles({ menuMode, responseMd });
 
   return (
     <div className={styles.logo}>
@@ -19,7 +20,7 @@ const BaseLogo: React.FC = memo(() => {
           src="https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg"
           alt="logo"
         />
-        {!collapsed && <h1>{title}</h1>}
+        {!collapsed && responseMd && <h1>{title}</h1>}
       </Link>
     </div>
   );

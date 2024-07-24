@@ -11,7 +11,11 @@ import useMenuWrapperStyles from "./styles";
 
 type MenusType = MenuItemType & Partial<SubMenuType>;
 
-const BaseMenu: React.FC = memo(() => {
+interface BaseMenuProps {
+  hideScroll?: boolean;
+}
+
+const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   const { styles } = useMenuWrapperStyles();
   const { matchRoute, treeMatchRoute } = useRouteMatch();
   const { menuMode } = useSelector(["menuMode"]);
@@ -50,23 +54,28 @@ const BaseMenu: React.FC = memo(() => {
     return genBaseMenus(routes);
   }, [routes]);
 
+  const menuDom = (
+    <Menu
+      theme={menuMode}
+      className="min-h-full"
+      mode="inline"
+      inlineIndent={16}
+      items={genMenus}
+      openKeys={openKeys}
+      onOpenChange={setOpenKeys}
+      selectedKeys={selectedKeys}
+      onSelect={({ key }) => setSelectedKeys([key])}
+    />
+  );
+
+  if (hideScroll) return menuDom;
   return (
     <OverlayScrollbarsComponent
       defer
       options={{ scrollbars: { autoHide: "leave", autoHideDelay: 200 } }}
       className={styles.menuWrapper}
     >
-      <Menu
-        theme={menuMode}
-        className="min-h-full"
-        mode="inline"
-        inlineIndent={16}
-        items={genMenus}
-        openKeys={openKeys}
-        onOpenChange={setOpenKeys}
-        selectedKeys={selectedKeys}
-        onSelect={({ key }) => setSelectedKeys([key])}
-      />
+      {menuDom}
     </OverlayScrollbarsComponent>
   );
 });
