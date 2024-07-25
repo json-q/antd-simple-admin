@@ -13,12 +13,12 @@ const HeaderBreadcrumb: React.FC = () => {
     const match = findCurentRoute(pathname, routes);
     if (!match) return [];
 
-    const genBreadcumbsTree = (treeRoutes: IRouter[], isChildren = false): ItemType[] => {
+    const genBaseBreadcumbs = (treeRoutes: IRouter[], isChildren = false): ItemType[] => {
       return treeRoutes.map((item) => {
         let redirect = item.redirect;
         const title = item.title || item.meta?.title;
         const icon = item.icon ? createElement(item.icon) : null;
-        const hasChildren = item.children && isArray(item.children);
+        const hasChildren = isArray(item.children) && item.children.length > 0;
 
         const titleBaseEl = (
           <Space>
@@ -63,14 +63,14 @@ const HeaderBreadcrumb: React.FC = () => {
         };
 
         if (hasChildren) {
-          breadcumbsItem.menu = { items: genBreadcumbsTree(item.children!, true) };
+          breadcumbsItem.menu = { items: genBaseBreadcumbs(item.children!, true) };
         }
 
         return breadcumbsItem;
       });
     };
 
-    return genBreadcumbsTree(match.treeMatchRoute);
+    return genBaseBreadcumbs(match.treeMatchRoute);
   }, [pathname, routes]);
 
   function itemRender(currentRoute: ItemType) {

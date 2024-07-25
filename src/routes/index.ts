@@ -25,7 +25,7 @@ const routes: IRouter[] = [
   ...nested,
   {
     path: "*",
-    component: lazy(() => import("@/pages/exception/404")),
+    component: lazy(() => import(/* webpackChunkName: "404" */ "@/pages/exception/404")),
     layout: false,
   },
 ];
@@ -45,7 +45,7 @@ export interface IRouter {
    * @description 是否是根路由
    */
   index?: true;
-  component?: React.LazyExoticComponent<React.FC>;
+  component?: React.FC;
   /**
    * @description 菜单名称/浏览器标题，若 `meta.title` 设置，则浏览器标题优先使用 `meta.title`
    */
