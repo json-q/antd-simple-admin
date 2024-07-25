@@ -26,7 +26,7 @@ const DrawSider: React.FC = memo(() => {
           className="h-full"
         >
           <BaseSider>
-            <BaseMenu />
+            <BaseMenu hideScroll />
           </BaseSider>
         </OverlayScrollbarsComponent>
       </Drawer>

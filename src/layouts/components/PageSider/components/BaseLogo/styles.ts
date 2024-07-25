@@ -3,11 +3,11 @@ import type { MenuTheme } from "antd";
 
 type LogoStylesProps = {
   menuMode: MenuTheme;
-  responseMd: boolean;
+  md: boolean;
 };
 
 const useLogoStyles = createStyles(({ css, token }, props: LogoStylesProps) => {
-  const { menuMode, responseMd } = props;
+  const { menuMode, md } = props;
   // menu 的 light 模式使用默认的主题 token 即可，menu dark，logo需和 menu 的背景色一致
   const bg = menuMode === "dark" ? "#001529" : token.colorBgContainer;
   const color = menuMode === "dark" ? "#ffffff" : token.colorText;
@@ -20,7 +20,7 @@ const useLogoStyles = createStyles(({ css, token }, props: LogoStylesProps) => {
       height: ${token.customHeaderHeight}px;
       line-height: ${token.customHeaderHeight}px;
       padding: ${token.paddingContentHorizontal}px ${token.paddingContentVertical}px;
-      border-right: ${responseMd ? 1 : 0}px solid ${token.colorBorderSecondary};
+      border-right: ${md ? 1 : 0}px solid ${token.colorBorderSecondary};
       color: ${color};
       background-color: ${bg};
       cursor: pointer;

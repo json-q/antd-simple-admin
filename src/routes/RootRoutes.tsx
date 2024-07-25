@@ -3,13 +3,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import routes, { type IRouter } from "@/routes";
 import PageLayout from "@/layouts";
 
-type TRenderRoutesEl = (routes: IRouter[]) => React.ReactNode;
-
 /**
  * 渲染应用路由
  * @param routes
  */
-const renderRoutes: TRenderRoutesEl = (routes) => {
+const renderRoutes = (routes: IRouter[]): React.ReactNode => {
   return routes.map((route) => {
     const { component, path, children, redirect, layout } = route;
 

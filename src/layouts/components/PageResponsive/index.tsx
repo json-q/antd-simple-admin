@@ -1,6 +1,6 @@
+import { memo } from "react";
 import { Layout } from "antd";
-import { useResponsive } from "ahooks";
-import { useSelector } from "@/stores";
+import { useResponsive } from "antd-style";
 import PageSider from "../PageSider";
 import PageHeader from "../PageHeader";
 import PageContent from "../PageContent";
@@ -9,10 +9,8 @@ interface PageResponsiveProps {
   children: React.ReactNode;
 }
 
-const PageResponsive: React.FC<PageResponsiveProps> = ({ children }) => {
-  const { actionResponseMd } = useSelector(["actionResponseMd", "responseMd"]);
-  const { md } = useResponsive();
-  actionResponseMd(md);
+const PageResponsive: React.FC<PageResponsiveProps> = memo(({ children }) => {
+  const { md } = useResponsive(); // 768
 
   if (md) {
     return (
@@ -34,6 +32,6 @@ const PageResponsive: React.FC<PageResponsiveProps> = ({ children }) => {
       </div>
     </Layout>
   );
-};
+});
 
 export default PageResponsive;

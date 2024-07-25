@@ -1,5 +1,6 @@
 import { Button, Flex, Layout } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { useResponsive } from "antd-style";
 import { useSelector } from "@/stores";
 import HeaderBreadcrumb from "./components/HeaderBreadcrumb";
 import PersonAction from "./components/PersonAction";
@@ -14,14 +15,14 @@ import useHeaderStyles from "./styles";
 const { Header } = Layout;
 
 const PageHeader: React.FC = () => {
-  const { responseMd } = useSelector(["responseMd"]);
+  const { md } = useResponsive();
   const { styles } = useHeaderStyles();
   const { collapsed, actionCollapsed } = useSelector(["collapsed", "actionCollapsed"]);
 
   return (
     <Header className={styles.header}>
       <Flex gap={8} align="center">
-        {responseMd ? (
+        {md ? (
           <>
             <Button
               type="text"

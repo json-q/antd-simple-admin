@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
+import { useResponsive } from "antd-style";
 import { isArray } from "lodash-es";
 import routes, { type IRouter } from "@/routes";
 import { useSelector } from "@/stores";
@@ -17,6 +18,7 @@ interface BaseMenuProps {
 
 const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   const { styles } = useMenuWrapperStyles();
+  const { lg, md } = useResponsive();
   const { matchRoute, treeMatchRoute } = useRouteMatch();
   const { menuMode } = useSelector(["menuMode"]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
@@ -24,8 +26,12 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
 
   useEffect(() => {
     setSelectedKeys([matchRoute?.path || ""]);
-    setOpenKeys(treeMatchRoute?.map((item) => item.path));
-  }, [matchRoute]);
+    // 初次加载时，若处在中屏 Sider 收缩状态下，不展开菜单（中屏下初次菜单悬浮）
+    // md 为 false 时，处于小屏状态，Menu 在  Drawer 中，Sider 一直展开
+    if (lg === true || md === false) {
+      setOpenKeys(treeMatchRoute?.map((item) => item.path));
+    }
+  }, [matchRoute, lg]);
 
   const genMenus = useMemo(() => {
     const genBaseMenus = (routes: IRouter[]) => {
