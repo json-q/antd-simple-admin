@@ -37,7 +37,7 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
     if (lg === true || md === false) {
       setOpenKeys(treeMatchRoute?.map((item) => item.path));
     }
-  }, [treeMatchRoute, lg, collapsed]);
+  }, [treeMatchRoute, lg, md, collapsed]);
 
   const genMenus = useMemo(() => {
     const genBaseMenus = (routes: IRouter[]) => {
