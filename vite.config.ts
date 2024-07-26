@@ -17,6 +17,7 @@ export default defineConfig((mode) => {
       viteEnv.VITE_BUILD_GZIP && compression({ threshold: 1025 }),
       manualChunksPlugin(),
     ],
+
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -36,34 +37,17 @@ export default defineConfig((mode) => {
     },
 
     esbuild: {
-      pure: viteEnv.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : [],
+      drop: viteEnv.VITE_DROP_CONSOLE ? ["console", "debugger"] : [],
     },
     build: {
       outDir: "dist",
-      // esbuild 打包更快，但是不能去除 console.log，去除 console 使用 terser 模式 npm i terser -D
-      // minify: "esbuild",
-      minify: "terser",
-      terserOptions: {
-        compress: {
-          drop_console: viteEnv.VITE_DROP_CONSOLE,
-          drop_debugger: true,
-        },
-      },
+      minify: "esbuild",
       rollupOptions: {
         output: {
           // Static resource classification and packaging
           chunkFileNames: "js/chunk-[name]-[hash].js",
           entryFileNames: "js/[name]-[hash].js",
           assetFileNames: "[ext]/[name]-[hash].[ext]",
-          manualChunks(id) {
-            if (id.includes("node_modules")) {
-              if (["react", "react-dom", "react-router-dom"].some((item) => id.includes(item))) {
-                return "react";
-              }
-              //最小化拆分包
-              return id.toString().split("node_modules/")[1].split("/")[0].toString();
-            }
-          },
         },
       },
     },
