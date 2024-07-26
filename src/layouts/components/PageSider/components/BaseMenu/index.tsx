@@ -1,9 +1,10 @@
-import { createElement, memo, useEffect, useMemo, useState } from "react";
+import { createElement, memo, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
 import { useResponsive } from "antd-style";
+import { useDeepCompareEffect } from "ahooks";
 import { isArray } from "lodash-es";
 import routes, { type IRouter } from "@/routes";
 import { useSelector } from "@/stores";
@@ -20,18 +21,23 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   const { styles } = useMenuWrapperStyles();
   const { lg, md } = useResponsive();
   const { matchRoute, treeMatchRoute } = useRouteMatch();
-  const { menuMode } = useSelector(["menuMode"]);
+  const { menuMode, collapsed } = useSelector(["menuMode", "collapsed"]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     setSelectedKeys([matchRoute?.path || ""]);
-    // 初次加载时，若处在中屏 Sider 收缩状态下，不展开菜单（中屏下初次菜单悬浮）
-    // md 为 false 时，处于小屏状态，Menu 在  Drawer 中，Sider 一直展开
+  }, [matchRoute]);
+
+  useDeepCompareEffect(() => {
+    // 子菜单展开的前提条件是 sider 处于展开状态，否则子菜单一律不展开（便于理解这么写，if 逻辑可合并）
+    if (collapsed === true) return;
+    // 1. 处在中屏 lg 及以上时，默认菜单是展开的，此时展开子菜单
+    // 2. 处于小屏状态 md 及以下时，Menu 在  Drawer 中，Sider 一直展开，Menu 子菜单一直展开
     if (lg === true || md === false) {
       setOpenKeys(treeMatchRoute?.map((item) => item.path));
     }
-  }, [matchRoute, lg]);
+  }, [treeMatchRoute, lg, collapsed]);
 
   const genMenus = useMemo(() => {
     const genBaseMenus = (routes: IRouter[]) => {

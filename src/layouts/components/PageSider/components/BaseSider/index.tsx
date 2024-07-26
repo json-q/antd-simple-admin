@@ -1,4 +1,4 @@
-import { createContext, memo, useEffect } from "react";
+import { memo, useEffect } from "react";
 import { Layout } from "antd";
 import { useResponsive } from "antd-style";
 import { useSelector } from "@/stores";
@@ -14,17 +14,17 @@ export interface SiderContextType {
   collapsed: boolean;
 }
 
-export const SiderContext = createContext<SiderContextType | null>(null);
-
 const BaseSider: React.FC<BaseSiderProps> = memo(({ children }) => {
   const { styles } = useSiderStyles();
-  const { md } = useResponsive();
+  const { md, lg } = useResponsive();
   const { collapsed, actionCollapsed } = useSelector(["collapsed", "actionCollapsed"]);
 
   useEffect(() => {
     // 小屏模式下，Menu 在 Drawer 里的 Sider 一直展开
     if (md === false) actionCollapsed(false);
-  }, [md]);
+    // 在小屏 md 和中屏 lg 之间时，sider 处于收缩态，防止从小屏拉到中屏时 sider 展开
+    else if (md === true && lg === false) actionCollapsed(true);
+  }, [md, lg]);
 
   return (
     <Sider
@@ -32,9 +32,7 @@ const BaseSider: React.FC<BaseSiderProps> = memo(({ children }) => {
       width={210}
       className={styles.sider}
       collapsed={collapsed}
-      onCollapse={(collapsed) => {
-        md && actionCollapsed(collapsed);
-      }}
+      onCollapse={actionCollapsed}
       breakpoint="lg"
       onBreakpoint={actionCollapsed}
     >
