@@ -32,9 +32,11 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   useDeepCompareEffect(() => {
     // 子菜单展开的前提条件是 sider 处于展开状态，否则子菜单一律不展开（便于理解这么写，if 逻辑可合并）
     if (collapsed === true) return;
+
     // 1. 处在中屏 lg 及以上时，默认菜单是展开的，此时展开子菜单
     // 2. 处于小屏状态 md 及以下时，Menu 在  Drawer 中，Sider 一直展开，Menu 子菜单一直展开
-    if (lg === true || md === false) {
+    // 3. 处于中屏 lg 和小屏 md 之间时，Sider 展开同样展开子菜单
+    if (lg === true || md === false || (lg === false && md === true)) {
       setOpenKeys(treeMatchRoute?.map((item) => item.path));
     }
   }, [treeMatchRoute, lg, md, collapsed]);

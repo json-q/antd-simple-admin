@@ -6,20 +6,17 @@ import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import "@/styles/index.less";
 import App from "./App.tsx";
-import React from "react";
 
 dayjs.locale("zh-cn");
 
 const baseRouterName = import.meta.env.VITE_BASE_ROUTER_NAME;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <BrowserRouter basename={baseRouterName}>
-      <ConfigProvider locale={zhCN} theme={{ cssVar: true, hashed: false }}>
-        <AntApp>
-          <App />
-        </AntApp>
-      </ConfigProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter basename={baseRouterName}>
+    <ConfigProvider locale={zhCN} theme={{ cssVar: true, hashed: false }}>
+      <AntApp>
+        <App />
+      </AntApp>
+    </ConfigProvider>
+  </BrowserRouter>,
 );
