@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
-import { useResponsive } from "antd-style";
 import { useDeepCompareEffect } from "ahooks";
 import { isArray } from "lodash-es";
 import routes, { type IRouter } from "@/routes";
@@ -19,11 +18,14 @@ interface BaseMenuProps {
 
 const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   const { styles } = useMenuWrapperStyles();
-  const { lg, md } = useResponsive();
   const { matchRoute, treeMatchRoute } = useRouteMatch();
-  const { menuMode, collapsed } = useSelector(["menuMode", "collapsed"]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const {
+    menuMode,
+    collapsed,
+    responsive: { lg, md },
+  } = useSelector(["menuMode", "collapsed", "responsive"]);
 
   useDeepCompareEffect(() => {
     setSelectedKeys([matchRoute?.path || ""]);

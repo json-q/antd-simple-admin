@@ -1,6 +1,5 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { useResponsive } from "antd-style";
 import { useSelector } from "@/stores";
 import useLogoStyles from "./styles";
 
@@ -8,8 +7,11 @@ const title = import.meta.env.VITE_APP_TITLE;
 const baseRouterName = import.meta.env.VITE_BASE_ROUTER_NAME;
 
 const BaseLogo: React.FC = memo(() => {
-  const { md = true } = useResponsive();
-  const { menuMode, collapsed } = useSelector(["menuMode", "collapsed"]);
+  const {
+    menuMode,
+    collapsed,
+    responsive: { md = true },
+  } = useSelector(["menuMode", "collapsed", "responsive"]);
   const { styles } = useLogoStyles({ menuMode, md });
 
   return (

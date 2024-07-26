@@ -1,6 +1,5 @@
 import { memo, useEffect } from "react";
 import { Layout } from "antd";
-import { useResponsive } from "antd-style";
 import { useSelector } from "@/stores";
 import useSiderStyles from "./styles";
 
@@ -16,8 +15,11 @@ export interface SiderContextType {
 
 const BaseSider: React.FC<BaseSiderProps> = memo(({ children }) => {
   const { styles } = useSiderStyles();
-  const { md, lg } = useResponsive();
-  const { collapsed, actionCollapsed } = useSelector(["collapsed", "actionCollapsed"]);
+  const {
+    collapsed,
+    actionCollapsed,
+    responsive: { md, lg },
+  } = useSelector(["collapsed", "actionCollapsed", "responsive"]);
 
   useEffect(() => {
     // 小屏模式下，Menu 在 Drawer 里的 Sider 一直展开

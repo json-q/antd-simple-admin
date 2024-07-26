@@ -1,6 +1,5 @@
 import { Button, Flex, Layout } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { useResponsive } from "antd-style";
 import { useSelector } from "@/stores";
 import HeaderBreadcrumb from "./components/HeaderBreadcrumb";
 import PersonAction from "./components/PersonAction";
@@ -15,9 +14,12 @@ import useHeaderStyles from "./styles";
 const { Header } = Layout;
 
 const PageHeader: React.FC = () => {
-  const { md } = useResponsive();
   const { styles } = useHeaderStyles();
-  const { collapsed, actionCollapsed } = useSelector(["collapsed", "actionCollapsed"]);
+  const {
+    collapsed,
+    actionCollapsed,
+    responsive: { md },
+  } = useSelector(["collapsed", "actionCollapsed", "responsive"]);
 
   return (
     <Header className={styles.header}>

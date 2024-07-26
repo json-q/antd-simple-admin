@@ -1,6 +1,8 @@
 import { memo } from "react";
 import { Layout } from "antd";
 import { useResponsive } from "antd-style";
+import { useDeepCompareEffect } from "ahooks";
+import { useSelector } from "@/stores";
 import PageSider from "../PageSider";
 import PageHeader from "../PageHeader";
 import PageContent from "../PageContent";
@@ -10,9 +12,14 @@ interface PageResponsiveProps {
 }
 
 const PageResponsive: React.FC<PageResponsiveProps> = memo(({ children }) => {
-  const { md } = useResponsive(); // 768
+  const responsive = useResponsive(); // 768
+  const { actionResponsive } = useSelector(["actionResponsive"]);
 
-  if (md) {
+  useDeepCompareEffect(() => {
+    actionResponsive(responsive);
+  }, [responsive]);
+
+  if (responsive.md) {
     return (
       <Layout>
         <PageSider />
