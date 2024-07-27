@@ -68,7 +68,7 @@ export interface IRouter {
      * @description 侧边栏隐藏该路由
      * @default false
      */
-    hidden?: boolean;
+    hideMenu?: boolean;
   };
   children?: IRouter[];
 }
