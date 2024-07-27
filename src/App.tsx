@@ -1,9 +1,10 @@
 import { Result } from "antd";
 import { ErrorBoundary } from "react-error-boundary";
 import ThemeControlProvider from "@/themes/ThemeControlProvider";
-import RootRoutes from "@/routes/RootRoutes";
 import useHelmet from "@/hooks/useHelmet";
 import useStaticApp from "@/hooks/useStaticApp";
+import RootRoutes from "@/routes/RootRoutes";
+import LoadUser from "@/layouts/auth/LoadUser";
 
 const App: React.FC = () => {
   useHelmet();
@@ -16,7 +17,9 @@ const App: React.FC = () => {
       }}
     >
       <ThemeControlProvider>
-        <RootRoutes />
+        <LoadUser>
+          <RootRoutes />
+        </LoadUser>
       </ThemeControlProvider>
     </ErrorBoundary>
   );

@@ -39,7 +39,7 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
       return (
         routes
           // 由于菜单页兼容重定向，index 区分菜单和首页重定向。过滤掉非菜单项和首页重定向
-          .filter((item) => !item.index && item.layout !== false)
+          .filter((item) => !item.index && item.layout !== false && item.meta?.hideMenu !== true)
           .map((item) => {
             const icon = item.icon;
             const label = item.title || item.meta?.title;

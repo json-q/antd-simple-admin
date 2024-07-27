@@ -4,8 +4,9 @@ import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 import { pick } from "lodash-es";
 import layoutSlice, { type LayoutSliceType } from "./modules/layoutSlice";
+import userSlice, { type UserSliceType } from "./modules/userSlice";
 
-type Store = LayoutSliceType;
+type Store = LayoutSliceType & UserSliceType;
 
 const useStore = createWithEqualityFn<Store>()(
   immer(
@@ -13,6 +14,7 @@ const useStore = createWithEqualityFn<Store>()(
       persist(
         (...args) => ({
           ...layoutSlice(...args),
+          ...userSlice(...args),
         }),
         {
           name: "settings-config", // 本地缓存 name=>key 。partialize 函数 => return 缓存内容

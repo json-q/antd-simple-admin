@@ -1,5 +1,6 @@
 import { lazy } from "react";
 
+import login from "./modules/login";
 import dashboard from "./modules/dashboard";
 import form from "./modules/form";
 import list from "./modules/list";
@@ -15,6 +16,7 @@ const routes: IRouter[] = [
     redirect: "/dashboard/analysis",
     index: true,
   },
+  ...login,
   ...dashboard,
   ...form,
   ...list,
@@ -65,7 +67,7 @@ export interface IRouter {
      */
     title?: string;
     /**
-     * @description 侧边栏隐藏该路由
+     * @description 侧边栏（菜单）不显示该路由
      * @default false
      */
     hideMenu?: boolean;

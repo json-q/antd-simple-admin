@@ -4,10 +4,12 @@ import { fileURLToPath } from "node:url";
 import { compression } from "vite-plugin-compression2";
 import { visualizer } from "rollup-plugin-visualizer";
 import { manualChunksPlugin } from "vite-plugin-webpackchunkname";
+import { vitePluginFakeServer } from "vite-plugin-fake-server";
 
 // https://vitejs.dev/config/
 export default defineConfig((mode) => {
   const env = loadEnv(mode.mode, process.cwd());
+  const isProd = mode.mode === "production";
   const viteEnv = wrapperEnv(env);
 
   return {
@@ -15,7 +17,13 @@ export default defineConfig((mode) => {
       react(),
       viteEnv.VITE_REPORT && visualizer(),
       viteEnv.VITE_BUILD_GZIP && compression({ threshold: 1025 }),
-      manualChunksPlugin(),
+      manualChunksPlugin(), // 类 webpack 魔法注释
+      vitePluginFakeServer({
+        include: "mock",
+        infixName: "mock",
+        enableProd: true,
+        enableDev: true,
+      }),
     ],
 
     resolve: {
@@ -37,7 +45,7 @@ export default defineConfig((mode) => {
     },
 
     esbuild: {
-      drop: viteEnv.VITE_DROP_CONSOLE ? ["console", "debugger"] : [],
+      drop: isProd && viteEnv.VITE_DROP_CONSOLE ? ["console", "debugger"] : [],
     },
     build: {
       outDir: "dist",

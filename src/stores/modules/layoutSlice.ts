@@ -17,7 +17,10 @@ export type LayoutSliceType = {
 
 // zustand TS 切片用法：https://docs.pmnd.rs/zustand/guides/typescript#slices-pattern
 
-const layoutSlice: StateCreator<LayoutSliceType> = (set) => ({
+const layoutSlice: StateCreator<
+  LayoutSliceType,
+  [["zustand/immer", never], ["zustand/devtools", never]]
+> = (set) => ({
   themeMode: "light",
   menuMode: "light",
   collapsed: true,
@@ -26,13 +29,6 @@ const layoutSlice: StateCreator<LayoutSliceType> = (set) => ({
   actionMenuMode: (menuMode) => set({ menuMode }),
   actionCollapsed: (collapsed) => set({ collapsed }),
   actionResponsive: (responsive) => set({ responsive }),
-  // resetSettings: () =>
-  //   set(() => ({
-  //     colorPrimary: "#1677ff",
-  //     themeMode: "light",
-  //     layoutMode: "sider",
-  //     sizeMode: "default",
-  //   })),
 });
 
 export default layoutSlice;
