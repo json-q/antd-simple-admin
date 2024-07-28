@@ -4,6 +4,7 @@ import localCacha from "@/utils/cache/localCache";
 import { LOGIN_PAGE, NOT_FOUND_PAGE, TOKEN_CACHE } from "@/constants";
 import { useSelector } from "@/stores";
 import LazyLoading from "../common/LazyLoading";
+import { LoadingOutlined } from "@ant-design/icons";
 
 interface LoadUserProps {
   children: React.ReactNode;
@@ -26,9 +27,7 @@ const LoadUser: React.FC<LoadUserProps> = memo(({ children }) => {
     if (!localCacha.get(TOKEN_CACHE)) {
       return navigate(LOGIN_PAGE, { replace: true });
     } else if (!currentUser) {
-      // "/" 作为重定向路由，可以不参与请求，交给重定向的最终地址处理即可，否则会导致两次重复请求
-      // 注释此行代码也不影响业务逻辑
-      if (pathname === "/") return setLoading(false);
+      // 网速够快情况下，可能出现连续请求两次的情况，原因： / 请求一次，重定向地址请求一次
       getCurrentUser();
     } else {
       setLoading(false);
@@ -37,6 +36,7 @@ const LoadUser: React.FC<LoadUserProps> = memo(({ children }) => {
 
   async function getCurrentUser() {
     try {
+      setLoading(true);
       await getCurrentUserInfo();
       setLoading(false);
     } catch (e) {
@@ -45,7 +45,7 @@ const LoadUser: React.FC<LoadUserProps> = memo(({ children }) => {
   }
 
   // 认证期间，一直处于 loading 状态，不渲染页面路由，防止闪屏
-  if (loading) return <LazyLoading tip="认证中" />;
+  if (loading) return <LazyLoading tip="认证中" indicator={<LoadingOutlined />} />;
 
   return children;
 });

@@ -16,7 +16,7 @@ export default defineConfig((mode) => {
     plugins: [
       react(),
       viteEnv.VITE_REPORT && visualizer(),
-      viteEnv.VITE_BUILD_GZIP && compression({ threshold: 1025 }),
+      viteEnv.VITE_BUILD_GZIP && compression({ threshold: 10240 }),
       manualChunksPlugin(), // 类 webpack 魔法注释
       vitePluginFakeServer({
         include: "mock",
@@ -39,7 +39,7 @@ export default defineConfig((mode) => {
         [viteEnv.VITE_API_BASE_URL]: {
           target: viteEnv.VITE_API_URL,
           changeOrigin: true,
-          rewrite: (path: string) => path.replace(/^\/api/, ""),
+          rewrite: (path) => path.replace(/^\/api/, ""),
         },
       },
     },

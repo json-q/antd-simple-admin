@@ -1,6 +1,6 @@
-import { message } from "@/hooks/useStaticApp";
 import axios from "axios";
 import type { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
+import { message } from "@/hooks/useStaticApp";
 import localCacha from "@/utils/cache/localCache";
 import { TOKEN_CACHE, TOKEN_HEADER } from "@/constants";
 import checkStatus from "./checkStatus";

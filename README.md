@@ -12,17 +12,24 @@
 
 # 布局设计
 
-部分交互参考 antd design pro，并在其基础上增加了一些细节。
+UI 参考
+
+- Ant Design Pro
+- vben admin
 
 - 侧边栏滚动条借由第三方库 `overlayscrollbars-react` 实现，使滚动条的显示效果更加平滑。
   > 该滚动条并未应用于全局，非原生会造成性能损失，所以仅在视觉感知影响较大的 Sider 组件中启用此方式。
 
+# 动态主题
+
+由 `antd-style` 实现，更易控制 antd 主题和统一主题样式。
+
 # 样式
 
-集成了 `tailwindcss` `less` 和 `antd-style` 的 css in js 写法，与主题相关的样式由 `antd-style` 书写。
+集成了 `tailwindcss` `less` 和 `antd-style` 的 css in js 写法，与主题相关的样式推荐使用 cssinjs 书写，其余建议选取 tw 和 less 其中之一，尽量避免样式规范不统一造成维护问题。
 
 # Mock
 
-采用 `vite-plugin-fake-server` 结合 `@faker-js/faker` 模拟数据请求
+采用 `vite-plugin-fake-server` 结合 `@faker-js/faker` 模拟数据请求，所有请求都延迟 1.5s 来模拟低网速下可能潜在的问题。
 
 > 为什么不使用 `vite-plugin-mock` + `mockjs`。详见：vite-plugin-mock [issue](https://github.com/vbenjs/vite-plugin-mock/issues/127)，且 `@faker-js/faker` 上手成本比 `mockjs` 更低。

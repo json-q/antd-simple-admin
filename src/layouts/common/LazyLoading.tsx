@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Col, Row, Spin } from "antd";
+import type { SpinProps } from "antd/es/spin";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
@@ -11,12 +12,11 @@ NProgress.configure({
   minimum: 0.3,
 });
 
-interface LazyLoadingProps {
+interface LazyLoadingProps extends SpinProps {
   height?: string | number;
-  tip?: React.ReactNode;
 }
 
-const LazyLoading: React.FC<LazyLoadingProps> = ({ height = "100vh", tip }) => {
+const LazyLoading: React.FC<LazyLoadingProps> = ({ height = "100vh", ...restProps }) => {
   useEffect(() => {
     NProgress.start();
 
@@ -28,7 +28,7 @@ const LazyLoading: React.FC<LazyLoadingProps> = ({ height = "100vh", tip }) => {
   return (
     <Row align="middle" justify="center" style={{ height }}>
       <Col className="w-full">
-        <Spin tip={tip || "加载中..."} size="large">
+        <Spin size="large" {...restProps}>
           {/* antd 5.5 之后 Spin 必须有子元素才能使用 tip。仅占位 */}
           <></>
         </Spin>
