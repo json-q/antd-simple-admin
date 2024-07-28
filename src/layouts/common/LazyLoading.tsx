@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { Col, Row, Spin } from "antd";
 import type { SpinProps } from "antd/es/spin";
 import NProgress from "nprogress";
@@ -16,7 +16,7 @@ interface LazyLoadingProps extends SpinProps {
   height?: string | number;
 }
 
-const LazyLoading: React.FC<LazyLoadingProps> = ({ height = "100vh", ...restProps }) => {
+const LazyLoading: React.FC<LazyLoadingProps> = memo(({ height = "100vh", ...restProps }) => {
   useEffect(() => {
     NProgress.start();
 
@@ -35,6 +35,6 @@ const LazyLoading: React.FC<LazyLoadingProps> = ({ height = "100vh", ...restProp
       </Col>
     </Row>
   );
-};
+});
 
 export default LazyLoading;

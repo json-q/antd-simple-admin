@@ -1,7 +1,8 @@
+import { memo } from "react";
 import { Badge, Button } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 
-const Notify: React.FC = () => {
+const Notify: React.FC = memo(() => {
   return (
     <Button
       type="text"
@@ -12,6 +13,6 @@ const Notify: React.FC = () => {
       }
     />
   );
-};
+});
 
 export default Notify;

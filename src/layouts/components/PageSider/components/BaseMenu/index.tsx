@@ -8,6 +8,7 @@ import { isArray } from "lodash-es";
 import routes, { type IRouter } from "@/routes";
 import { useSelector } from "@/stores";
 import useRouteMatch from "@/hooks/useRouteMatch";
+import { validateAccess } from "@/hooks/useAccess";
 import useMenuWrapperStyles from "./styles";
 
 type MenusType = MenuItemType & Partial<SubMenuType>;
@@ -21,7 +22,11 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   const { matchRoute, treeMatchRoute } = useRouteMatch();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
-  const { menuMode, collapsed } = useSelector(["menuMode", "collapsed"]);
+  const { menuMode, collapsed, currentUser } = useSelector([
+    "menuMode",
+    "collapsed",
+    "currentUser",
+  ]);
 
   useDeepCompareEffect(() => {
     setSelectedKeys([matchRoute?.path || ""]);
@@ -36,30 +41,35 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
 
   const genMenus = useMemo(() => {
     const genBaseMenus = (routes: IRouter[]) => {
-      return (
-        routes
-          // 由于菜单页兼容重定向，index 区分菜单和首页重定向。过滤掉非菜单项和首页重定向
-          .filter((item) => !item.index && item.layout !== false && item.meta?.hideMenu !== true)
-          .map((item) => {
-            const icon = item.icon;
-            const label = item.title || item.meta?.title;
-            const hasChildren = isArray(item.children) && item.children.length > 0;
+      return routes
+        .filter((item) => {
+          const access = item.meta?.access;
+          const isIndex = item.index !== true; // 去掉首页标识（重定向配置不是菜单路由，不显示到菜单）
+          const isFullPage = item.layout !== false; // 去掉全屏显示的页面，不在菜单内
+          const isShowMenuByConfig = item.meta?.hideMenu !== true; // 配置 hideMenu = true 的不显示到菜单
+          const isShowMenuByAuth = access ? validateAccess(currentUser?.role || [], access) : true; // 无权限配置直接展示，有设置权限先校验在判断是否显示
 
-            const menuItem: MenusType = {
-              label: hasChildren ? label : <Link to={item.path}>{label}</Link>,
-              key: item.path,
-              icon: icon ? createElement(icon) : null,
-            };
+          return isIndex && isFullPage && isShowMenuByConfig && isShowMenuByAuth;
+        })
+        .map((item) => {
+          const icon = item.icon;
+          const label = item.title || item.meta?.title;
+          const hasChildren = isArray(item.children) && item.children.length > 0;
 
-            if (hasChildren) menuItem.children = genBaseMenus(item.children!);
+          const menuItem: MenusType = {
+            label: hasChildren ? label : <Link to={item.path}>{label}</Link>,
+            key: item.path,
+            icon: icon ? createElement(icon) : null,
+          };
 
-            return menuItem;
-          })
-      );
+          if (hasChildren) menuItem.children = genBaseMenus(item.children!);
+
+          return menuItem;
+        });
     };
 
     return genBaseMenus(routes);
-  }, [routes]);
+  }, [routes, currentUser]);
 
   const menuDom = (
     <Menu

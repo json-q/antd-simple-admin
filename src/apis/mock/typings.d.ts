@@ -1,12 +1,12 @@
 export namespace Mock {
-  type Auth = "admin" | "user" | "visitor";
+  // type Auth = "admin" | "user" | "visitor";
 
   interface UserInfo {
     nickName: string;
     id: string;
     avatar: string;
     email: string;
-    auth: Auth[];
+    role: string[];
   }
 
   interface LoginParams {

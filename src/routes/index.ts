@@ -8,6 +8,7 @@ import profile from "./modules/profile";
 import result from "./modules/result";
 import exception from "./modules/exception";
 import account from "./modules/account";
+import auth from "./modules/auth";
 import nested from "./modules/nested";
 
 const routes: IRouter[] = [
@@ -24,6 +25,7 @@ const routes: IRouter[] = [
   ...result,
   ...exception,
   ...account,
+  ...auth,
   ...nested,
   {
     path: "*",
@@ -71,6 +73,10 @@ export interface IRouter {
      * @default false
      */
     hideMenu?: boolean;
+    /**
+     * @description 权限菜单
+     */
+    access?: string | string[];
   };
   children?: IRouter[];
 }

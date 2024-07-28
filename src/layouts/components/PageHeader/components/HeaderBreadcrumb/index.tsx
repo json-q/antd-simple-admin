@@ -1,4 +1,4 @@
-import { createElement, useMemo } from "react";
+import { createElement, memo, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Breadcrumb, Space } from "antd";
 import type { ItemType } from "antd/es/breadcrumb/Breadcrumb";
@@ -6,7 +6,7 @@ import { isArray } from "lodash-es";
 import { findCurentRoute } from "@/hooks/useRouteMatch";
 import routes, { type IRouter } from "@/routes";
 
-const HeaderBreadcrumb: React.FC = () => {
+const HeaderBreadcrumb: React.FC = memo(() => {
   const { pathname } = useLocation();
 
   const genBreadcumbs = useMemo(() => {
@@ -79,6 +79,6 @@ const HeaderBreadcrumb: React.FC = () => {
   }
 
   return <Breadcrumb items={genBreadcumbs} itemRender={itemRender} />;
-};
+});
 
 export default HeaderBreadcrumb;

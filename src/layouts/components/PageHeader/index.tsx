@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Button, Flex, Layout } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { useSelector } from "@/stores";
@@ -13,7 +14,7 @@ import useHeaderStyles from "./styles";
 
 const { Header } = Layout;
 
-const PageHeader: React.FC = () => {
+const PageHeader: React.FC = memo(() => {
   const { styles } = useHeaderStyles();
   const {
     collapsed,
@@ -52,6 +53,6 @@ const PageHeader: React.FC = () => {
       </Flex>
     </Header>
   );
-};
+});
 
 export default PageHeader;

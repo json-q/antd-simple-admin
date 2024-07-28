@@ -18,7 +18,6 @@ const account: IRouter[] = [
       {
         title: "个人设置",
         path: "/account/settings",
-        meta: { hideMenu: true },
         component: lazy(
           () => import(/* webpackChunkName: "Account_Settings" */ "@/pages/account/settings"),
         ),

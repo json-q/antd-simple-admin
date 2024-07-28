@@ -1,3 +1,5 @@
+import { memo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Avatar, Dropdown, Flex, type MenuProps } from "antd";
 import { LockOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { message, modal } from "@/hooks/useStaticApp";
@@ -6,7 +8,6 @@ import { LOGIN_PAGE, TOKEN_CACHE } from "@/constants";
 import localCacha from "@/utils/cache/localCache";
 import { logout } from "@/apis/mock";
 import usePersonActionStyles from "./styles";
-import { useNavigate } from "react-router-dom";
 
 enum MenuItemKey {
   PASSWORD = "PASSWORD",
@@ -28,7 +29,7 @@ const items: MenuProps["items"] = [
   },
 ];
 
-const PersonAction: React.FC = () => {
+const PersonAction: React.FC = memo(() => {
   const { styles } = usePersonActionStyles();
   const { currentUser, resetUserState } = useSelector(["currentUser", "resetUserState"]);
   const navigate = useNavigate();
@@ -70,6 +71,6 @@ const PersonAction: React.FC = () => {
       </Flex>
     </Dropdown>
   );
-};
+});
 
 export default PersonAction;
