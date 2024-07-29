@@ -1,19 +1,20 @@
 import { memo, Suspense } from "react";
-import LazyLoading from "./common/LazyLoading";
+import { Outlet } from "react-router-dom";
 import PageResponsive from "./components/PageResponsive";
+import useRouteMatch from "@/hooks/useRouteMatch";
+import LazyLoading from "./common/LazyLoading";
 
-type PageLayoutProps = {
-  children?: React.ReactNode;
-  layout?: boolean;
-};
-
-const PageLayout: React.FC<PageLayoutProps> = memo((props) => {
-  const { children, layout } = props;
+const PageLayout: React.FC = memo(() => {
+  const { matchRoute } = useRouteMatch();
 
   // 路由统一懒加载
-  const lazyChildren = <Suspense fallback={<LazyLoading />}>{children}</Suspense>;
+  const lazyChildren = (
+    <Suspense fallback={<LazyLoading />}>
+      <Outlet />
+    </Suspense>
+  );
 
-  if (layout === false) {
+  if (matchRoute?.layout === false) {
     return lazyChildren;
   }
 

@@ -1,12 +1,12 @@
-import { createElement, memo, useMemo } from "react";
-import { Navigate, Route, RouteObject, Routes } from "react-router-dom";
+import React, { createElement, memo, useMemo } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { useDeepCompareEffect } from "ahooks";
+import { isArray } from "lodash-es";
 import routes, { type IRouter } from "@/routes";
 import PageLayout from "@/layouts";
 import { useSelector } from "@/stores";
-import { validateAccess } from "@/hooks/useAccess";
 import { addRedirect, genAuthRoutes } from "./utils";
-import { isArray } from "lodash-es";
+import LazyLoading from "@/layouts/common/LazyLoading";
 
 const RednerRoutes: React.FC = memo(() => {
   const { currentUser, authRoutes, actionAuthRoutes } = useSelector([
@@ -19,79 +19,47 @@ const RednerRoutes: React.FC = memo(() => {
     actionAuthRoutes(genAuthRoutes(routes, currentUser?.role));
   }, [routes, currentUser]);
 
-  const test = useMemo(() => {
-    function genBaseRcRoutes(routes: IRouter[]) {
-      const reactRoutes: RouteObject[] = [];
-      for (let i = 0; i < routes.length; i++) {
-        const item = routes[i];
-        const hasChildren = isArray(item.children) && item.children.length > 0;
-        let redirect = item.redirect;
-        const { component } = item;
-
-        // 有子节点，但是没有声明 redirect 重定向的子节点地址，自动查找第一个具有路由的子节点
-        if (hasChildren && !redirect) {
-          redirect = addRedirect(item.children!);
-        }
-
-        let element: React.ReactNode | null = null;
-        if (redirect) element = <Navigate to={redirect!} replace />;
-        else if (component) element = createElement(component);
-
-        const routerItem: RouteObject = {
-          path: item.path,
-          element: element,
-        };
-        if (hasChildren) {
-          reactRoutes.push({
-            ...routerItem,
-            children: genBaseRcRoutes(item.children!),
-          });
-        } else {
-          reactRoutes.push(routerItem);
-        }
-      }
-      return reactRoutes;
-    }
-
-    return genBaseRcRoutes(authRoutes);
-  }, [authRoutes]);
-
-  console.log(test);
-
   const renderRoutes = useMemo(() => {
-    function genAuthRoutes(routes: IRouter[]): React.ReactNode {
-      return routes.map((route) => {
-        const { component, path, children, redirect, layout, meta } = route;
-        const access = meta?.access;
+    function genRoutes(routes: IRouter[]): React.ReactNode {
+      return routes.map((item) => {
+        const baseRoutes: React.ReactNode[] = [];
 
-        if (children) return genAuthRoutes(children);
+        const { component, path, children } = item;
+        let redirect = item.redirect;
+        const hasChildren = isArray(children) && children.length > 0;
+
+        redirect = redirect || addRedirect(children || []);
+
+        if (hasChildren) {
+          baseRoutes.push(genRoutes(children));
+        }
 
         if (redirect) {
-          return <Route key={path} path={path} element={<Navigate to={redirect} replace />} />;
+          baseRoutes.push(
+            <Route key={path} path={path} element={<Navigate to={redirect} replace />} />,
+          );
         }
 
         if (component) {
-          const el = (
-            <Route
-              key={path}
-              path={path}
-              element={<PageLayout layout={layout}>{createElement(component)}</PageLayout>}
-            />
-          );
-
-          if (!access) return el;
-
-          const hasAccess = validateAccess(currentUser?.role || [], access);
-          return hasAccess ? el : null;
+          baseRoutes.push(<Route key={path} path={path} element={createElement(component)} />);
         }
-        return null;
+        return baseRoutes;
       });
     }
 
-    return genAuthRoutes(routes);
-  }, [routes, currentUser]);
+    return genRoutes(authRoutes);
+  }, [authRoutes, currentUser]);
 
-  return <Routes>{renderRoutes}</Routes>;
+  // 路由渲染完成前，渲染 loading 等待
+  if (React.Children.count(renderRoutes) === 0) {
+    return <LazyLoading tip="加载中" />;
+  }
+
+  return (
+    <Routes>
+      <Route element={<PageLayout />}>{renderRoutes}</Route>
+    </Routes>
+  );
 });
 
 export default RednerRoutes;
