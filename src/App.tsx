@@ -3,7 +3,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import ThemeControlProvider from "@/themes/ThemeControlProvider";
 import useHelmet from "@/hooks/useHelmet";
 import useStaticApp from "@/hooks/useStaticApp";
-import RootRoutes from "@/routes/RootRoutes";
+import RenderRoutes from "@/routes/RenderRoutes";
 import LoadUser from "@/layouts/auth/LoadUser";
 
 const App: React.FC = () => {
@@ -18,7 +18,7 @@ const App: React.FC = () => {
     >
       <ThemeControlProvider>
         <LoadUser>
-          <RootRoutes />
+          <RenderRoutes />
         </LoadUser>
       </ThemeControlProvider>
     </ErrorBoundary>

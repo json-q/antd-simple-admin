@@ -1,23 +1,62 @@
 import { createElement, memo, useMemo } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, RouteObject, Routes } from "react-router-dom";
 import { useDeepCompareEffect } from "ahooks";
 import routes, { type IRouter } from "@/routes";
 import PageLayout from "@/layouts";
 import { useSelector } from "@/stores";
 import { validateAccess } from "@/hooks/useAccess";
-import { genAuthRoutes } from "./utils";
+import { addRedirect, genAuthRoutes } from "./utils";
+import { isArray } from "lodash-es";
 
-const RootRoutes: React.FC = memo(() => {
+const RednerRoutes: React.FC = memo(() => {
   const { currentUser, authRoutes, actionAuthRoutes } = useSelector([
     "currentUser",
     "authRoutes",
     "actionAuthRoutes",
   ]);
-  console.log(authRoutes);
 
   useDeepCompareEffect(() => {
     actionAuthRoutes(genAuthRoutes(routes, currentUser?.role));
   }, [routes, currentUser]);
+
+  const test = useMemo(() => {
+    function genBaseRcRoutes(routes: IRouter[]) {
+      const reactRoutes: RouteObject[] = [];
+      for (let i = 0; i < routes.length; i++) {
+        const item = routes[i];
+        const hasChildren = isArray(item.children) && item.children.length > 0;
+        let redirect = item.redirect;
+        const { component } = item;
+
+        // 有子节点，但是没有声明 redirect 重定向的子节点地址，自动查找第一个具有路由的子节点
+        if (hasChildren && !redirect) {
+          redirect = addRedirect(item.children!);
+        }
+
+        let element: React.ReactNode | null = null;
+        if (redirect) element = <Navigate to={redirect!} replace />;
+        else if (component) element = createElement(component);
+
+        const routerItem: RouteObject = {
+          path: item.path,
+          element: element,
+        };
+        if (hasChildren) {
+          reactRoutes.push({
+            ...routerItem,
+            children: genBaseRcRoutes(item.children!),
+          });
+        } else {
+          reactRoutes.push(routerItem);
+        }
+      }
+      return reactRoutes;
+    }
+
+    return genBaseRcRoutes(authRoutes);
+  }, [authRoutes]);
+
+  console.log(test);
 
   const renderRoutes = useMemo(() => {
     function genAuthRoutes(routes: IRouter[]): React.ReactNode {
@@ -55,4 +94,4 @@ const RootRoutes: React.FC = memo(() => {
   return <Routes>{renderRoutes}</Routes>;
 });
 
-export default RootRoutes;
+export default RednerRoutes;

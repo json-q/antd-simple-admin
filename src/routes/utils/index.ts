@@ -2,6 +2,8 @@ import { cloneDeep, isArray } from "lodash-es";
 import { validateAccess } from "@/hooks/useAccess";
 import type { IRouter } from "..";
 
+// *** 此文件为 RenderRoutes 的静态函数逻辑抽离
+
 /**
  * @param genRoutes 初始数组
  * @param routes 基础路由配置
@@ -31,3 +33,17 @@ export const genAuthRoutes: GenAuthRoutesFn = (routes, role = [], genRoutes = []
 
   return genRoutes;
 };
+
+export function addRedirect(multMenu: IRouter[]): string | undefined {
+  for (let i = 0; i < multMenu.length; i++) {
+    const item = multMenu[i];
+
+    if (item.children && isArray(item.children)) {
+      // 递归找到第一个具有路由页面的节点就停止，作为父节点的重定向地址
+      const _redirect = addRedirect(item.children);
+      if (_redirect) return _redirect;
+    }
+
+    if (item.component) return item.path;
+  }
+}
