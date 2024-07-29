@@ -36,7 +36,6 @@ const LoadUser: React.FC<LoadUserProps> = memo(({ children }) => {
 
   async function getCurrentUser() {
     try {
-      setLoading(true);
       await getCurrentUserInfo();
       setLoading(false);
     } catch (e) {
