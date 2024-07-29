@@ -5,10 +5,9 @@ import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
 import { useDeepCompareEffect } from "ahooks";
 import { isArray } from "lodash-es";
-import routes, { type IRouter } from "@/routes";
+import { type IRouter } from "@/routes";
 import { useSelector } from "@/stores";
 import useRouteMatch from "@/hooks/useRouteMatch";
-import { validateAccess } from "@/hooks/useAccess";
 import useMenuWrapperStyles from "./styles";
 
 type MenusType = MenuItemType & Partial<SubMenuType>;
@@ -22,11 +21,7 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   const { matchRoute, treeMatchRoute } = useRouteMatch();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
-  const { menuMode, collapsed, currentUser } = useSelector([
-    "menuMode",
-    "collapsed",
-    "currentUser",
-  ]);
+  const { menuMode, collapsed, authRoutes } = useSelector(["menuMode", "collapsed", "authRoutes"]);
 
   useDeepCompareEffect(() => {
     setSelectedKeys([matchRoute?.path || ""]);
@@ -43,13 +38,10 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
     const genBaseMenus = (routes: IRouter[]) => {
       return routes
         .filter((item) => {
-          const access = item.meta?.access;
           const isIndex = item.index !== true; // 去掉首页标识（重定向配置不是菜单路由，不显示到菜单）
           const isFullPage = item.layout !== false; // 去掉全屏显示的页面，不在菜单内
-          const isShowMenuByConfig = item.meta?.hideMenu !== true; // 配置 hideMenu = true 的不显示到菜单
-          const isShowMenuByAuth = access ? validateAccess(currentUser?.role || [], access) : true; // 无权限配置直接展示，有设置权限先校验在判断是否显示
-
-          return isIndex && isFullPage && isShowMenuByConfig && isShowMenuByAuth;
+          const isShowMenu = item.meta?.hideMenu !== true; // 配置 hideMenu = true 的不显示到菜单
+          return isIndex && isFullPage && isShowMenu;
         })
         .map((item) => {
           const icon = item.icon;
@@ -68,8 +60,8 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
         });
     };
 
-    return genBaseMenus(routes);
-  }, [routes, currentUser]);
+    return genBaseMenus(authRoutes);
+  }, [authRoutes]);
 
   const menuDom = (
     <Menu

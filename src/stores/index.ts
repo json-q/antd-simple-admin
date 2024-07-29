@@ -5,8 +5,9 @@ import { createWithEqualityFn } from "zustand/traditional";
 import { pick } from "lodash-es";
 import layoutSlice, { type LayoutSliceType } from "./modules/layoutSlice";
 import userSlice, { type UserSliceType } from "./modules/userSlice";
+import routesSlice, { type RoutesSliceType } from "./modules/routeSlice";
 
-type Store = LayoutSliceType & UserSliceType;
+type Store = LayoutSliceType & UserSliceType & RoutesSliceType;
 
 const useStore = createWithEqualityFn<Store>()(
   immer(
@@ -15,6 +16,7 @@ const useStore = createWithEqualityFn<Store>()(
         (...args) => ({
           ...layoutSlice(...args),
           ...userSlice(...args),
+          ...routesSlice(...args),
         }),
         {
           name: "settings-config", // 本地缓存 name=>key 。partialize 函数 => return 缓存内容

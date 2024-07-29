@@ -1,12 +1,23 @@
 import { createElement, memo, useMemo } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { useDeepCompareEffect } from "ahooks";
 import routes, { type IRouter } from "@/routes";
 import PageLayout from "@/layouts";
 import { useSelector } from "@/stores";
 import { validateAccess } from "@/hooks/useAccess";
+import { genAuthRoutes } from "./utils";
 
 const RootRoutes: React.FC = memo(() => {
-  const { currentUser } = useSelector(["currentUser"]);
+  const { currentUser, authRoutes, actionAuthRoutes } = useSelector([
+    "currentUser",
+    "authRoutes",
+    "actionAuthRoutes",
+  ]);
+  console.log(authRoutes);
+
+  useDeepCompareEffect(() => {
+    actionAuthRoutes(genAuthRoutes(routes, currentUser?.role));
+  }, [routes, currentUser]);
 
   const renderRoutes = useMemo(() => {
     function genAuthRoutes(routes: IRouter[]): React.ReactNode {
