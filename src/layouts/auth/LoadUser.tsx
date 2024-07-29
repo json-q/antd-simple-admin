@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import localCacha from "@/utils/cache/localCache";
-import { LOGIN_PAGE, NOT_FOUND_PAGE, TOKEN_CACHE } from "@/constants";
+import { LOGIN_PAGE, TOKEN_CACHE } from "@/constants";
 import { useSelector } from "@/stores";
 import LazyLoading from "../common/LazyLoading";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -21,7 +21,7 @@ const LoadUser: React.FC<LoadUserProps> = memo(({ children }) => {
 
   useEffect(() => {
     //  访问开放页面无需认证
-    const noNeedAuth = [LOGIN_PAGE, NOT_FOUND_PAGE].includes(pathname);
+    const noNeedAuth = [LOGIN_PAGE].includes(pathname);
     if (noNeedAuth) return setLoading(false);
 
     if (!localCacha.get(TOKEN_CACHE)) {
