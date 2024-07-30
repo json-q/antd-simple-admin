@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { has, isArray } from "lodash-es";
-import routes, { type IRouter } from "@/routes";
+import routes, { type IRouteObject } from "@/routes";
 
 type TFindCurentRouteFn = (
   pathname: string,
-  routes?: IRouter[] | undefined,
-  treeMatchRoute?: IRouter[],
+  routes?: IRouteObject[] | undefined,
+  treeMatchRoute?: IRouteObject[],
 ) => TMatchRoute | undefined;
-type TMatchRoute = { matchRoute: IRouter | undefined; treeMatchRoute: IRouter[] };
+type TMatchRoute = { matchRoute: IRouteObject | undefined; treeMatchRoute: IRouteObject[] };
 
 export const findCurentRoute: TFindCurentRouteFn = (
   pathname: string,

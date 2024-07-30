@@ -5,7 +5,7 @@ import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
 import { useDeepCompareEffect } from "ahooks";
 import { isArray } from "lodash-es";
-import { type IRouter } from "@/routes";
+import { type IRouteObject } from "@/routes";
 import { useSelector } from "@/stores";
 import useRouteMatch from "@/hooks/useRouteMatch";
 import useMenuWrapperStyles from "./styles";
@@ -35,7 +35,7 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   }, [treeMatchRoute, collapsed]);
 
   const genMenus = useMemo(() => {
-    const genBaseMenus = (routes: IRouter[]) => {
+    const genBaseMenus = (routes: IRouteObject[]) => {
       return routes
         .filter((item) => {
           const isIndex = item.index !== true; // 去掉首页标识（重定向配置不是菜单路由，不显示到菜单）

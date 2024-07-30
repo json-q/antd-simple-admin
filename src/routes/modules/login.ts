@@ -1,7 +1,7 @@
 import { lazy } from "react";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
-const login: IRouter[] = [
+const login: IRouteObject[] = [
   {
     path: "/login",
     title: "登录页",

@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { ProfileOutlined } from "@ant-design/icons";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
-const profile: IRouter[] = [
+const profile: IRouteObject[] = [
   {
     path: "/profile",
     title: "详情页",

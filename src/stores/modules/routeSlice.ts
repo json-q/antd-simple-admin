@@ -1,9 +1,9 @@
 import type { StateCreator } from "zustand";
-import type { IRouter } from "@/routes";
+import type { IRouteObject } from "@/routes";
 
 export type RoutesSliceType = {
-  authRoutes: IRouter[];
-  actionAuthRoutes: (authRoutes: IRouter[]) => void;
+  authRoutes: IRouteObject[];
+  actionAuthRoutes: (authRoutes: IRouteObject[]) => void;
 };
 
 const routesSlice: StateCreator<

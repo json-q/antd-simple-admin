@@ -2,7 +2,7 @@ import React, { createElement, memo, useMemo } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useDeepCompareEffect } from "ahooks";
 import { isArray } from "lodash-es";
-import routes, { type IRouter } from "@/routes";
+import routes, { type IRouteObject } from "@/routes";
 import PageLayout from "@/layouts";
 import { useSelector } from "@/stores";
 import { addRedirect, genAuthRoutes } from "./utils";
@@ -20,7 +20,7 @@ const RednerRoutes: React.FC = memo(() => {
   }, [routes, currentUser]);
 
   const renderRoutes = useMemo(() => {
-    function genRoutes(routes: IRouter[]): React.ReactNode {
+    function genRoutes(routes: IRouteObject[]): React.ReactNode {
       return routes.map((item) => {
         const baseRoutes: React.ReactNode[] = [];
 

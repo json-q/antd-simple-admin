@@ -4,7 +4,7 @@ import { Breadcrumb, Space } from "antd";
 import type { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import { isArray } from "lodash-es";
 import { findCurentRoute } from "@/hooks/useRouteMatch";
-import routes, { type IRouter } from "@/routes";
+import routes, { type IRouteObject } from "@/routes";
 
 const HeaderBreadcrumb: React.FC = memo(() => {
   const { pathname } = useLocation();
@@ -13,7 +13,7 @@ const HeaderBreadcrumb: React.FC = memo(() => {
     const match = findCurentRoute(pathname, routes);
     if (!match) return [];
 
-    const genBaseBreadcumbs = (treeRoutes: IRouter[], isChildren = false): ItemType[] => {
+    const genBaseBreadcumbs = (treeRoutes: IRouteObject[], isChildren = false): ItemType[] => {
       return treeRoutes.map((item) => {
         const title = item.title || item.meta?.title;
         const icon = item.icon ? createElement(item.icon) : null;

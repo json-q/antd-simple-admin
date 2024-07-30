@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { CheckCircleOutlined } from "@ant-design/icons";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
-const result: IRouter[] = [
+const result: IRouteObject[] = [
   {
     path: "/result",
     title: "结果页",

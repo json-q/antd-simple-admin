@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { ProductOutlined } from "@ant-design/icons";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
-const nested: IRouter[] = [
+const nested: IRouteObject[] = [
   {
     path: "/nested",
     title: "嵌套菜单",

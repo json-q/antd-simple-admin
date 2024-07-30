@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { WarningOutlined } from "@ant-design/icons";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
-const exception: IRouter[] = [
+const exception: IRouteObject[] = [
   {
     path: "/exception",
     title: "异常页",

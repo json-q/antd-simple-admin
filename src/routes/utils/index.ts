@@ -1,6 +1,6 @@
 import { cloneDeep, isArray } from "lodash-es";
 import { validateAccess } from "@/hooks/useAccess";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
 // *** 此文件为 RenderRoutes 的静态函数逻辑抽离
 
@@ -10,7 +10,11 @@ import type { IRouter } from "..";
  * @param role 用户权限
  * @returns 对应权限路由
  */
-type GenAuthRoutesFn = (routes: IRouter[], role?: string[], genRoutes?: IRouter[]) => IRouter[];
+type GenAuthRoutesFn = (
+  routes: IRouteObject[],
+  role?: string[],
+  genRoutes?: IRouteObject[],
+) => IRouteObject[];
 export const genAuthRoutes: GenAuthRoutesFn = (routes, role = [], genRoutes = []) => {
   const _routes = cloneDeep(routes);
 
@@ -34,7 +38,7 @@ export const genAuthRoutes: GenAuthRoutesFn = (routes, role = [], genRoutes = []
   return genRoutes;
 };
 
-export function addRedirect(multMenu: IRouter[]): string | undefined {
+export function addRedirect(multMenu: IRouteObject[]): string | undefined {
   for (let i = 0; i < multMenu.length; i++) {
     const item = multMenu[i];
 

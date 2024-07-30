@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { TableOutlined } from "@ant-design/icons";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
-const list: IRouter[] = [
+const list: IRouteObject[] = [
   {
     path: "/list",
     title: "列表页",

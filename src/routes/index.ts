@@ -10,8 +10,11 @@ import exception from "./modules/exception";
 import account from "./modules/account";
 import auth from "./modules/auth";
 import nested from "./modules/nested";
+import type { AuthRouteObject, IRouter } from "./types";
 
-const routes: IRouter[] = [
+export type IRouteObject = AuthRouteObject<IRouter>;
+
+const routes: IRouteObject[] = [
   {
     path: "/",
     redirect: "/dashboard/analysis",
@@ -35,48 +38,3 @@ const routes: IRouter[] = [
 ];
 
 export default routes;
-
-export interface IRouter {
-  /**
-   * @description 路由信息，嵌套子路由需写完整路由
-   */
-  path: string;
-  /**
-   * @description 重定向地址，嵌套菜单情况下，若不手指定，则默认寻找第一个具有页面(component)的子路由作为重定向地址
-   */
-  redirect?: string;
-  /**
-   * @description 是否是根路由
-   */
-  index?: true;
-  component?: React.FC;
-  /**
-   * @description 菜单名称/浏览器标题，若 `meta.title` 设置，则浏览器标题优先使用 `meta.title`
-   */
-  title?: string;
-  /**
-   * @description 是否展示 layout 布局（当前路由是否全屏显示）
-   * @default true
-   */
-  layout?: false;
-  /**
-   * @description meta 路由的额外信息
-   */
-  icon?: React.FC;
-  meta?: {
-    /**
-     * @description 浏览器标题，若菜单没有配置 title，则使用该 title
-     */
-    title?: string;
-    /**
-     * @description 侧边栏（菜单）不显示该路由
-     * @default false
-     */
-    hideMenu?: boolean;
-    /**
-     * @description 权限菜单
-     */
-    access?: string | string[];
-  };
-  children?: IRouter[];
-}

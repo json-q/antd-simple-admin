@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { VerifiedOutlined } from "@ant-design/icons";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
-const auth: IRouter[] = [
+const auth: IRouteObject[] = [
   {
     path: "/auth",
     title: "权限示例",

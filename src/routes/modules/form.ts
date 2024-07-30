@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { FormOutlined } from "@ant-design/icons";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
-const form: IRouter[] = [
+const form: IRouteObject[] = [
   {
     path: "/form",
     title: "表单页",

@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { DashboardOutlined } from "@ant-design/icons";
-import type { IRouter } from "..";
+import type { IRouteObject } from "..";
 
-const dashboard: IRouter[] = [
+const dashboard: IRouteObject[] = [
   {
     path: "/dashboard",
     title: "Dashboard",
