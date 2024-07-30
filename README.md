@@ -33,3 +33,11 @@ UI 参考
 采用 `vite-plugin-fake-server` 结合 `@faker-js/faker` 模拟数据请求，所有请求都延迟 1.5s 来模拟低网速下可能潜在的问题。
 
 > 为什么不使用 `vite-plugin-mock` + `mockjs`。详见：vite-plugin-mock [issue](https://github.com/vbenjs/vite-plugin-mock/issues/127)，且 `@faker-js/faker` 上手成本比 `mockjs` 更低。
+
+# 计划
+
+- [ ] 重构路由的配置方式，使用 `RouterProvider` 重构
+- [ ] 重构面包屑配置方式
+- [ ] 动态主题切换
+- [ ] 全局页面搜索
+- [ ] 通知栏简单示例
