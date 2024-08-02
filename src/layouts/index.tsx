@@ -15,7 +15,7 @@ const PageLayout: React.FC = memo(() => {
   );
 
   // 不存在的路由 / 路由为
-  if (matchRoute?.layout === false) {
+  if (matchRoute.route?.layout === false) {
     return lazyOutlet;
   }
 

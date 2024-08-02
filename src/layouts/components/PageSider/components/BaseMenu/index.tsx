@@ -1,5 +1,5 @@
 import { memo, useMemo, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
@@ -7,7 +7,7 @@ import { useDeepCompareEffect } from "ahooks";
 import { isArray } from "lodash-es";
 import { useSelector } from "@/stores";
 import { IRouteObject } from "@/routes";
-import { genParentPaths, mergePath } from "@/routes/utils";
+import { mergePath } from "@/routes/utils";
 import useMenuWrapperStyles from "./styles";
 
 type MenusType = MenuItemType & Partial<SubMenuType>;
@@ -18,23 +18,27 @@ interface BaseMenuProps {
 
 const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   const { styles } = useMenuWrapperStyles();
-  const { pathname } = useLocation();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
-  const { menuMode, collapsed, authRoutes } = useSelector(["menuMode", "collapsed", "authRoutes"]);
+  const { menuMode, collapsed, authRoutes, matchRoute } = useSelector([
+    "menuMode",
+    "collapsed",
+    "authRoutes",
+    "matchRoute",
+  ]);
 
   useDeepCompareEffect(() => {
-    setSelectedKeys([pathname]);
-  }, [pathname]);
+    setSelectedKeys([matchRoute.route?.path || ""]);
+  }, [matchRoute]);
 
   useDeepCompareEffect(() => {
     // 若 sider 处于展开状态，则默认需要展开对应的子级菜单
     if (collapsed === false) {
-      setOpenKeys(genParentPaths(pathname));
+      setOpenKeys(matchRoute.treeRoute.map((item) => item.path));
     } else {
       setOpenKeys([]);
     }
-  }, [pathname, collapsed]);
+  }, [matchRoute, collapsed]);
 
   const genMenus = useMemo(() => {
     function genBaseMenus(routes: IRouteObject[] = [], parentPath: string = "/") {

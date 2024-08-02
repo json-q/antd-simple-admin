@@ -77,23 +77,6 @@ export const mergePath = (path: string = "", parentPath: string = "/") => {
   return `/${parentPath}/${path}`.replace(/\/\//g, "/").replace(/\/\//g, "/");
 };
 
-/**
- * 经处理后 authRoutes 的 path 可直接使用路由切割，规避递归
- */
-export const genParentPaths = (currentPath?: string) => {
-  if (!currentPath) return [];
-  const paths = currentPath
-    .split("/")
-    .filter(Boolean)
-    .map((path) => `/${path}`);
-
-  // openKeys 不需要当前项
-  paths.pop();
-
-  let path = "";
-  return paths.map((item) => (path += item));
-};
-
 function isUrl(path: string) {
   if (!path.startsWith("http")) return false;
 

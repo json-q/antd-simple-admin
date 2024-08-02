@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 const GlobalHelmet: React.FC = memo(() => {
   const { matchRoute } = useSelector(["matchRoute"]);
 
-  const title = matchRoute?.meta?.title || matchRoute?.title;
+  const title = matchRoute.route?.meta?.title || matchRoute.route?.title;
   const appTitle = (title ? `${title} - ` : "") + import.meta.env.VITE_APP_TITLE;
 
   return (
