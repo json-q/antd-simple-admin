@@ -12,11 +12,11 @@ NProgress.configure({
   minimum: 0.3,
 });
 
-interface LazyLoadingProps extends SpinProps {
+interface LoadingProps extends SpinProps {
   height?: string | number;
 }
 
-const LazyLoading: React.FC<LazyLoadingProps> = memo(({ height = "100vh", ...restProps }) => {
+const Loading: React.FC<LoadingProps> = memo(({ height = "100vh", ...restProps }) => {
   useEffect(() => {
     NProgress.start();
 
@@ -37,4 +37,4 @@ const LazyLoading: React.FC<LazyLoadingProps> = memo(({ height = "100vh", ...res
   );
 });
 
-export default LazyLoading;
+export default Loading;

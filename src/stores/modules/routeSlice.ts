@@ -3,7 +3,9 @@ import type { IRouteObject } from "@/routes";
 
 export type RoutesSliceType = {
   authRoutes: IRouteObject[];
+  matchRoute?: IRouteObject;
   actionAuthRoutes: (authRoutes: IRouteObject[]) => void;
+  actionMatchRoute: (matchRoute?: IRouteObject) => void;
 };
 
 const routesSlice: StateCreator<
@@ -12,6 +14,7 @@ const routesSlice: StateCreator<
 > = (set) => ({
   authRoutes: [],
   actionAuthRoutes: (authRoutes) => set({ authRoutes }),
+  actionMatchRoute: (matchRoute) => set({ matchRoute }),
 });
 
 export default routesSlice;

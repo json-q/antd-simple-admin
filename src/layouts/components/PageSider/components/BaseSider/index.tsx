@@ -30,6 +30,7 @@ const BaseSider: React.FC<BaseSiderProps> = memo(({ children }) => {
 
   return (
     <Sider
+      collapsible
       trigger={null}
       width={210}
       className={styles.sider}

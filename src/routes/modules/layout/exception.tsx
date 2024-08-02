@@ -1,33 +1,32 @@
 import { lazy } from "react";
 import { WarningOutlined } from "@ant-design/icons";
-import type { IRouteObject } from "..";
+import type { IRouteObject } from "../..";
+
+const NoPermission = lazy(() => import("@/pages/exception/403"));
+const NotFound = lazy(() => import("@/pages/exception/404"));
+const ServerError = lazy(() => import("@/pages/exception/500"));
 
 const exception: IRouteObject[] = [
   {
+    order: 6,
     path: "/exception",
     title: "异常页",
-    icon: WarningOutlined,
+    icon: <WarningOutlined />,
     children: [
       {
         title: "403",
         path: "/exception/403",
-        component: lazy(
-          () => import(/* webpackChunkName: "Exception_403" */ "@/pages/exception/403"),
-        ),
+        element: <NoPermission />,
       },
       {
         title: "404",
         path: "/exception/404",
-        component: lazy(
-          () => import(/* webpackChunkName: "Exception_404" */ "@/pages/exception/404"),
-        ),
+        element: <NotFound />,
       },
       {
         title: "500",
         path: "/exception/500",
-        component: lazy(
-          () => import(/* webpackChunkName: "Exception_500" */ "@/pages/exception/500"),
-        ),
+        element: <ServerError />,
       },
     ],
   },

@@ -1,55 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
-import { has, isArray } from "lodash-es";
-import routes, { type IRouteObject } from "@/routes";
+import { unAuthRoutes, type IRouteObject } from "@/routes";
+import { mergePath } from "@/routes/utils";
+import { useSelector } from "@/stores";
 
-type TFindCurentRouteFn = (
+type TFindCurrentRouteFn = (
   pathname: string,
   routes?: IRouteObject[] | undefined,
-  treeMatchRoute?: IRouteObject[],
-) => TMatchRoute | undefined;
-type TMatchRoute = { matchRoute: IRouteObject | undefined; treeMatchRoute: IRouteObject[] };
+  parentPath?: string,
+) => IRouteObject | undefined;
 
-export const findCurentRoute: TFindCurentRouteFn = (
+export const findCurrentRoute: TFindCurrentRouteFn = (
   pathname: string,
   routes = [],
-  treeMatchRoute = [],
+  parentPath: string = "/",
 ) => {
   for (let i = 0; i < routes.length; i++) {
-    if (has(routes[i], "index")) continue; // redirect 不做匹配
-
-    if (pathname === routes[i].path) {
-      treeMatchRoute.push(routes[i]);
-      return { matchRoute: routes[i], treeMatchRoute };
+    const fullPath = mergePath(routes[i].path, parentPath);
+    if (pathname.indexOf(fullPath) !== -1) {
+      return routes[i];
     }
-
-    const exist = pathname.indexOf(routes[i].path);
-    if (exist === -1) continue;
-
-    if (routes[i].children && isArray(routes[i].children)) {
-      treeMatchRoute.push(routes[i]);
-      return findCurentRoute(pathname, routes[i].children, treeMatchRoute);
-    }
-    continue;
   }
 };
 
 /**
  * @description 路由变化时匹配当前路由在路由表的配置信息，及对应的路由树
- * @returns `{ matchRoute, treeMatchRoute }`
+ * @returns `{ route, treeRoute }`
  */
-export default function useRouteMatch(path?: string): TMatchRoute {
+export default function useRouteMatch(path?: string) {
   const location = useLocation();
+  const { authRoutes, actionMatchRoute } = useSelector(["authRoutes", "actionMatchRoute"]);
   const pathname = path || location.pathname;
-  const [matchRoute, setMatchRoute] = useState<TMatchRoute>({
-    matchRoute: undefined,
-    treeMatchRoute: [],
-  });
+
+  const mathRoute = useMemo(() => {
+    const math = findCurrentRoute(pathname, [...authRoutes, ...unAuthRoutes]);
+    return math;
+  }, [pathname, authRoutes]);
 
   useEffect(() => {
-    const match = findCurentRoute(pathname, routes);
-    if (match) setMatchRoute({ ...match });
-  }, [pathname]);
+    // 手动传入的 path，可能不是路由切换，此时不同步更新 store
+    if (!path) actionMatchRoute(mathRoute);
+  }, [mathRoute]);
 
-  return matchRoute;
+  return mathRoute;
 }

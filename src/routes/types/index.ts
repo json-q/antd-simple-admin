@@ -1,6 +1,9 @@
 import type { IndexRouteObject, NonIndexRouteObject } from "react-router-dom";
 
-export type AuthIndexRouteObject<T extends Record<string, any> = any> = IndexRouteObject & {
+export type AuthIndexRouteObject<T extends Record<string, any> = any> = Omit<
+  IndexRouteObject,
+  "index"
+> & {
   [P in keyof T]: T[P];
 };
 
@@ -18,6 +21,8 @@ export type AuthRouteObject<T extends Record<string, any> = any> =
   | AuthNonIndexRouteObject<T>;
 
 export interface IRouter {
+  /** vite 自动导入路由为文件顺序，菜单渲染无序，order 指定排序 */
+  order?: number;
   /**
    * @description 路由信息，嵌套子路由需写完整路由
    */
@@ -26,11 +31,6 @@ export interface IRouter {
    * @description 重定向地址，嵌套菜单情况下，若不手指定，则默认寻找第一个具有页面(component)的子路由作为重定向地址
    */
   redirect?: string;
-  /**
-   * @description 是否是根路由
-   */
-  index?: true;
-  component?: React.FC;
   /**
    * @description 菜单名称/浏览器标题，若 `meta.title` 设置，则浏览器标题优先使用 `meta.title`
    */
@@ -43,7 +43,7 @@ export interface IRouter {
   /**
    * @description meta 路由的额外信息
    */
-  icon?: React.FC;
+  icon?: React.ReactNode;
   meta?: {
     /**
      * @description 浏览器标题，若菜单没有配置 title，则使用该 title
@@ -55,7 +55,7 @@ export interface IRouter {
      */
     hideMenu?: boolean;
     /**
-     * @description 权限菜单
+     * @description 权限
      */
     access?: string | string[];
   };

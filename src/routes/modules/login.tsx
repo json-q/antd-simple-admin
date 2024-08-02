@@ -1,12 +1,13 @@
 import { lazy } from "react";
 import type { IRouteObject } from "..";
 
+const Login = lazy(() => import("@/pages/login"));
+
 const login: IRouteObject[] = [
   {
     path: "/login",
     title: "登录页",
-    component: lazy(() => import(/* webpackChunkName: "Login" */ "@/pages/login")),
-    layout: false,
+    element: <Login />,
   },
 ];
 

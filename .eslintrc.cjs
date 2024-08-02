@@ -15,7 +15,7 @@ module.exports = {
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
 
-    "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+    "react-refresh/only-export-components": "off",
     "@typescript-eslint/no-explicit-any": "off", // allow any type
     "react-hooks/exhaustive-deps": "off", // colse effect deps lint
   },
