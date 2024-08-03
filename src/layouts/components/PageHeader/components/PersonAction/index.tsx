@@ -1,38 +1,36 @@
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Dropdown, Flex, type MenuProps } from "antd";
+import { Avatar, Button, Dropdown, type MenuProps } from "antd";
 import { LockOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { message, modal } from "@/hooks/useStaticApp";
 import { useSelector } from "@/stores";
 import { LOGIN_PAGE, TOKEN_CACHE } from "@/constants";
 import localCacha from "@/utils/cache/localCache";
 import { logout } from "@/apis/mock";
-import usePersonActionStyles from "./styles";
 
 enum MenuItemKey {
   PASSWORD = "PASSWORD",
   LOGOUT = "LOGOUT",
 }
 
-const items: MenuProps["items"] = [
-  {
-    label: "修改密码",
-    key: MenuItemKey.PASSWORD,
-    icon: <LockOutlined />,
-  },
-  { type: "divider" },
-  {
-    label: "退出登录",
-    key: MenuItemKey.LOGOUT,
-    danger: true,
-    icon: <LogoutOutlined />,
-  },
-];
-
 const PersonAction: React.FC = memo(() => {
-  const { styles } = usePersonActionStyles();
   const { currentUser, resetUserState } = useSelector(["currentUser", "resetUserState"]);
   const navigate = useNavigate();
+
+  const items: MenuProps["items"] = [
+    {
+      label: "修改密码",
+      key: MenuItemKey.PASSWORD,
+      icon: <LockOutlined />,
+    },
+    { type: "divider" },
+    {
+      label: "退出登录",
+      key: MenuItemKey.LOGOUT,
+      danger: true,
+      icon: <LogoutOutlined />,
+    },
+  ];
 
   const onClickDrop: MenuProps["onClick"] = async ({ key }) => {
     switch (key) {
@@ -64,11 +62,13 @@ const PersonAction: React.FC = memo(() => {
   };
 
   return (
-    <Dropdown menu={{ items, onClick: onClickDrop }}>
-      <Flex align="center" gap={8} className={styles.personWrapper}>
-        <Avatar size={28} src={currentUser?.avatar} icon={<UserOutlined />} />
-        <span className="name">{currentUser?.nickName}</span>
-      </Flex>
+    <Dropdown menu={{ items, onClick: onClickDrop }} placement="bottomRight" trigger={["click"]}>
+      <Button
+        type="text"
+        shape="circle"
+        size="large"
+        icon={<Avatar size={32} src={currentUser?.avatar} icon={<UserOutlined />} />}
+      />
     </Dropdown>
   );
 });

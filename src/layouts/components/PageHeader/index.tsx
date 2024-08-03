@@ -48,8 +48,8 @@ const PageHeader: React.FC = memo(() => {
         {md && <SearchPage />}
         <Notify />
         {md && <FullScreen />}
-        <PersonAction />
         <LayoutSetting />
+        <PersonAction />
       </Flex>
     </Header>
   );

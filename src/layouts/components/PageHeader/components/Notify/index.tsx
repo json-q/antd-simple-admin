@@ -6,6 +6,7 @@ const Notify: React.FC = memo(() => {
   return (
     <Button
       type="text"
+      shape="circle"
       icon={
         <Badge dot>
           <BellOutlined />

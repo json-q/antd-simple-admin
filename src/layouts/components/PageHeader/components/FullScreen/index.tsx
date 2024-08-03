@@ -10,6 +10,7 @@ const FullScreen: React.FC = memo(() => {
   return (
     <Button
       type="text"
+      shape="circle"
       icon={isFullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
       onClick={toggleFullscreen}
     />
