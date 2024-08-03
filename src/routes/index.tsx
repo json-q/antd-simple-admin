@@ -4,7 +4,9 @@ import { useSelector } from "@/stores";
 import Loading from "@/components/Loading";
 import AuthGuard from "./auth/AuthGuard";
 import type { AuthRouteObject, IRouter } from "./types";
-import { genAuthRoutes, loadModuleRouter, mergeRoutePath, type ModuleType } from "./utils";
+import { loadModuleRouter, mergeRoutePath, type ModuleType } from "./utils";
+import { cloneDeep, isArray } from "lodash-es";
+import { validateAccess } from "@/hooks/useAccess";
 
 export type IRouteObject = AuthRouteObject<IRouter>;
 
@@ -32,8 +34,7 @@ export default function RenderRoutes() {
   const { currentUser, actionAuthRoutes } = useSelector(["currentUser", "actionAuthRoutes"]);
 
   const authRoutes = useMemo(() => {
-    const auth = genAuthRoutes(layoutRoutes, currentUser?.role);
-    return auth;
+    return genAuthRoutes(cloneDeep(layoutRoutes), currentUser?.role);
   }, [currentUser]);
 
   useEffect(() => {
@@ -63,3 +64,42 @@ export default function RenderRoutes() {
     />
   );
 }
+
+type GenAuthRoutesFn = (
+  routes: IRouteObject[],
+  role?: string[],
+  genRoutes?: IRouteObject[],
+) => IRouteObject[];
+/**
+ * @param genRoutes 初始数组
+ * @param routes 基础路由配置
+ * @param role 用户权限
+ * @returns 对应权限路由
+ */
+export const genAuthRoutes: GenAuthRoutesFn = (routes, role = [], genRoutes = []) => {
+  routes.forEach((item) => {
+    const { meta, children } = item;
+    const access = meta?.access;
+
+    if (isArray(children) && children.length > 0) {
+      // !!! push 顺序一定要先添加重定向，再添加子路由，按照 react-router 路由匹配顺序
+      genRoutes.push({
+        path: item.path,
+        element: <Navigate to={children[0].path} replace />,
+        redirect: true,
+      });
+
+      genRoutes.push({
+        ...item,
+        children: genAuthRoutes(children, role),
+      });
+    } else if (access) {
+      const hasAccess = validateAccess(role, access);
+      hasAccess && genRoutes.push({ ...item }); // 存在权限配置，且校验通过，插入路由
+    } else {
+      genRoutes.push({ ...item });
+    }
+  });
+
+  return genRoutes;
+};

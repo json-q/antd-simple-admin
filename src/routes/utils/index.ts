@@ -1,5 +1,4 @@
-import { cloneDeep, isArray } from "lodash-es";
-import { validateAccess } from "@/hooks/useAccess";
+import { isArray } from "lodash-es";
 import type { IRouteObject } from "..";
 
 export type ModuleType = { default: IRouteObject[] };
@@ -13,53 +12,22 @@ export const loadModuleRouter = (modules: Record<string, ModuleType>) => {
 };
 
 /**
- * @param genRoutes 初始数组
- * @param routes 基础路由配置
- * @param role 用户权限
- * @returns 对应权限路由
- */
-type GenAuthRoutesFn = (
-  routes: IRouteObject[],
-  role?: string[],
-  genRoutes?: IRouteObject[],
-) => IRouteObject[];
-export const genAuthRoutes: GenAuthRoutesFn = (routes, role = [], genRoutes = []) => {
-  const _routes = cloneDeep(routes);
-
-  _routes.forEach((item) => {
-    const { meta, children } = item;
-    const access = meta?.access;
-
-    if (isArray(children) && children.length > 0) {
-      genRoutes.push({
-        ...item,
-        children: genAuthRoutes(children, role),
-      });
-    } else if (access) {
-      const hasAccess = validateAccess(role, access);
-      hasAccess && genRoutes.push({ ...item }); // 存在权限配置，且校验通过，插入路由
-    } else {
-      genRoutes.push({ ...item });
-    }
-  });
-
-  return genRoutes;
-};
-
-/**
  * 对 route 的 path 处理成统一格式
  */
-export const mergeRoutePath = (routes: IRouteObject[], parentPath = "/") => {
-  return routes.map((item) => {
-    item = {
-      ...item,
-      path: mergePath(item.path, parentPath),
-    };
-    if (isArray(item.children) && item.children.length > 0) {
-      item.children = mergeRoutePath(item.children, item.path);
-    }
-    return item;
-  });
+export const mergeRoutePath = (routes: IRouteObject[], parentPath = "/"): IRouteObject[] => {
+  return routes
+    .map((item) => {
+      if (item.redirect) return null;
+      item = {
+        ...item,
+        path: mergePath(item.path, parentPath),
+      };
+      if (isArray(item.children) && item.children.length > 0) {
+        item.children = mergeRoutePath(item.children, item.path);
+      }
+      return item;
+    })
+    .filter(Boolean) as IRouteObject[];
 };
 
 /**

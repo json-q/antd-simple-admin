@@ -28,9 +28,9 @@ export interface IRouter {
    */
   path: string;
   /**
-   * @description 重定向地址，嵌套菜单情况下，若不手指定，则默认寻找第一个具有页面(component)的子路由作为重定向地址
+   * @description 是否为重定向地址，路由转菜单是不需要重定向项，过滤掉
    */
-  redirect?: string;
+  redirect?: true;
   /**
    * @description 菜单名称/浏览器标题，若 `meta.title` 设置，则浏览器标题优先使用 `meta.title`
    */

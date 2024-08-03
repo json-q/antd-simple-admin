@@ -57,8 +57,6 @@ const HeaderBreadcrumb: React.FC = memo(() => {
     return currentRoute.title;
   }
 
-  console.log(genBreadcumbs);
-
   return <Breadcrumb items={genBreadcumbs} itemRender={itemRender} />;
 });
 
