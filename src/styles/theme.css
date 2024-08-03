@@ -1,4 +1,4 @@
-/* webkit scrollbar colot follow system */
+/* webkit scrollbar color follow system */
 [data-prefers-color="dark"] {
   color-scheme: dark;
 }
@@ -7,7 +7,7 @@
   color-scheme: light;
 }
 
-/* change `overlayscrollbars-react` scrollbar base color for chorme */
+/* change `overlayscrollbars-react` scrollbar base color for chrome */
 [data-prefers-color="dark"] .os-theme-dark {
   --os-size: 8px;
   --os-handle-bg: #686868;
