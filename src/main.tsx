@@ -9,8 +9,6 @@ import { HelmetProvider } from "react-helmet-async";
 
 dayjs.locale("zh-cn");
 
-// const baseRouterName = import.meta.env.VITE_BASE_ROUTER_NAME;
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ConfigProvider locale={zhCN} theme={{ cssVar: true, hashed: false }}>
     <AntApp>

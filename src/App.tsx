@@ -5,7 +5,6 @@ import useStaticApp from "@/hooks/useStaticApp";
 import RenderRoutes from "@/routes";
 
 const App: React.FC = () => {
-  // useHelmet();
   useStaticApp();
 
   return (

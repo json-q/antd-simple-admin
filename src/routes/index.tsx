@@ -8,6 +8,8 @@ import { loadModuleRouter, mergeRoutePath, type ModuleType } from "./utils";
 import { cloneDeep, isArray } from "lodash-es";
 import { validateAccess } from "@/hooks/useAccess";
 
+const baseRouterName = import.meta.env.VITE_BASE_ROUTER_NAME;
+
 export type IRouteObject = AuthRouteObject<IRouter>;
 
 /**
@@ -45,22 +47,27 @@ export default function RenderRoutes() {
   return (
     <RouterProvider
       fallbackElement={<Loading />}
-      router={createBrowserRouter([
+      router={createBrowserRouter(
+        [
+          {
+            path: "/",
+            element: <Navigate to="/dashboard/analysis" replace />,
+          },
+          {
+            path: "/",
+            element: <AuthGuard />,
+            children: authRoutes,
+          },
+          ...unAuthRoutes,
+          {
+            path: "*",
+            element: <NotFound />,
+          },
+        ] as RouteObject[],
         {
-          path: "/",
-          element: <Navigate to="/dashboard/analysis" replace />,
+          basename: baseRouterName,
         },
-        {
-          path: "/",
-          element: <AuthGuard />,
-          children: authRoutes,
-        },
-        ...unAuthRoutes,
-        {
-          path: "*",
-          element: <NotFound />,
-        },
-      ] as RouteObject[])}
+      )}
     />
   );
 }
