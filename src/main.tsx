@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
 import { App as AntApp, ConfigProvider } from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
-import "@/styles/index.less";
 import App from "./App.tsx";
-import { HelmetProvider } from "react-helmet-async";
+import "@/styles/index.css";
 
 dayjs.locale("zh-cn");
 

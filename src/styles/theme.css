@@ -1,4 +1,4 @@
-// webkit scrollbar flow theme
+/* webkit scrollbar colot follow system */
 [data-prefers-color="dark"] {
   color-scheme: dark;
 }
@@ -7,7 +7,7 @@
   color-scheme: light;
 }
 
-// 滚动条色调以 chorme 浏览器为参考
+/* change `overlayscrollbars-react` scrollbar base color for chorme */
 [data-prefers-color="dark"] .os-theme-dark {
   --os-size: 8px;
   --os-handle-bg: #686868;

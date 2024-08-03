@@ -5,4 +5,7 @@ export default {
     extend: {},
   },
   plugins: [],
+  corePlugins: {
+    preflight: false, // https://tailwindcss.com/docs/preflight#disabling-preflight
+  },
 };

@@ -36,8 +36,8 @@ const PageHeader: React.FC = memo(() => {
           </>
         ) : (
           <>
-            <DrawSider />
             <BaseLogo />
+            <DrawSider />
           </>
         )}
       </Flex>
@@ -45,9 +45,9 @@ const PageHeader: React.FC = memo(() => {
       <div className="flex-auto"></div>
 
       <Flex gap={12} align="center">
-        <SearchPage />
+        {md && <SearchPage />}
         <Notify />
-        <FullScreen />
+        {md && <FullScreen />}
         <PersonAction />
         <LayoutSetting />
       </Flex>

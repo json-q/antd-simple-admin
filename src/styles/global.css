@@ -9,7 +9,7 @@ body,
     "Noto Color Emoji";
 }
 
-// 系统所有滚动条默认为细滚动条
+/* default scrollbar width is thin  */
 * {
   scrollbar-width: thin;
   scrollbar-color: unset;
@@ -21,32 +21,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-ul,
-ol {
-  list-style: none;
-}
-
-canvas {
-  display: block;
-}
-
-@media (width <= 768px) {
-  .ant-table {
-    width: 100%;
-    overflow-x: auto;
-
-    &-thead > tr,
-    &-tbody > tr {
-      > th,
-      > td {
-        white-space: pre;
-
-        > span {
-          display: block;
-        }
-      }
-    }
-  }
+/* change progress color, use antd primary color */
+html #nprogress .bar {
+  background: #1677ff;
 }
 
 .ant-app,
@@ -54,6 +31,23 @@ canvas {
   height: 100%;
 }
 
-html #nprogress .bar {
-  background: #1677ff;
+@media (width <= 768px) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > th,
+  .ant-table-thead > tr > td,
+  .ant-table-tbody > tr > td {
+    white-space: pre;
+  }
+
+  .ant-table-thead > tr > th > span,
+  .ant-table-tbody > tr > th > span,
+  .ant-table-thead > tr > td > span,
+  .ant-table-tbody > tr > td > span {
+    display: block;
+  }
 }

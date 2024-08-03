@@ -51,10 +51,8 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.8",
-    "less": "^4.2.0",
     "picocolors": "^1.0.1",
     "postcss": "^8.4.39",
-    "postcss-less": "^6.0.0",
     "prettier": "^3.3.3",
     "pretty-quick": "^4.0.0",
     "rollup-plugin-visualizer": "^5.12.0",
@@ -72,11 +70,5 @@
   "simple-git-hooks": {
     "pre-commit": "npx pretty-quick --staged && npm run eslint && npm run stylelint",
     "commit-msg": "node scripts/verify-commit.js"
-  },
-  "broserlist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ]
+  }
 }
