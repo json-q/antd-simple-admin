@@ -1,3 +1,18 @@
+/* change `overlayscrollbars-react` scrollbar base color for chrome */
+html[data-prefers-color="dark"] .os-theme-dark {
+  --os-size: 8px;
+  --os-handle-bg: #686868;
+  --os-handle-bg-hover: #7b7b7b;
+  --os-handle-bg-active: #a1a1a1;
+}
+
+html[data-prefers-color="light"] .os-theme-dark {
+  --os-size: 8px;
+  --os-handle-bg: #c1c1c1;
+  --os-handle-bg-hover: #a8a8a8;
+  --os-handle-bg-active: #787878;
+}
+
 @layer theme {
   /* webkit scrollbar color follow system */
   html[data-prefers-color="dark"] {
@@ -6,21 +21,6 @@
 
   html[data-prefers-color="light"] {
     color-scheme: light;
-  }
-
-  /* change `overlayscrollbars-react` scrollbar base color for chrome */
-  html[data-prefers-color="dark"] .os-theme-dark {
-    --os-size: 8px;
-    --os-handle-bg: #686868;
-    --os-handle-bg-hover: #7b7b7b;
-    --os-handle-bg-active: #a1a1a1;
-  }
-
-  html[data-prefers-color="light"] .os-theme-dark {
-    --os-size: 8px;
-    --os-handle-bg: #c1c1c1;
-    --os-handle-bg-hover: #a8a8a8;
-    --os-handle-bg-active: #787878;
   }
 
   /* switch theme transition base css */
