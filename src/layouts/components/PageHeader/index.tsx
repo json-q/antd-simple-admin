@@ -11,6 +11,7 @@ import SearchPage from "./components/SearchPage";
 import DrawSider from "../PageSider/DrawSider";
 import BaseLogo from "../PageSider/components/BaseLogo";
 import useHeaderStyles from "./styles";
+import ThemeSwitch from "./components/ThemeSwitch";
 
 const { Header } = Layout;
 
@@ -47,6 +48,7 @@ const PageHeader: React.FC = memo(() => {
       <Flex gap={12} align="center">
         {md && <SearchPage />}
         <Notify />
+        <ThemeSwitch />
         {md && <FullScreen />}
         <LayoutSetting />
         <PersonAction />

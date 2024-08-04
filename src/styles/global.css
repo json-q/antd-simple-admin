@@ -1,53 +1,59 @@
-html,
-body,
-#root {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji";
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* default scrollbar width is thin  */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: unset;
-}
-
-body {
-  text-rendering: optimizelegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* change progress color, use antd primary color */
-html #nprogress .bar {
-  background: #1677ff;
-}
-
-.ant-app,
-.ant-layout {
-  height: 100%;
-}
-
-@media (width <= 768px) {
-  .ant-table {
-    width: 100%;
-    overflow-x: auto;
+@layer global {
+  html,
+  body,
+  #root {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+      "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
   }
 
-  .ant-table-thead > tr > th,
-  .ant-table-tbody > tr > th,
-  .ant-table-thead > tr > td,
-  .ant-table-tbody > tr > td {
-    white-space: pre;
+  /* default scrollbar width is thin  */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: unset;
   }
 
-  .ant-table-thead > tr > th > span,
-  .ant-table-tbody > tr > th > span,
-  .ant-table-thead > tr > td > span,
-  .ant-table-tbody > tr > td > span {
-    display: block;
+  body {
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* change progress color, use antd primary color */
+  html #nprogress .bar {
+    background: #1677ff;
+  }
+
+  .ant-app,
+  .ant-layout {
+    height: 100%;
+  }
+
+  @media (width <= 768px) {
+    .ant-table {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > th,
+    .ant-table-thead > tr > td,
+    .ant-table-tbody > tr > td {
+      white-space: pre;
+    }
+
+    .ant-table-thead > tr > th > span,
+    .ant-table-tbody > tr > th > span,
+    .ant-table-thead > tr > td > span,
+    .ant-table-tbody > tr > td > span {
+      display: block;
+    }
   }
 }

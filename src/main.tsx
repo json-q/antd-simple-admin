@@ -10,11 +10,11 @@ import "@/styles/index.css";
 dayjs.locale("zh-cn");
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <ConfigProvider locale={zhCN} theme={{ cssVar: true, hashed: false }}>
-    <AntApp>
-      <HelmetProvider>
+  <HelmetProvider>
+    <ConfigProvider locale={zhCN} theme={{ cssVar: true, hashed: false }}>
+      <AntApp>
         <App />
-      </HelmetProvider>
-    </AntApp>
-  </ConfigProvider>,
+      </AntApp>
+    </ConfigProvider>
+  </HelmetProvider>,
 );

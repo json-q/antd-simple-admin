@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { ThemeProvider } from "antd-style";
 import { useSelector } from "@/stores";
 
@@ -9,7 +9,7 @@ interface ThemeControlProviderProps {
 const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children }) => {
   const { themeMode } = useSelector(["themeMode"]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.querySelector("html")?.setAttribute("data-prefers-color", themeMode);
   }, [themeMode]);
 
