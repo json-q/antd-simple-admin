@@ -16,7 +16,11 @@ enum MenuItemKey {
 
 const PersonAction: React.FC = memo(() => {
   const { styles } = usePersonActionStyles();
-  const { currentUser, resetUserState } = useSelector(["currentUser", "resetUserState"]);
+  const { currentUser, resetUserState, responsive } = useSelector([
+    "currentUser",
+    "resetUserState",
+    "responsive",
+  ]);
   const navigate = useNavigate();
 
   const items: MenuProps["items"] = [
@@ -67,7 +71,7 @@ const PersonAction: React.FC = memo(() => {
     <Dropdown menu={{ items, onClick: onClickDrop }} placement="bottomRight">
       <Flex align="center" gap={8} className={styles.personWrapper}>
         <Avatar size={28} src={currentUser?.avatar} icon={<UserOutlined />} />
-        <span className="name">{currentUser?.nickName}</span>
+        {responsive.md && <span className="name">{currentUser?.nickName}</span>}
       </Flex>
     </Dropdown>
   );
