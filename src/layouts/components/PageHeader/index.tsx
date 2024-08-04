@@ -36,8 +36,8 @@ const PageHeader: React.FC = memo(() => {
           </>
         ) : (
           <>
-            <BaseLogo />
             <DrawSider />
+            <BaseLogo />
           </>
         )}
       </Flex>

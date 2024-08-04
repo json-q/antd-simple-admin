@@ -1,12 +1,13 @@
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Button, Dropdown, type MenuProps } from "antd";
+import { Avatar, Dropdown, Flex, type MenuProps } from "antd";
 import { LockOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { message, modal } from "@/hooks/useStaticApp";
 import { useSelector } from "@/stores";
 import { LOGIN_PAGE, TOKEN_CACHE } from "@/constants";
 import localCacha from "@/utils/cache/localCache";
 import { logout } from "@/apis/mock";
+import usePersonActionStyles from "./styles";
 
 enum MenuItemKey {
   PASSWORD = "PASSWORD",
@@ -14,6 +15,7 @@ enum MenuItemKey {
 }
 
 const PersonAction: React.FC = memo(() => {
+  const { styles } = usePersonActionStyles();
   const { currentUser, resetUserState } = useSelector(["currentUser", "resetUserState"]);
   const navigate = useNavigate();
 
@@ -62,13 +64,11 @@ const PersonAction: React.FC = memo(() => {
   };
 
   return (
-    <Dropdown menu={{ items, onClick: onClickDrop }} placement="bottomRight" trigger={["click"]}>
-      <Button
-        type="text"
-        shape="circle"
-        size="large"
-        icon={<Avatar size={32} src={currentUser?.avatar} icon={<UserOutlined />} />}
-      />
+    <Dropdown menu={{ items, onClick: onClickDrop }} placement="bottomRight">
+      <Flex align="center" gap={8} className={styles.personWrapper}>
+        <Avatar size={28} src={currentUser?.avatar} icon={<UserOutlined />} />
+        <span className="name">{currentUser?.nickName}</span>
+      </Flex>
     </Dropdown>
   );
 });
