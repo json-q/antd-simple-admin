@@ -17,8 +17,8 @@ UI 参考
 - Ant Design Pro
 - vben admin
 
-- 侧边栏滚动条借由第三方库 `overlayscrollbars-react` 实现，使滚动条的显示效果更加平滑。
-  > 该滚动条并未应用于全局，非原生会造成性能损失，所以仅在视觉感知影响较大的 Sider 组件中启用此方式。
+- 侧边栏滚动条使用 `overlayscrollbars-react` 实现，使滚动条的显示效果更加平滑。
+  - 非原生会造成性能损失，所以仅在视觉感知影响较大的 Sider 组件中使用此组件。
 
 # 动态主题
 
@@ -26,7 +26,7 @@ UI 参考
 
 # 样式
 
-集成了 `tailwindcss` `less` 和 `antd-style` 的 css in js 写法，与主题相关的样式推荐使用 cssinjs 书写，其余建议选取 tw 和 less 其中之一，尽量避免样式规范不统一造成维护问题。
+集成了 `tailwindcss` 和 `antd-style` 的 cssinjs 写法，与主题相关的样式推荐使用 cssinjs 书写。
 
 # Mock
 
