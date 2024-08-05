@@ -70,7 +70,7 @@ const PersonAction: React.FC = memo(() => {
   return (
     <Dropdown menu={{ items, onClick: onClickDrop }} placement="bottomRight">
       <Flex align="center" gap={8} className={styles.personWrapper}>
-        <Avatar size={28} src={currentUser?.avatar} icon={<UserOutlined />} />
+        <Avatar size="small" src={currentUser?.avatar} icon={<UserOutlined />} />
         {responsive.md && <span className="name">{currentUser?.nickName}</span>}
       </Flex>
     </Dropdown>
