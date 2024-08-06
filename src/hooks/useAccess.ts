@@ -1,6 +1,6 @@
+import { useMemo } from "react";
 import { isArray } from "lodash-es";
 import { useSelector } from "@/stores";
-import { useEffect, useState } from "react";
 
 /**
  * 当前用户权限默认为数组，根据入参身份进行权限判断
@@ -10,14 +10,10 @@ import { useEffect, useState } from "react";
 const useAccess = (access: string | string[]) => {
   const { currentUser } = useSelector(["currentUser"]);
   const auth = currentUser?.role || [];
-  const [hasAccess, setHasAccess] = useState(false);
 
-  useEffect(() => {
-    const hasAccess = validateAccess(auth, access);
-    setHasAccess(hasAccess);
-  }, [auth, access]);
-
-  return hasAccess;
+  return useMemo(() => {
+    return validateAccess(auth, access);
+  }, [access, auth]);
 };
 
 export function validateAccess(auth: string[], access: string | string[]) {
