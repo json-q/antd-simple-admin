@@ -51,7 +51,7 @@ const AuthGuard: React.FC = memo(() => {
     } else {
       setLoading(false);
     }
-  }, [pathname]);
+  }, [pathname, whiteRoutePaths]);
 
   async function getCurrentUser() {
     try {
