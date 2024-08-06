@@ -10,6 +10,6 @@
 # 0.0.1
 
 - react-router 路由渲染方式使用 `RouterProvider` 重构
-- router TS 类型定义优化，对 `IRouteObject` 进行类型扩展
+- router TS 类型定义优化，对 `RouteObject` 进行类型扩展
 - 面包屑渲染逻辑优化
 - Menu 渲染逻辑优化
