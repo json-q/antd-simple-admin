@@ -1,4 +1,5 @@
 import { useLayoutEffect } from "react";
+import { theme } from "antd";
 import { ThemeProvider } from "antd-style";
 import { useSelector } from "@/stores";
 
@@ -7,7 +8,7 @@ interface ThemeControlProviderProps {
 }
 
 const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children }) => {
-  const { themeMode } = useSelector(["themeMode"]);
+  const { themeMode, compact } = useSelector(["themeMode", "compact"]);
 
   useLayoutEffect(() => {
     document.querySelector("html")?.setAttribute("data-prefers-color", themeMode);
@@ -19,6 +20,7 @@ const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children })
       customToken={{
         customHeaderHeight: 56,
       }}
+      theme={{ algorithm: compact ? theme.compactAlgorithm : undefined }}
     >
       {children}
     </ThemeProvider>
