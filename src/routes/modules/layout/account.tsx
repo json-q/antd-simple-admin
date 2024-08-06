@@ -8,18 +8,18 @@ const Settings = lazy(() => import("@/pages/account/settings"));
 const account: IRouteObject[] = [
   {
     order: 7,
-    path: "/account",
+    path: "account",
     title: "个人页",
     icon: <UserOutlined />,
     children: [
       {
         title: "个人中心",
-        path: "/account/center",
+        path: "center",
         element: <Center />,
       },
       {
         title: "个人设置",
-        path: "/account/settings",
+        path: "settings",
         element: <Settings />,
       },
     ],

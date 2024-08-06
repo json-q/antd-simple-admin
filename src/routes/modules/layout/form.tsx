@@ -9,23 +9,23 @@ const AdvancedForm = lazy(() => import("@/pages/form/advanced-form"));
 const form: IRouteObject[] = [
   {
     order: 2,
-    path: "/form",
+    path: "form",
     title: "表单页",
     icon: <FormOutlined />,
     children: [
       {
         title: "基础表单",
-        path: "/form/basic-form",
+        path: "basic-form",
         element: <BasicForm />,
       },
       {
         title: "分步表单",
-        path: "/form/step-form",
+        path: "step-form",
         element: <StepForm />,
       },
       {
         title: "高级表单",
-        path: "/form/advanced-form",
+        path: "advanced-form",
         element: <AdvancedForm />,
       },
     ],

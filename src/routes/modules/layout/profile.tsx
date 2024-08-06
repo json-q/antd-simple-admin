@@ -8,18 +8,18 @@ const Advanced = lazy(() => import("@/pages/profile/advanced"));
 const profile: IRouteObject[] = [
   {
     order: 4,
-    path: "/profile",
+    path: "profile",
     title: "详情页",
     icon: <ProfileOutlined />,
     children: [
       {
         title: "基础详情页",
-        path: "/profile/basic",
+        path: "basic",
         element: <Basic />,
       },
       {
         title: "高级详情页",
-        path: "/profile/advanced",
+        path: "advanced",
         element: <Advanced />,
       },
     ],

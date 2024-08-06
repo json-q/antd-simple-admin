@@ -8,18 +8,18 @@ const Fail = lazy(() => import("@/pages/result/fail"));
 const result: IRouteObject[] = [
   {
     order: 5,
-    path: "/result",
+    path: "result",
     title: "结果页",
     icon: <CheckCircleOutlined />,
     children: [
       {
         title: "成功页",
-        path: "/result/success",
+        path: "success",
         element: <Success />,
       },
       {
         title: "失败页",
-        path: "/result/fail",
+        path: "fail",
         element: <Fail />,
       },
     ],

@@ -22,34 +22,34 @@ const list: IRouteObject[] = [
         children: [
           {
             title: "搜索列表 (文章)",
-            path: "/list/search/articles",
+            path: "articles",
             element: <Articles />,
           },
           {
             title: "搜索列表 (项目)",
-            path: "/list/search/projects",
+            path: "projects",
             element: <Projects />,
           },
           {
             title: "搜索列表 (应用)",
-            path: "/list/search/applications",
+            path: "applications",
             element: <Applications />,
           },
         ],
       },
       {
         title: "查询表格",
-        path: "/list/table-list",
+        path: "table-list",
         element: <TableList />,
       },
       {
         title: "标准列表",
-        path: "/list/basic-list",
+        path: "basic-list",
         element: <BasicList />,
       },
       {
         title: "卡片列表",
-        path: "/list/card-list",
+        path: "card-list",
         element: <CardList />,
       },
     ],
