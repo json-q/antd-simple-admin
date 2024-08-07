@@ -20,7 +20,11 @@ const useLogoStyles = createStyles(({ css, token }, props: LogoStylesProps) => {
       height: ${token.customHeaderHeight}px;
       line-height: ${token.customHeaderHeight}px;
       padding: ${token.paddingContentHorizontal}px ${token.paddingContentVertical}px;
-      border-right: ${md ? 1 : 0}px solid ${token.colorBorderSecondary};
+      /* Less than md layout, only logo, remove border */
+      border-right-width: ${md ? 1 : 0}px;
+      border-right-style: solid;
+      /* Menu dark, border should be consistent with bg color, bright is ant border */
+      border-right-color: ${menuMode === "dark" ? bg : token.colorBorderSecondary};
       color: ${color};
       background-color: ${bg};
       cursor: pointer;
