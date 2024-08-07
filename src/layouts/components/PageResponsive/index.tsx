@@ -3,7 +3,6 @@ import { Layout } from "antd";
 import { useResponsive } from "antd-style";
 import { useDeepCompareEffect } from "ahooks";
 import { useSelector } from "@/stores";
-import LayoutAnimation from "@/layouts/animation/LayoutAnimation";
 import PageSider from "../PageSider";
 import PageHeader from "../PageHeader";
 import PageContent from "../PageContent";
@@ -26,9 +25,7 @@ const PageResponsive: React.FC<PageResponsiveProps> = memo(({ children }) => {
         <PageSider />
         <Layout>
           <PageHeader />
-          <PageContent>
-            <LayoutAnimation>{children}</LayoutAnimation>
-          </PageContent>
+          <PageContent>{children}</PageContent>
         </Layout>
       </Layout>
     );
