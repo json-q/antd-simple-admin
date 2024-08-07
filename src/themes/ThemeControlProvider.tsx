@@ -8,7 +8,12 @@ interface ThemeControlProviderProps {
 }
 
 const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children }) => {
-  const { themeMode, compact } = useSelector(["themeMode", "compact"]);
+  const { themeMode, sizeMode, colorPrimary, borderRadius } = useSelector([
+    "themeMode",
+    "sizeMode",
+    "colorPrimary",
+    "borderRadius",
+  ]);
 
   useLayoutEffect(() => {
     document.querySelector("html")?.setAttribute("data-prefers-color", themeMode);
@@ -20,7 +25,13 @@ const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children })
       customToken={{
         customHeaderHeight: 56,
       }}
-      theme={{ algorithm: compact ? theme.compactAlgorithm : undefined }}
+      theme={{
+        algorithm: sizeMode === "compact" ? theme.compactAlgorithm : undefined,
+        token: {
+          colorPrimary,
+          borderRadius,
+        },
+      }}
     >
       {children}
     </ThemeProvider>
