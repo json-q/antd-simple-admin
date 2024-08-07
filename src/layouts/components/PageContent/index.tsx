@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from "react";
+import { memo, useRef } from "react";
 import { Layout } from "antd";
 import useContentStyles from "./styles";
 import { useLocation } from "react-router-dom";
@@ -13,10 +13,6 @@ const PageContent: React.FC<PageContentProps> = memo(({ children }) => {
   const { styles } = useContentStyles();
   const { pathname } = useLocation();
   const nodeRef = useRef(null);
-
-  useEffect(() => {
-    console.log("aaa");
-  }, []);
 
   return (
     <Content className={styles.content}>
