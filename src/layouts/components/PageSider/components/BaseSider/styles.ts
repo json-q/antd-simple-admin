@@ -6,6 +6,10 @@ const useSiderStyles = createStyles(({ css, token }) => ({
 
     &.ant-layout-sider {
       background: ${token.colorBgContainer};
+
+      & .ant-layout-sider-children {
+        height: 100%;
+      }
     }
   `,
 }));

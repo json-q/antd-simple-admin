@@ -26,7 +26,8 @@ const useLogoStyles = createStyles(({ css, token }, props: LogoStylesProps) => {
       /* Menu dark, border should be consistent with bg color, bright is ant border */
       border-right-color: ${menuMode === "dark" ? bg : token.colorBorderSecondary};
       color: ${color};
-      background-color: ${bg};
+      /* Less than md layout, logo in header, keep header bg color */
+      background-color: ${md ? bg : token.colorBgContainer};
       cursor: pointer;
 
       a {
