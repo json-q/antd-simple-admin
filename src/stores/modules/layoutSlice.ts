@@ -4,7 +4,7 @@ import type { StateCreator } from "zustand";
 
 type Responsive = Partial<Record<ResponsiveKey, boolean>>;
 
-type ManyLayout = "side" | "top" | "mixin";
+export type ManyLayout = "side" | "top" | "mixin";
 
 export type LayoutSliceType = {
   menuMode: MenuTheme;

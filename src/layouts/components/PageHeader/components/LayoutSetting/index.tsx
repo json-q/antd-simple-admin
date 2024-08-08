@@ -1,7 +1,11 @@
 import { memo, useState } from "react";
-import { Button, Card, Drawer, Flex, type FlexProps, Segmented, Tooltip } from "antd";
-import { QuestionCircleOutlined, SettingOutlined } from "@ant-design/icons";
-import { useTheme } from "antd-style";
+import { Button, Card, Divider, Drawer, Flex, type FlexProps, Space, Tooltip } from "antd";
+import {
+  BgColorsOutlined,
+  LayoutOutlined,
+  QuestionCircleOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import {
   ColorSelect,
   MenuToggle,
@@ -9,6 +13,7 @@ import {
   SizeToggle,
   ThemeToggle,
 } from "../../Themes/Appearance";
+import { NavSwitch } from "../../Themes/Layout";
 
 type ConfigItemProps = {
   title: React.ReactNode;
@@ -18,12 +23,10 @@ type ConfigItemProps = {
 
 /** 设置区域内容的 Card 组件 */
 const ConfigItem: React.FC<ConfigItemProps> = ({ title, content, description, ...rest }) => {
-  const { margin, boxShadow } = useTheme();
-
   return (
-    <Card size="small" bordered={false} style={{ marginBottom: margin, boxShadow: boxShadow }}>
+    <Card size="small" bordered={false} hoverable className="mb-4">
       <Flex justify="space-between" align="center" wrap {...rest}>
-        <div className="text-left">
+        <div>
           {title}
           {description && (
             <Tooltip title={description}>
@@ -39,7 +42,6 @@ const ConfigItem: React.FC<ConfigItemProps> = ({ title, content, description, ..
 
 const LayoutSetting: React.FC = memo(() => {
   const [openSetting, setOpenSetting] = useState(false);
-  const [segmentValue, setSegmentValue] = useState("appearance");
 
   return (
     <>
@@ -49,36 +51,38 @@ const LayoutSetting: React.FC = memo(() => {
         icon={<SettingOutlined />}
         onClick={() => setOpenSetting(true)}
       />
-
       <Drawer
         title="系统本地设置"
         placement="right"
         open={openSetting}
         onClose={() => setOpenSetting(false)}
       >
-        <Segmented
-          className="mb-3"
-          options={[
-            { label: "外观", value: "appearance" },
-            { label: "布局", value: "layout" },
-            { label: "通用", value: "common" },
-          ]}
-          onChange={setSegmentValue}
-          block
-        />
+        <Divider plain style={{ marginTop: 0 }}>
+          <Space>
+            <BgColorsOutlined />
+            <span>外观设置</span>
+          </Space>
+        </Divider>
+        <ConfigItem title="暗黑主题" content={<ThemeToggle />} />
+        <ConfigItem title="暗色菜单" content={<MenuToggle />} />
+        <ConfigItem title="紧凑风格" content={<SizeToggle />} />
+        <ConfigItem title="主题颜色" content={<ColorSelect />} vertical align="flex-start" />
+        <ConfigItem title="圆角大小" content={<RaduisAdjust />} />
 
-        {segmentValue === "appearance" && (
-          <>
-            <ConfigItem title="暗黑主题" content={<ThemeToggle />} />
-            <ConfigItem title="暗色菜单" content={<MenuToggle />} />
-            <ConfigItem title="紧凑风格" content={<SizeToggle />} />
-            <ConfigItem title="主题颜色" content={<ColorSelect />} />
-            <ConfigItem title="圆角大小" content={<RaduisAdjust />} />
-          </>
-        )}
+        <Divider plain>
+          <Space>
+            <LayoutOutlined />
+            <span>布局设置</span>
+          </Space>
+        </Divider>
+        <ConfigItem title="导航模式" content={<NavSwitch />} vertical align="flex-start" />
 
-        {segmentValue === "layout" && <></>}
-        {segmentValue === "common" && <></>}
+        <Divider plain>
+          <Space>
+            <LayoutOutlined />
+            <span>布局设置</span>
+          </Space>
+        </Divider>
       </Drawer>
     </>
   );

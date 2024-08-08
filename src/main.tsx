@@ -6,9 +6,9 @@ import { StyleProvider } from "antd-style";
 import zhCN from "antd/es/locale/zh_CN";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
-import App from "./App.tsx";
+import ThemeControlProvider from "./themes/ThemeControlProvider";
+import App from "./App";
 import "@/styles/index.css";
-import ThemeControlProvider from "./themes/ThemeControlProvider.tsx";
 
 dayjs.locale("zh-cn");
 
