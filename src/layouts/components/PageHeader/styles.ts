@@ -9,6 +9,7 @@ const useHeaderStyles = createStyles(({ css, token }) => ({
     align-items: center;
     padding: 0 ${token.paddingSM}px;
     height: ${token.customHeaderHeight}px;
+    line-height: ${token.customHeaderHeight}px;
     background-color: ${token.colorBgContainer};
     border-bottom: 1px solid ${token.colorBorderSecondary};
   `,

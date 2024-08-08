@@ -11,8 +11,9 @@ const BaseLogo: React.FC = memo(() => {
     menuMode,
     collapsed,
     responsive: { md = true },
-  } = useSelector(["menuMode", "collapsed", "responsive"]);
-  const { styles } = useLogoStyles({ menuMode, md });
+    layout,
+  } = useSelector(["menuMode", "collapsed", "responsive", "layout"]);
+  const { styles } = useLogoStyles({ menuMode, md, layout });
 
   return (
     <div className={styles.logo}>

@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { Button, Flex, Layout } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { useSelector } from "@/stores";
@@ -12,6 +12,7 @@ import DrawSider from "../PageSider/DrawSider";
 import BaseLogo from "../PageSider/components/BaseLogo";
 import useHeaderStyles from "./styles";
 import ThemeSwitch from "./components/ThemeSwitch";
+import BaseMenu from "../PageSider/components/BaseMenu";
 
 const { Header } = Layout;
 
@@ -21,29 +22,48 @@ const PageHeader: React.FC = memo(() => {
     collapsed,
     actionCollapsed,
     responsive: { md },
-  } = useSelector(["collapsed", "actionCollapsed", "responsive"]);
+    layout,
+    breadcrumb,
+  } = useSelector(["collapsed", "actionCollapsed", "responsive", "layout", "breadcrumb"]);
+
+  const renderHeaderNode = useMemo(() => {
+    if (md === false) {
+      return (
+        <>
+          <DrawSider />
+          <BaseLogo />
+        </>
+      );
+    }
+
+    if (layout === "side") {
+      return (
+        <>
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => actionCollapsed(!collapsed)}
+          />
+          {breadcrumb && <HeaderBreadcrumb />}
+        </>
+      );
+    }
+
+    if (layout === "top") {
+      return (
+        <>
+          <BaseLogo />
+          <BaseMenu mode="horizontal" />
+        </>
+      );
+    }
+  }, [md, collapsed, layout, breadcrumb]);
 
   return (
     <Header className={styles.header}>
-      <Flex gap={8} align="center">
-        {md ? (
-          <>
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => actionCollapsed(!collapsed)}
-            />
-            <HeaderBreadcrumb />
-          </>
-        ) : (
-          <>
-            <DrawSider />
-            <BaseLogo />
-          </>
-        )}
+      <Flex gap={8} align="center" flex={1} style={{ height: 56 }}>
+        {renderHeaderNode}
       </Flex>
-
-      <div className="flex-auto"></div>
 
       <Flex gap={12} align="center">
         {md && <SearchPage />}

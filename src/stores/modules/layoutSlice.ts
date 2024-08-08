@@ -4,7 +4,7 @@ import type { StateCreator } from "zustand";
 
 type Responsive = Partial<Record<ResponsiveKey, boolean>>;
 
-export type ManyLayout = "side" | "top" | "mixin";
+export type ManyLayout = "side" | "top";
 
 export type LayoutSliceType = {
   menuMode: MenuTheme;
@@ -15,6 +15,8 @@ export type LayoutSliceType = {
   layout: ManyLayout;
   colorPrimary: string;
   borderRadius: number;
+  watermark: boolean;
+  breadcrumb: boolean;
   actionThemeMode: (themeMode: ThemeAppearance) => void;
   actionMenuMode: (themeMode: MenuTheme) => void;
   actionCollapsed: (collapsed: boolean) => void;
@@ -23,6 +25,8 @@ export type LayoutSliceType = {
   actionLayout: (layout: ManyLayout) => void;
   actionColorPrimary: (colorPrimary: string) => void;
   actionBorderRadius: (borderRadius: number) => void;
+  actionWatermark: (watermark: boolean) => void;
+  actionBreadcrumb: (breadcrumb: boolean) => void;
 };
 
 // zustand TS 切片用法：https://docs.pmnd.rs/zustand/guides/typescript#slices-pattern
@@ -39,6 +43,8 @@ const layoutSlice: StateCreator<
   layout: "side",
   colorPrimary: "#1677ff",
   borderRadius: 6,
+  watermark: true,
+  breadcrumb: true,
   actionThemeMode: (themeMode) => set({ themeMode }),
   actionMenuMode: (menuMode) => set({ menuMode }),
   actionCollapsed: (collapsed) => set({ collapsed }),
@@ -47,6 +53,8 @@ const layoutSlice: StateCreator<
   actionLayout: (layout) => set({ layout }),
   actionColorPrimary: (colorPrimary) => set({ colorPrimary }),
   actionBorderRadius: (borderRadius) => set({ borderRadius }),
+  actionWatermark: (watermark) => set({ watermark }),
+  actionBreadcrumb: (breadcrumb) => set({ breadcrumb }),
 });
 
 export default layoutSlice;

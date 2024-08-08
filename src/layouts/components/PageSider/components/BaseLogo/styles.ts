@@ -1,14 +1,15 @@
 import { createStyles } from "antd-style";
 import type { MenuTheme } from "antd";
+import type { ManyLayout } from "@/stores/modules/layoutSlice";
 
 type LogoStylesProps = {
   menuMode: MenuTheme;
   md: boolean;
+  layout?: ManyLayout;
 };
 
 const useLogoStyles = createStyles(({ css, token }, props: LogoStylesProps) => {
-  const { menuMode, md } = props;
-  // menu 的 light 模式使用默认的主题 token 即可，menu dark，logo需和 menu 的背景色一致
+  const { menuMode, md, layout } = props;
   const bg = menuMode === "dark" ? "#001529" : token.colorBgContainer;
   const color = menuMode === "dark" ? "#ffffff" : token.colorText;
 
@@ -20,13 +21,11 @@ const useLogoStyles = createStyles(({ css, token }, props: LogoStylesProps) => {
       height: ${token.customHeaderHeight}px;
       line-height: ${token.customHeaderHeight}px;
       padding: ${token.paddingContentHorizontal}px ${token.paddingContentVertical}px;
-      /* Less than md layout, only logo, remove border */
-      border-right-width: ${md ? 1 : 0}px;
-      border-right-style: solid;
-      /* Menu dark, border should be consistent with bg color, bright is ant border */
-      border-right-color: ${menuMode === "dark" ? bg : token.colorBorderSecondary};
+      border-right: ${layout === "top" || menuMode === "dark" || !md
+        ? "none"
+        : `1px solid ${token.colorBorderSecondary}`};
+      border-bottom: ${layout === "top" ? `1px solid ${token.colorBorderSecondary}` : "none"};
       color: ${color};
-      /* Less than md layout, logo in header, keep header bg color */
       background-color: ${md ? bg : token.colorBgContainer};
       cursor: pointer;
 

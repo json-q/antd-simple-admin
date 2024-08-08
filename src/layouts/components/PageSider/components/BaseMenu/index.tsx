@@ -14,9 +14,10 @@ type MenusType = MenuItemType & Partial<SubMenuType>;
 
 interface BaseMenuProps {
   hideScroll?: boolean;
+  mode?: "horizontal" | "inline";
 }
 
-const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
+const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll, mode = "inline" }) => {
   const { styles } = useMenuWrapperStyles();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
@@ -32,6 +33,8 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   }, [matchRoute]);
 
   useDeepCompareEffect(() => {
+    // top Menu don't need openKeys
+    if (mode === "horizontal") return;
     // 若 sider 处于展开状态，则默认需要展开对应的子级菜单
     if (collapsed === false) {
       setOpenKeys(matchRoute.treeRoute.map((item) => item.path));
@@ -67,8 +70,8 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
   const menuDom = (
     <Menu
       theme={menuMode}
-      className="min-h-full"
-      mode="inline"
+      className="min-h-full w-full"
+      mode={mode}
       inlineIndent={16}
       items={genMenus}
       openKeys={openKeys}
@@ -78,7 +81,8 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll }) => {
     />
   );
 
-  if (hideScroll) return menuDom;
+  if (hideScroll || mode === "horizontal") return menuDom;
+
   return (
     <OverlayScrollbarsComponent
       defer

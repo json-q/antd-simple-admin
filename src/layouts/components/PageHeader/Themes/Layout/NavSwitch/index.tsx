@@ -34,13 +34,23 @@ const LayoutShapeItem: React.FC<LayoutShapeItemProps> = (props) => {
 };
 
 const NavSwitch: React.FC = () => {
-  const { layout, actionLayout } = useSelector(["layout", "actionLayout"]);
+  const { layout, actionLayout, actionMenuMode } = useSelector([
+    "layout",
+    "actionLayout",
+    "actionMenuMode",
+  ]);
 
   return (
     <Space className="mt-1" size={12}>
       <LayoutShapeItem layoutMode={layout} type="side" onSelected={actionLayout} />
-      <LayoutShapeItem layoutMode={layout} type="top" onSelected={actionLayout} />
-      <LayoutShapeItem layoutMode={layout} type="mixin" onSelected={actionLayout} />
+      <LayoutShapeItem
+        layoutMode={layout}
+        type="top"
+        onSelected={(type) => {
+          actionLayout(type);
+          actionMenuMode("light");
+        }}
+      />
     </Space>
   );
 };

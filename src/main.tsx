@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { App as AntApp, ConfigProvider } from "antd";
@@ -13,17 +12,15 @@ import "@/styles/index.css";
 dayjs.locale("zh-cn");
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <HelmetProvider>
-      <ThemeControlProvider>
-        <ConfigProvider locale={zhCN} theme={{ cssVar: true, hashed: false }}>
-          <StyleProvider hashPriority="high">
-            <AntApp>
-              <App />
-            </AntApp>
-          </StyleProvider>
-        </ConfigProvider>
-      </ThemeControlProvider>
-    </HelmetProvider>
-  </StrictMode>,
+  <HelmetProvider>
+    <ThemeControlProvider>
+      <ConfigProvider locale={zhCN} theme={{ cssVar: true, hashed: false }}>
+        <StyleProvider hashPriority="high">
+          <AntApp>
+            <App />
+          </AntApp>
+        </StyleProvider>
+      </ConfigProvider>
+    </ThemeControlProvider>
+  </HelmetProvider>,
 );

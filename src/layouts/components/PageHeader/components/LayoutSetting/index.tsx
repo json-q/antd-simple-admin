@@ -14,6 +14,7 @@ import {
   ThemeToggle,
 } from "../../Themes/Appearance";
 import { NavSwitch } from "../../Themes/Layout";
+import { WatermarkToggle, BreadcrumbToggle } from "../../Themes/Common";
 
 type ConfigItemProps = {
   title: React.ReactNode;
@@ -80,9 +81,11 @@ const LayoutSetting: React.FC = memo(() => {
         <Divider plain>
           <Space>
             <LayoutOutlined />
-            <span>布局设置</span>
+            <span>通用设置</span>
           </Space>
         </Divider>
+        <ConfigItem title="水印" content={<WatermarkToggle />} />
+        <ConfigItem title="面包屑" content={<BreadcrumbToggle />} />
       </Drawer>
     </>
   );
