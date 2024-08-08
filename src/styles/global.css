@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* progress color use antd primary color */
-html #nprogress .bar {
-  background: #1677ff;
-}
-
 @layer global {
   html,
   body,
@@ -35,25 +30,30 @@ html #nprogress .bar {
   .ant-layout {
     height: 100%;
   }
+}
 
-  @media (width <= 768px) {
-    .ant-table {
-      width: 100%;
-      overflow-x: auto;
-    }
+/* progress color use antd primary color */
+html #nprogress .bar {
+  background: #1677ff;
+}
 
-    .ant-table-thead > tr > th,
-    .ant-table-tbody > tr > th,
-    .ant-table-thead > tr > td,
-    .ant-table-tbody > tr > td {
-      white-space: pre;
-    }
+@media (width <= 768px) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+  }
 
-    .ant-table-thead > tr > th > span,
-    .ant-table-tbody > tr > th > span,
-    .ant-table-thead > tr > td > span,
-    .ant-table-tbody > tr > td > span {
-      display: block;
-    }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > th,
+  .ant-table-thead > tr > td,
+  .ant-table-tbody > tr > td {
+    white-space: pre;
+  }
+
+  .ant-table-thead > tr > th > span,
+  .ant-table-tbody > tr > th > span,
+  .ant-table-thead > tr > td > span,
+  .ant-table-tbody > tr > td > span {
+    display: block;
   }
 }
