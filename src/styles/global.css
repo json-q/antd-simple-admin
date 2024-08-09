@@ -30,30 +30,30 @@
   .ant-layout {
     height: 100%;
   }
+
+  @media (width <= 768px) {
+    .ant-table {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > th,
+    .ant-table-thead > tr > td,
+    .ant-table-tbody > tr > td {
+      white-space: pre;
+    }
+
+    .ant-table-thead > tr > th > span,
+    .ant-table-tbody > tr > th > span,
+    .ant-table-thead > tr > td > span,
+    .ant-table-tbody > tr > td > span {
+      display: block;
+    }
+  }
 }
 
 /* progress color use antd primary color */
 html #nprogress .bar {
   background: #1677ff;
-}
-
-@media (width <= 768px) {
-  .ant-table {
-    width: 100%;
-    overflow-x: auto;
-  }
-
-  .ant-table-thead > tr > th,
-  .ant-table-tbody > tr > th,
-  .ant-table-thead > tr > td,
-  .ant-table-tbody > tr > td {
-    white-space: pre;
-  }
-
-  .ant-table-thead > tr > th > span,
-  .ant-table-tbody > tr > th > span,
-  .ant-table-thead > tr > td > span,
-  .ant-table-tbody > tr > td > span {
-    display: block;
-  }
 }
