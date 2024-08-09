@@ -1,5 +1,22 @@
 import { createStyles } from "antd-style";
 
+function hexToRgba(hex: string, alpha = 1.0) {
+  hex = hex.replace("#", "");
+
+  if (hex.length === 3) {
+    hex = hex
+      .split("")
+      .map((char) => char + char)
+      .join("");
+  }
+
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 const useLoginPageStyles = createStyles(({ css, token, responsive }) => ({
   loginPageBg: css`
     z-index: 1;
@@ -62,7 +79,7 @@ const useLoginPageStyles = createStyles(({ css, token, responsive }) => ({
     display: flex;
     flex-direction: column;
     padding: ${token.paddingXL}px;
-    background-color: ${token.colorBgContainer};
+    background-color: ${hexToRgba(token.colorBgContainer, 0.5)};
     border-radius: ${token.borderRadius}px;
     border: 1px solid ${token.colorBorderSecondary};
     overflow: auto;
