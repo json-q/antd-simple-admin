@@ -1,7 +1,8 @@
-import { useLayoutEffect } from "react";
+import { useCallback, useLayoutEffect } from "react";
 import { theme } from "antd";
-import { ThemeProvider } from "antd-style";
+import { CustomTokenParams, ThemeProvider } from "antd-style";
 import { useSelector } from "@/stores";
+import { createCustomToken } from "./customToken";
 
 interface ThemeControlProviderProps {
   children: React.ReactNode;
@@ -19,12 +20,15 @@ const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children })
     document.querySelector("html")?.setAttribute("data-prefers-color", themeMode);
   }, [themeMode]);
 
+  const getCustomToken = useCallback((params: CustomTokenParams) => {
+    const base = createCustomToken(params);
+    return base;
+  }, []);
+
   return (
     <ThemeProvider
       appearance={themeMode}
-      customToken={{
-        customHeaderHeight: 56,
-      }}
+      customToken={getCustomToken}
       theme={{
         algorithm: sizeMode === "compact" ? theme.compactAlgorithm : undefined,
         token: {

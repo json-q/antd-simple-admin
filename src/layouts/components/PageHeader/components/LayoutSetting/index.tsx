@@ -76,7 +76,7 @@ const LayoutSetting: React.FC = memo(() => {
             <span>布局设置</span>
           </Space>
         </Divider>
-        <ConfigItem title="导航模式" content={<NavSwitch />} vertical align="flex-start" />
+        <ConfigItem title="导航模式" content={<NavSwitch />} />
 
         <Divider plain>
           <Space>
