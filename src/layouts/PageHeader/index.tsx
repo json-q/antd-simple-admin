@@ -10,9 +10,9 @@ import FullScreen from "./components/FullScreen";
 import SearchPage from "./components/SearchPage";
 import DrawSider from "../PageSider/DrawSider";
 import BaseLogo from "../PageSider/components/BaseLogo";
-import useHeaderStyles from "./styles";
 import ThemeSwitch from "./components/ThemeSwitch";
 import BaseMenu from "../PageSider/components/BaseMenu";
+import useHeaderStyles from "./styles";
 
 const { Header } = Layout;
 

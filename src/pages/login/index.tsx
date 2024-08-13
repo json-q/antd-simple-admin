@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useTheme } from "antd-style";
-import ThemeSwitch from "@/layouts/components/PageHeader/components/ThemeSwitch";
+import ThemeSwitch from "@/layouts/PageHeader/components/ThemeSwitch";
 import { message } from "@/hooks/useStaticApp";
 import { TOKEN_CACHE } from "@/constants";
 import localCacha from "@/utils/cache/localCache";
@@ -53,7 +53,7 @@ const LoginPage = () => {
               <span className="font-semibold text-2xl">{loginTitle}</span>
             </div>
             <div className="mt-3 mb-6" style={{ color: colorTextTertiary }}>
-              简单易用的 react 后台
+              a pure admin template for react
             </div>
           </div>
           <Form onFinish={handleSubmit} autoComplete="off">
