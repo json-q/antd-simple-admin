@@ -18,12 +18,7 @@ const BaseLogo: React.FC = memo(() => {
   return (
     <div className={styles.logo}>
       <Link to={baseRouterName}>
-        <img
-          width="auto"
-          height="22"
-          src="https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg"
-          alt="logo"
-        />
+        <img width="auto" height="22" src="/logo.svg" alt="logo" />
         {!collapsed && md && <h1>{title}</h1>}
       </Link>
     </div>
