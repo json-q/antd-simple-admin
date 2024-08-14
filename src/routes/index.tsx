@@ -36,6 +36,9 @@ export default function RenderRoutes() {
   const { currentUser, actionAuthRoutes } = useSelector(["currentUser", "actionAuthRoutes"]);
 
   const authRoutes = useMemo(() => {
+    // 当处于权限页面时且刷新页面（此时用户权限不存在），无法过滤出权限路由，会导致直接 404
+    // 在用户信息请求回来前，所有路由都暂时挂载，但此时页面处于 loading 无法操作状态，用户信息拿到后，再渲染出最新权限路由
+    if (!currentUser) return layoutRoutes;
     return genAuthRoutes(cloneDeep(layoutRoutes), currentUser?.role);
   }, [currentUser]);
 
