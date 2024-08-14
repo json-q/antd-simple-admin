@@ -7,7 +7,7 @@ const User = lazy(() => import("@/pages/auth/user"));
 
 const auth: IRouteObject[] = [
   {
-    order: 8,
+    order: 2,
     path: "auth",
     title: "权限示例",
     icon: <VerifiedOutlined />,

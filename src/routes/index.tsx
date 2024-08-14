@@ -30,7 +30,7 @@ export const unAuthRoutes = loadModuleRouter(unLayoutModules).map((item) => {
   return item;
 });
 
-const NotFound = lazy(() => import("@/pages/exception/404"));
+const NotFound = lazy(() => import("@/pages/404"));
 
 export default function RenderRoutes() {
   const { currentUser, actionAuthRoutes } = useSelector(["currentUser", "actionAuthRoutes"]);
@@ -51,7 +51,7 @@ export default function RenderRoutes() {
         [
           {
             path: "/",
-            element: <Navigate to="/dashboard/analysis" replace />,
+            element: <Navigate to="/home" replace />,
           },
           {
             path: "/",

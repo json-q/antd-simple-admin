@@ -1,6 +1,6 @@
 import { Typography } from "antd";
 
-const Analysis: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <Typography>
       <Typography.Title level={4} className="mt-0">
@@ -31,4 +31,4 @@ const Analysis: React.FC = () => {
   );
 };
 
-export default Analysis;
+export default Home;
