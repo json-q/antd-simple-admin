@@ -1,6 +1,7 @@
 import type { GetCustomToken } from "antd-style";
 
 declare module "antd-style" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   export interface CustomToken extends BizToken {}
 }
 

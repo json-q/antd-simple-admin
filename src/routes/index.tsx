@@ -102,7 +102,7 @@ export const genAuthRoutes: GenAuthRoutesFn = (routes, role = [], genRoutes = []
       });
     } else if (access) {
       const hasAccess = validateAccess(role, access);
-      hasAccess && genRoutes.push({ ...item }); // 存在权限配置，且校验通过，插入路由
+      if (hasAccess) genRoutes.push({ ...item }); // 存在权限配置，且校验通过，插入路由
     } else {
       genRoutes.push({ ...item });
     }

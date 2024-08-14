@@ -30,7 +30,7 @@ const PageResponsive: React.FC<PageResponsiveProps> = memo(({ children }) => {
 
   const content = useMemo(() => {
     const baseContent = ["antd simple admin"];
-    currentUser?.nickName && baseContent.push(currentUser?.nickName);
+    if (currentUser?.nickName) baseContent.push(currentUser?.nickName);
     return watermark ? baseContent : "";
   }, [watermark, currentUser]);
 

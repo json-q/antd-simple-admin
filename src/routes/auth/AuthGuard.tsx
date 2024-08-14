@@ -57,7 +57,7 @@ const AuthGuard: React.FC = memo(() => {
     try {
       await getCurrentUserInfo();
       setLoading(false);
-    } catch (e) {
+    } catch {
       navigate(LOGIN_PAGE, { replace: true });
     }
   }

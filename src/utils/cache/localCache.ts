@@ -48,7 +48,7 @@ class LocalCacha implements StorageCls {
       const decVal = this.encryption.decryptByAES(val);
       const data = JSON.parse(decVal);
       return data;
-    } catch (error) {
+    } catch {
       return null;
     }
   }

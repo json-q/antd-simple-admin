@@ -51,7 +51,7 @@ function isUrl(path: string) {
   try {
     const url = new URL(path);
     return !!url;
-  } catch (error) {
+  } catch {
     return false;
   }
 }

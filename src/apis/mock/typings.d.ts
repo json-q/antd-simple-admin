@@ -1,7 +1,7 @@
 export namespace Mock {
   // type Auth = "admin" | "user" | "visitor";
 
-  interface UserInfo {
+  export interface UserInfo {
     nickName: string;
     id: string;
     avatar: string;
@@ -9,7 +9,7 @@ export namespace Mock {
     role: string[];
   }
 
-  interface LoginParams {
+  export interface LoginParams {
     username: string;
     password: string;
     captcha: string;
