@@ -1,12 +1,12 @@
 import { lazy, useEffect, useMemo } from "react";
 import { createBrowserRouter, Navigate, RouterProvider, type RouteObject } from "react-router-dom";
+import { cloneDeep, isArray } from "lodash-es";
 import { useSelector } from "@/stores";
 import Loading from "@/components/Loading";
+import { validateAccess } from "@/hooks/useAccess";
 import AuthGuard from "./auth/AuthGuard";
 import type { AuthRouteObject, IRouter } from "./types";
 import { loadModuleRouter, mergeRoutePath, type ModuleType } from "./utils";
-import { cloneDeep, isArray } from "lodash-es";
-import { validateAccess } from "@/hooks/useAccess";
 
 const baseRouterName = import.meta.env.VITE_BASE_ROUTER_NAME;
 

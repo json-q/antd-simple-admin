@@ -45,10 +45,7 @@ const LoginPage = () => {
           <div className="text-center">
             <div className="flex items-center justify-center h-10 leading-10">
               <span className="w-10 h-10 mr-4 align-top">
-                <img
-                  className="w-full"
-                  src="https://github.githubassets.com/favicons/favicon.png"
-                />
+                <img className="w-full" src="/logo.svg" />
               </span>
               <span className="font-semibold text-2xl">{loginTitle}</span>
             </div>
