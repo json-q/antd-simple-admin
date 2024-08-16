@@ -1,4 +1,4 @@
-import { lazy, useEffect, useMemo } from "react";
+import { lazy, Suspense, useEffect, useMemo } from "react";
 import { createBrowserRouter, Navigate, RouterProvider, type RouteObject } from "react-router-dom";
 import { cloneDeep, isArray } from "lodash-es";
 import { useSelector } from "@/stores";
@@ -64,7 +64,11 @@ export default function RenderRoutes() {
           ...unAuthRoutes,
           {
             path: "*",
-            element: <NotFound />,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <NotFound />
+              </Suspense>
+            ),
           },
         ] as RouteObject[],
         {
