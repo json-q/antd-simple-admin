@@ -23,8 +23,7 @@ const PageHeader: React.FC = memo(() => {
     actionCollapsed,
     responsive: { md },
     layout,
-    breadcrumb,
-  } = useSelector(["collapsed", "actionCollapsed", "responsive", "layout", "breadcrumb"]);
+  } = useSelector(["collapsed", "actionCollapsed", "responsive", "layout"]);
 
   const renderHeaderNode = useMemo(() => {
     if (md === false) {
@@ -44,7 +43,7 @@ const PageHeader: React.FC = memo(() => {
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => actionCollapsed(!collapsed)}
           />
-          {breadcrumb && <HeaderBreadcrumb />}
+          <HeaderBreadcrumb />
         </>
       );
     }
@@ -57,7 +56,7 @@ const PageHeader: React.FC = memo(() => {
         </>
       );
     }
-  }, [md, collapsed, layout, breadcrumb]);
+  }, [md, collapsed, layout]);
 
   return (
     <Header className={styles.header}>

@@ -20,7 +20,15 @@ const useStore = createWithEqualityFn<Store>()(
         }),
         {
           name: "settings-config", // 本地缓存 name=>key 。partialize 函数 => return 缓存内容
-          partialize: () => ({}),
+          partialize: (state) => ({
+            themeMode: state.themeMode,
+            menuMode: state.menuMode,
+            layout: state.layout,
+            colorPrimary: state.colorPrimary,
+            sizeMode: state.sizeMode,
+            borderRadius: state.borderRadius,
+            watermark: state.watermark,
+          }),
         },
       ),
       {

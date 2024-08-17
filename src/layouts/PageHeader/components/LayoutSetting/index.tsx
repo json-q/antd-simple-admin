@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { Button, Card, Divider, Drawer, Flex, type FlexProps, Space, Tooltip } from "antd";
+import { Button, Card, Divider, Drawer, Flex, Space, Tooltip, type FlexProps } from "antd";
 import {
   BgColorsOutlined,
   LayoutOutlined,
@@ -14,7 +14,8 @@ import {
   ThemeToggle,
 } from "../../Themes/Appearance";
 import { NavSwitch } from "../../Themes/Layout";
-import { WatermarkToggle, BreadcrumbToggle } from "../../Themes/Common";
+import { WatermarkToggle, ResetSetting } from "../../Themes/Common";
+import { useSelector } from "@/stores";
 
 type ConfigItemProps = {
   title: React.ReactNode;
@@ -43,6 +44,7 @@ const ConfigItem: React.FC<ConfigItemProps> = ({ title, content, description, ..
 
 const LayoutSetting: React.FC = memo(() => {
   const [openSetting, setOpenSetting] = useState(false);
+  const { responsive } = useSelector(["responsive"]);
 
   return (
     <>
@@ -70,13 +72,18 @@ const LayoutSetting: React.FC = memo(() => {
         <ConfigItem title="主题颜色" content={<ColorSelect />} vertical align="flex-start" />
         <ConfigItem title="圆角大小" content={<RaduisAdjust />} />
 
-        <Divider plain>
-          <Space>
-            <LayoutOutlined />
-            <span>布局设置</span>
-          </Space>
-        </Divider>
-        <ConfigItem title="导航模式" content={<NavSwitch />} />
+        {/* small screen only one layout */}
+        {responsive.md && (
+          <>
+            <Divider plain>
+              <Space>
+                <LayoutOutlined />
+                <span>布局设置</span>
+              </Space>
+            </Divider>
+            <ConfigItem title="导航模式" content={<NavSwitch />} />
+          </>
+        )}
 
         <Divider plain>
           <Space>
@@ -85,7 +92,7 @@ const LayoutSetting: React.FC = memo(() => {
           </Space>
         </Divider>
         <ConfigItem title="水印" content={<WatermarkToggle />} />
-        <ConfigItem title="面包屑" content={<BreadcrumbToggle />} />
+        <ConfigItem title="重置主题" content={<ResetSetting />} />
       </Drawer>
     </>
   );

@@ -1,4 +1,4 @@
 import WatermarkToggle from "./WatermarkToggle";
-import BreadcrumbToggle from "./BreadcrumbToggle";
+import ResetSetting from "./RessetSetting";
 
-export { WatermarkToggle, BreadcrumbToggle };
+export { WatermarkToggle, ResetSetting };

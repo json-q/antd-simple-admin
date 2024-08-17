@@ -1,5 +1,14 @@
+import { Card, Typography } from "antd";
+
+const { Paragraph, Text } = Typography;
 const Admin: React.FC = () => {
-  return <div>Admin</div>;
+  return (
+    <Card>
+      <Paragraph>
+        This page can only be viewed by <Text code>admin</Text>
+      </Paragraph>
+    </Card>
+  );
 };
 
 export default Admin;
