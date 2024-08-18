@@ -1,13 +1,13 @@
 import type { IndexRouteObject, NonIndexRouteObject } from "react-router-dom";
 
-export type AuthIndexRouteObject<T extends Record<string, any> = any> = Omit<
+export type AuthIndexRouteObject<T extends Record<string, any>> = Omit<
   IndexRouteObject,
   "index"
 > & {
   [P in keyof T]: T[P];
 };
 
-export type AuthNonIndexRouteObject<T extends Record<string, any> = any> = Omit<
+export type AuthNonIndexRouteObject<T extends Record<string, any>> = Omit<
   NonIndexRouteObject,
   "children" | "index" | "path"
 > & {
@@ -16,7 +16,7 @@ export type AuthNonIndexRouteObject<T extends Record<string, any> = any> = Omit<
   children?: AuthRouteObject<T>[];
 };
 
-export type AuthRouteObject<T extends Record<string, any> = any> =
+export type AuthRouteObject<T extends Record<string, any>> =
   | AuthIndexRouteObject<T>
   | AuthNonIndexRouteObject<T>;
 

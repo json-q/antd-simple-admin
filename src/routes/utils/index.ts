@@ -14,7 +14,7 @@ export const loadModuleRouter = (modules: Record<string, ModuleType>) => {
 /**
  * 对 route 的 path 处理成统一格式
  */
-export const mergeRoutePath = (routes: IRouteObject[], parentPath = "/"): IRouteObject[] => {
+export const mergeRoutePath = (routes: IRouteObject[], parentPath = "/") => {
   return routes
     .map((item) => {
       if (item.redirect) return null;
