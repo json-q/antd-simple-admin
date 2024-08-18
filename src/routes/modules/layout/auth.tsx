@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { VerifiedOutlined } from "@ant-design/icons";
+import { SafetyCertificateOutlined } from "@ant-design/icons";
 import type { IRouteObject } from "../..";
 
 const Admin = lazy(() => import("@/pages/auth/admin"));
@@ -10,7 +10,7 @@ const auth: IRouteObject[] = [
     order: 2,
     path: "auth",
     title: "权限示例",
-    icon: <VerifiedOutlined />,
+    icon: <SafetyCertificateOutlined />,
     children: [
       {
         title: "Admin页面",

@@ -6,9 +6,9 @@ import { visualizer } from "rollup-plugin-visualizer";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 
 // https://vitejs.dev/config/
-export default defineConfig((mode) => {
-  const env = loadEnv(mode.mode, process.cwd());
-  const isProd = mode.mode === "production";
+export default defineConfig((config) => {
+  const env = loadEnv(config.mode, process.cwd());
+  const isProd = config.mode === "production";
   const viteEnv = wrapperEnv(env);
 
   return {
