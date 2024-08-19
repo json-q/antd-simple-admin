@@ -12,7 +12,6 @@ const userSlice: StateCreator<
   UserSliceType,
   [["zustand/immer", never], ["zustand/devtools", never]]
 > = (set) => ({
-  currentUser: undefined,
   getCurrentUserInfo: async () => {
     const { data } = await fetchUserInfo();
     set({ currentUser: data });

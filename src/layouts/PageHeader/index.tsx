@@ -2,16 +2,19 @@ import { memo, useMemo } from "react";
 import { Button, Flex, Layout } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { useSelector } from "@/stores";
-import HeaderBreadcrumb from "./components/HeaderBreadcrumb";
-import PersonAction from "./components/PersonAction";
-import LayoutSetting from "./components/LayoutSetting";
-import Notify from "./components/Notify";
-import FullScreen from "./components/FullScreen";
-import SearchPage from "./components/SearchPage";
+import {
+  HeaderBreadcrumb,
+  SearchPage,
+  Notify,
+  PersonAction,
+  FullScreen,
+  LayoutSetting,
+  ThemeSwitch,
+} from "./components";
 import DrawSider from "../PageSider/DrawSider";
 import BaseLogo from "../PageSider/components/BaseLogo";
-import ThemeSwitch from "./components/ThemeSwitch";
 import BaseMenu from "../PageSider/components/BaseMenu";
+
 import useHeaderStyles from "./styles";
 
 const { Header } = Layout;
@@ -56,16 +59,17 @@ const PageHeader: React.FC = memo(() => {
         </>
       );
     }
+    return null;
   }, [md, collapsed, layout]);
 
   return (
     <Header className={styles.header}>
-      <Flex gap={8} align="center" flex={1} style={{ height: 56 }}>
+      <Flex gap={8} align="center" flex={1}>
         {renderHeaderNode}
       </Flex>
 
       <Flex gap={12} align="center">
-        {md && <SearchPage />}
+        <SearchPage />
         <Notify />
         <ThemeSwitch />
         {md && <FullScreen />}
