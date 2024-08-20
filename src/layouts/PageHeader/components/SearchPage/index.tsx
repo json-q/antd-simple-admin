@@ -39,7 +39,11 @@ const SearchPage: React.FC = memo(() => {
     return genBaseRouteList(authRoutes);
   }, [authRoutes]);
 
-  useKeyPress("esc", () => setOpen(false));
+  //  does not respond to keyboard events when modal is closed
+  useKeyPress("esc", () => {
+    if (!open) return;
+    setOpen(false);
+  });
 
   useKeyPress("uparrow", () => {
     if (!open) return;

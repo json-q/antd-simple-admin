@@ -16,7 +16,6 @@ const useSearchStyles = createStyles(({ css, token }) => ({
     border-radius: ${token.borderRadius}px;
     transition: all 0.2s ease;
 
-    &:hover,
     &.hover {
       background-color: ${token.colorBgTextHover};
     }
