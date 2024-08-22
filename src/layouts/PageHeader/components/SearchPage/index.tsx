@@ -70,6 +70,10 @@ const SearchPage: React.FC = memo(() => {
 
   const navToPage = (routeItem: IRouteObject) => {
     navigate(routeItem.path);
+    closeModal();
+  };
+
+  const closeModal = () => {
     setOpen(false);
     setHoverIndex(0);
     setRouteList([]);
@@ -84,7 +88,7 @@ const SearchPage: React.FC = memo(() => {
         closeIcon={null}
         destroyOnClose
         open={open}
-        onCancel={() => setOpen(false)}
+        onCancel={closeModal}
         styles={{ body: { minHeight: 200, maxHeight: 500 } }}
       >
         <Input
