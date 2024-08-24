@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Button } from "antd";
 import { useSelector } from "@/stores";
 import { DarkIcon, LightIcon } from "@/assets/icons";
+import { ThemeModeEnum } from "@/enums";
 
 const isAppearanceTransition =
   typeof document.startViewTransition === "function" &&
@@ -12,8 +13,8 @@ const ThemeSwitch: React.FC = memo(() => {
 
   // https://github.com/vbenjs/vue-vben-admin/blob/main/packages/effects/layouts/src/widgets/theme-toggle/theme-button.vue
   function toggleTheme(event: React.MouseEvent<HTMLElement, MouseEvent>) {
-    const isDark = themeMode === "dark";
-    const newTheme = isDark ? "light" : "dark";
+    const isDark = themeMode === ThemeModeEnum.Dark;
+    const newTheme = isDark ? ThemeModeEnum.Light : ThemeModeEnum.Dark;
 
     // no support browser do nothing
     if (!isAppearanceTransition || !event) {

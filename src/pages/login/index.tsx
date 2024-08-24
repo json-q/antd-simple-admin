@@ -5,7 +5,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useTheme } from "antd-style";
 import ThemeSwitch from "@/layouts/PageHeader/components/ThemeSwitch";
 import { message } from "@/hooks/useStaticApp";
-import { TOKEN_CACHE } from "@/constants";
+import { StorageEnum } from "@/enums";
 import localCacha from "@/utils/cache/localCache";
 import { login } from "@/apis/mock";
 import type { Mock } from "@/apis/mock/typings";
@@ -24,7 +24,7 @@ const LoginPage = () => {
     const { data, code } = await login(values);
 
     if (code === 200) {
-      localCacha.set(TOKEN_CACHE, data);
+      localCacha.set(StorageEnum.Token, data);
       setLoading(false);
       message.success("登录成功！");
       navigate("/");

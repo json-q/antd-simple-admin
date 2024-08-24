@@ -1,13 +1,13 @@
 import { Space, Tooltip } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
 import { useSelector } from "@/stores";
-import { type ManyLayout } from "@/stores/modules/layoutSlice";
+import { LayoutEnum, MenuModeEnum } from "@/enums";
 import useLayoutToggleStyles from "./styles";
 
 interface LayoutShapeItemProps {
-  type: ManyLayout;
-  layoutMode: ManyLayout;
-  onSelected: (type: ManyLayout) => void;
+  type: LayoutEnum;
+  layoutMode: LayoutEnum;
+  onSelected: (type: LayoutEnum) => void;
 }
 
 enum typeEnum {
@@ -42,13 +42,13 @@ const NavSwitch: React.FC = () => {
 
   return (
     <Space className="mt-1" size={12}>
-      <LayoutShapeItem layoutMode={layout} type="side" onSelected={actionLayout} />
+      <LayoutShapeItem layoutMode={layout} type={LayoutEnum.Side} onSelected={actionLayout} />
       <LayoutShapeItem
         layoutMode={layout}
-        type="top"
+        type={LayoutEnum.Top}
         onSelected={(type) => {
           actionLayout(type);
-          actionMenuMode("light");
+          actionMenuMode(MenuModeEnum.Light);
         }}
       />
     </Space>

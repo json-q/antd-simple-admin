@@ -1,9 +1,9 @@
-import { ManyLayout } from "@/stores/modules/layoutSlice";
 import { createStyles } from "antd-style";
+import { LayoutEnum } from "@/enums";
 
 const siderBg = "#001529";
 
-export default createStyles(({ css, token }, props: ManyLayout) => ({
+export default createStyles(({ css, token }, props: LayoutEnum) => ({
   container: css`
     position: relative;
     box-sizing: border-box;
@@ -24,8 +24,8 @@ export default createStyles(({ css, token }, props: ManyLayout) => ({
       inset-block-start: 0;
       inset-inline-start: 0;
       background-color: ${siderBg};
-      z-index: ${props === "side" ? 2 : 1};
-      opacity: ${props === "top" ? 0 : 1};
+      z-index: ${props === LayoutEnum.Side ? 2 : 1};
+      opacity: ${props === LayoutEnum.Top ? 0 : 1};
     }
 
     &::after {
@@ -36,7 +36,7 @@ export default createStyles(({ css, token }, props: ManyLayout) => ({
       inset-block-start: 0;
       inset-inline-start: 0;
       z-index: 1;
-      background-color: ${props === "top" ? siderBg : token.colorBgContainer};
+      background-color: ${props === LayoutEnum.Top ? siderBg : token.colorBgContainer};
     }
   `,
 

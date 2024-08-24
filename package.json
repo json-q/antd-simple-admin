@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "eslint": "eslint . --cache",
+    "eslint": "eslint . --fix --cache",
     "stylelint": "stylelint \"**/*.{less,css,scss}\" --fix --cache",
     "postinstall": "simple-git-hooks"
   },
@@ -20,6 +20,8 @@
     "axios": "^1.7.3",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.12",
+    "i18next": "^23.14.0",
+    "i18next-browser-languagedetector": "^8.0.0",
     "immer": "^10.1.1",
     "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
@@ -30,6 +32,7 @@
     "react-error-boundary": "^4.0.13",
     "react-fast-compare": "^3.2.2",
     "react-helmet-async": "^2.0.5",
+    "react-i18next": "^15.0.1",
     "react-router-dom": "^6.26.0",
     "react-transition-group": "^4.4.5",
     "zustand": "^4.5.4"

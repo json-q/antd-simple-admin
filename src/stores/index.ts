@@ -3,6 +3,7 @@ import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 import { pick } from "lodash-es";
+import { StorageEnum } from "@/enums";
 import layoutSlice, { type LayoutSliceType } from "./modules/layoutSlice";
 import userSlice, { type UserSliceType } from "./modules/userSlice";
 import routesSlice, { type RoutesSliceType } from "./modules/routeSlice";
@@ -19,7 +20,7 @@ const useStore = createWithEqualityFn<Store>()(
           ...routesSlice(...args),
         }),
         {
-          name: "settings-config", // 本地缓存 name=>key 。partialize 函数 => return 缓存内容
+          name: StorageEnum.Settings, // 本地缓存 name=>key 。partialize 函数 => return 缓存内容
           partialize: (state) => ({
             themeMode: state.themeMode,
             menuMode: state.menuMode,

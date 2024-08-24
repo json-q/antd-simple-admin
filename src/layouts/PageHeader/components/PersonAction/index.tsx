@@ -4,7 +4,7 @@ import { Avatar, Dropdown, Flex, type MenuProps } from "antd";
 import { LockOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { message, modal } from "@/hooks/useStaticApp";
 import { useSelector } from "@/stores";
-import { LOGIN_PAGE, TOKEN_CACHE } from "@/constants";
+import { PagePathEnum, StorageEnum } from "@/enums";
 import localCacha from "@/utils/cache/localCache";
 import { logout } from "@/apis/mock";
 import usePersonActionStyles from "./styles";
@@ -59,10 +59,10 @@ const PersonAction: React.FC = memo(() => {
     async function loginOut() {
       const { code } = await logout();
       if (code === 200) {
-        localCacha.remove(TOKEN_CACHE);
+        localCacha.remove(StorageEnum.Token);
         message.success("退出成功");
         resetUserState();
-        navigate(LOGIN_PAGE);
+        navigate(PagePathEnum.Login);
       }
     }
   };

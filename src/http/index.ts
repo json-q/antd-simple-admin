@@ -2,7 +2,7 @@ import axios from "axios";
 import type { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { message } from "@/hooks/useStaticApp";
 import localCacha from "@/utils/cache/localCache";
-import { TOKEN_CACHE, TOKEN_HEADER } from "@/constants";
+import { StorageEnum } from "@/enums";
 import checkStatus from "./checkStatus";
 
 enum HttpEnum {
@@ -25,8 +25,8 @@ class RequestHttp {
 
     this.service.interceptors.request.use(
       (config) => {
-        const token = localCacha.get(TOKEN_CACHE);
-        config.headers[TOKEN_HEADER] = token;
+        const token = localCacha.get(StorageEnum.Token);
+        config.headers[StorageEnum.TokenHeader] = token;
         return config;
       },
       (error: AxiosError) => {

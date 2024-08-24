@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Switch } from "antd";
 import { useSelector } from "@/stores";
+import { MenuModeEnum } from "@/enums";
 
 const MenuToggle: React.FC = memo(() => {
   const { menuMode, layout, actionMenuMode } = useSelector([
@@ -12,8 +13,8 @@ const MenuToggle: React.FC = memo(() => {
   return (
     <Switch
       disabled={layout === "top"}
-      checked={menuMode === "dark"}
-      onChange={(checked) => actionMenuMode(checked ? "dark" : "light")}
+      checked={menuMode === MenuModeEnum.Dark}
+      onChange={(checked) => actionMenuMode(checked ? MenuModeEnum.Dark : MenuModeEnum.Light)}
     />
   );
 });

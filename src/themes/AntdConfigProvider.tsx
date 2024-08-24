@@ -1,14 +1,16 @@
 import { useCallback, useLayoutEffect } from "react";
-import { theme } from "antd";
-import { CustomTokenParams, ThemeProvider } from "antd-style";
+import { App as AntApp, ConfigProvider, theme } from "antd";
+import { CustomTokenParams, ThemeProvider, StyleProvider } from "antd-style";
 import { useSelector } from "@/stores";
 import { createCustomToken } from "./customToken";
+import useLang from "@/locales/useLang";
 
-interface ThemeControlProviderProps {
+interface AntdConfigProviderProps {
   children: React.ReactNode;
 }
 
-const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children }) => {
+const AntdConfigProvider: React.FC<AntdConfigProviderProps> = ({ children }) => {
+  const { langConfig } = useLang();
   const { themeMode, sizeMode, colorPrimary, borderRadius } = useSelector([
     "themeMode",
     "sizeMode",
@@ -30,6 +32,8 @@ const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children })
       appearance={themeMode}
       customToken={getCustomToken}
       theme={{
+        cssVar: true,
+        hashed: false,
         algorithm: sizeMode === "compact" ? theme.compactAlgorithm : undefined,
         token: {
           colorPrimary,
@@ -37,9 +41,13 @@ const ThemeControlProvider: React.FC<ThemeControlProviderProps> = ({ children })
         },
       }}
     >
-      {children}
+      <ConfigProvider locale={langConfig.antdLocal}>
+        <StyleProvider hashPriority="high">
+          <AntApp>{children}</AntApp>
+        </StyleProvider>
+      </ConfigProvider>
     </ThemeProvider>
   );
 };
 
-export default ThemeControlProvider;
+export default AntdConfigProvider;

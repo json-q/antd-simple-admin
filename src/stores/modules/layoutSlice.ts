@@ -1,27 +1,25 @@
-import type { MenuTheme } from "antd";
-import type { ResponsiveKey, ThemeAppearance } from "antd-style";
+import type { ResponsiveKey } from "antd-style";
 import type { StateCreator } from "zustand";
+import { LayoutEnum, MenuModeEnum, SizeModeEnum, ThemeModeEnum } from "@/enums";
 
 type Responsive = Partial<Record<ResponsiveKey, boolean>>;
 
-export type ManyLayout = "side" | "top";
-
 export type LayoutSliceType = {
-  menuMode: MenuTheme;
-  themeMode: ThemeAppearance;
+  menuMode: MenuModeEnum;
+  themeMode: ThemeModeEnum;
   collapsed: boolean;
   responsive: Responsive;
-  sizeMode: "default" | "compact";
-  layout: ManyLayout;
+  sizeMode: SizeModeEnum;
+  layout: LayoutEnum;
   colorPrimary: string;
   borderRadius: number;
   watermark: boolean;
-  actionThemeMode: (themeMode: ThemeAppearance) => void;
-  actionMenuMode: (themeMode: MenuTheme) => void;
+  actionThemeMode: (themeMode: ThemeModeEnum) => void;
+  actionMenuMode: (themeMode: MenuModeEnum) => void;
   actionCollapsed: (collapsed: boolean) => void;
   actionResponsive: (responsive: Responsive) => void;
-  actionSizeMode: (sizeMode: "default" | "compact") => void;
-  actionLayout: (layout: ManyLayout) => void;
+  actionSizeMode: (sizeMode: SizeModeEnum) => void;
+  actionLayout: (layout: LayoutEnum) => void;
   actionColorPrimary: (colorPrimary: string) => void;
   actionBorderRadius: (borderRadius: number) => void;
   actionWatermark: (watermark: boolean) => void;
@@ -34,12 +32,12 @@ const layoutSlice: StateCreator<
   LayoutSliceType,
   [["zustand/immer", never], ["zustand/devtools", never]]
 > = (set) => ({
-  themeMode: "light",
-  menuMode: "light",
+  themeMode: ThemeModeEnum.Light,
+  menuMode: MenuModeEnum.Light,
   collapsed: true,
   responsive: {},
-  sizeMode: "default",
-  layout: "side",
+  sizeMode: SizeModeEnum.Default,
+  layout: LayoutEnum.Side,
   colorPrimary: "#1677ff",
   borderRadius: 6,
   watermark: true,
@@ -54,10 +52,10 @@ const layoutSlice: StateCreator<
   actionWatermark: (watermark) => set({ watermark }),
   resetSetting: () =>
     set({
-      themeMode: "light",
-      menuMode: "light",
-      sizeMode: "default",
-      layout: "side",
+      themeMode: ThemeModeEnum.Light,
+      menuMode: MenuModeEnum.Light,
+      sizeMode: SizeModeEnum.Default,
+      layout: LayoutEnum.Side,
       colorPrimary: "#1677ff",
       borderRadius: 6,
       watermark: true,

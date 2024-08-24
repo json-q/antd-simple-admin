@@ -6,7 +6,7 @@ import GlobalHelmet from "@/components/GlobalHelmet";
 import Loading from "@/components/Loading";
 import useRouteMatch from "@/hooks/useRouteMatch";
 import { useSelector } from "@/stores";
-import { LOGIN_PAGE, TOKEN_CACHE } from "@/constants";
+import { PagePathEnum, StorageEnum } from "@/enums";
 import localCacha from "@/utils/cache/localCache";
 import { unAuthRoutes, type IRouteObject } from "..";
 
@@ -43,8 +43,8 @@ const AuthGuard: React.FC = memo(() => {
     const noNeedAuth = whiteRoutePaths.includes(pathname);
     if (noNeedAuth) return setLoading(false);
 
-    if (!localCacha.get(TOKEN_CACHE)) {
-      return navigate(LOGIN_PAGE, { replace: true });
+    if (!localCacha.get(StorageEnum.Token)) {
+      return navigate(PagePathEnum.Login, { replace: true });
     } else if (!currentUser) {
       // 根路由访问，网速够快情况下，可能出现连续请求两次的情况
       getCurrentUser();
@@ -58,7 +58,7 @@ const AuthGuard: React.FC = memo(() => {
       await getCurrentUserInfo();
       setLoading(false);
     } catch {
-      navigate(LOGIN_PAGE, { replace: true });
+      navigate(PagePathEnum.Login, { replace: true });
     }
   }
 

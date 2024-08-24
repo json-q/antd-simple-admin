@@ -1,17 +1,16 @@
 import { createStyles } from "antd-style";
-import type { MenuTheme } from "antd";
-import type { ManyLayout } from "@/stores/modules/layoutSlice";
+import { LayoutEnum, MenuModeEnum } from "@/enums";
 
 type LogoStylesProps = {
-  menuMode: MenuTheme;
+  menuMode: MenuModeEnum;
   md: boolean;
-  layout?: ManyLayout;
+  layout?: LayoutEnum;
 };
 
 const useLogoStyles = createStyles(({ css, token }, props: LogoStylesProps) => {
   const { menuMode, md, layout } = props;
-  const bg = menuMode === "dark" ? "#001529" : token.colorBgContainer;
-  const color = menuMode === "dark" ? "#ffffff" : token.colorText;
+  const bg = menuMode === MenuModeEnum.Dark ? "#001529" : token.colorBgContainer;
+  const color = menuMode === MenuModeEnum.Dark ? "#ffffff" : token.colorText;
 
   return {
     logo: css`
@@ -21,10 +20,12 @@ const useLogoStyles = createStyles(({ css, token }, props: LogoStylesProps) => {
       height: ${token.customHeaderHeight}px;
       line-height: ${token.customHeaderHeight}px;
       padding: ${token.paddingContentHorizontal}px ${token.paddingContentVertical}px;
-      border-right: ${layout === "top" || menuMode === "dark" || !md
+      border-right: ${layout === LayoutEnum.Top || menuMode === MenuModeEnum.Dark || !md
         ? "none"
         : `1px solid ${token.colorBorderSecondary}`};
-      border-bottom: ${layout === "top" ? `1px solid ${token.colorBorderSecondary}` : "none"};
+      border-bottom: ${layout === LayoutEnum.Top
+        ? `1px solid ${token.colorBorderSecondary}`
+        : "none"};
       color: ${color};
       background-color: ${md ? bg : token.colorBgContainer};
       cursor: pointer;

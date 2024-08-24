@@ -4,6 +4,7 @@ import { cloneDeep, isArray } from "lodash-es";
 import { useSelector } from "@/stores";
 import Loading from "@/components/Loading";
 import { validateAccess } from "@/hooks/useAccess";
+import useStaticApp from "@/hooks/useStaticApp";
 import AuthGuard from "./auth/AuthGuard";
 import type { AuthRouteObject, IRouter } from "./types";
 import { loadModuleRouter, mergeRoutePath, type ModuleType } from "./utils";
@@ -33,6 +34,7 @@ export const unAuthRoutes = loadModuleRouter(unLayoutModules).map((item) => {
 const NotFound = lazy(() => import("@/pages/404"));
 
 export default function RenderRoutes() {
+  useStaticApp(); // antd static method
   const { currentUser, actionAuthRoutes } = useSelector(["currentUser", "actionAuthRoutes"]);
 
   const authRoutes = useMemo(() => {
@@ -90,7 +92,7 @@ type GenAuthRoutesFn = (
  * @param role 用户权限
  * @returns 对应权限路由
  */
-export const genAuthRoutes: GenAuthRoutesFn = (routes, role = [], genRoutes = []) => {
+const genAuthRoutes: GenAuthRoutesFn = (routes, role = [], genRoutes = []) => {
   routes.forEach((item) => {
     const { meta, children } = item;
     const access = meta?.access;

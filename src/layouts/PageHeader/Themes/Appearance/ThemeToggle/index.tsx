@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Switch } from "antd";
 import { useSelector } from "@/stores";
+import { ThemeModeEnum } from "@/enums";
 
 const ThemeToggle: React.FC = memo(() => {
   const { themeMode, actionThemeMode } = useSelector(["themeMode", "actionThemeMode"]);
@@ -8,7 +9,7 @@ const ThemeToggle: React.FC = memo(() => {
   return (
     <Switch
       checked={themeMode === "dark"}
-      onChange={(checked) => actionThemeMode(checked ? "dark" : "ligth")}
+      onChange={(checked) => actionThemeMode(checked ? ThemeModeEnum.Dark : ThemeModeEnum.Light)}
     />
   );
 });
