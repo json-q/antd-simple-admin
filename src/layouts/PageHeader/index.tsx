@@ -10,6 +10,7 @@ import {
   FullScreen,
   LayoutSetting,
   ThemeSwitch,
+  LangSwitch,
 } from "./components";
 import DrawSider from "../PageSider/DrawSider";
 import BaseLogo from "../PageSider/components/BaseLogo";
@@ -72,6 +73,7 @@ const PageHeader: React.FC = memo(() => {
         <SearchPage />
         <Notify />
         <ThemeSwitch />
+        <LangSwitch />
         {md && <FullScreen />}
         <LayoutSetting />
         <PersonAction />

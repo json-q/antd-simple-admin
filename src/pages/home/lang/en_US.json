@@ -1,0 +1,11 @@
+{
+  "home.article.title": "Introduction",
+  "home.article.description": "This system is an extremely minimal React backend management system that only provides the most general functions for the backend. Its main features include:",
+  "home.article.feature1": "Dynamic Permission Routing",
+  "home.article.feature2": "Permission Control (Components + Hooks)",
+  "home.article.feature3": "Dynamic Theming",
+  "home.article.feature4": "Encrypted Local Storage",
+  "home.article.feature5": "Page Transition Animations",
+  "home.article.feature6": "Internationalization",
+  "home.article.antd_eg": "Ant Design Component Examples"
+}

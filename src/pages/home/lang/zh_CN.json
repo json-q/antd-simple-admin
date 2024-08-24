@@ -1,0 +1,11 @@
+{
+  "home.article.title": "介绍",
+  "home.article.description": "本系统属于极简的 react 后台管理系统，只提供了后台最为通用的功能。其主要功能如下: ",
+  "home.article.feature1": "动态权限路由",
+  "home.article.feature2": "权限控制（组件 + hook）",
+  "home.article.feature3": "动态主题",
+  "home.article.feature4": "本地存储加密",
+  "home.article.feature5": "页面切换动画",
+  "home.article.feature6": "国际化",
+  "home.article.antd_eg": "Antd 组件示例"
+}
