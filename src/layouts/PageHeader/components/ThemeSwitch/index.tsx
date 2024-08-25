@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { Button } from "antd";
 import { useSelector } from "@/stores";
-import { DarkIcon, LightIcon } from "@/assets/icons";
 import { ThemeModeEnum } from "@/enums";
+import { DarkIcon, LightIcon } from "@/assets/icons";
 
 const isAppearanceTransition =
   typeof document.startViewTransition === "function" &&

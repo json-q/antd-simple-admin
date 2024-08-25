@@ -2,11 +2,11 @@ import { memo, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Empty, Input, Modal } from "antd";
 import { EnterOutlined, SearchOutlined } from "@ant-design/icons";
+import { useKeyPress } from "ahooks";
 import { debounce } from "lodash-es";
 import { useSelector } from "@/stores";
 import { type IRouteObject } from "@/routes";
 import useSearchStyles from "./styles";
-import { useKeyPress } from "ahooks";
 
 const SearchPage: React.FC = memo(() => {
   const { styles, cx } = useSearchStyles();

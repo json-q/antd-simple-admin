@@ -6,6 +6,7 @@ import {
   QuestionCircleOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
+import { useSelector } from "@/stores";
 import {
   ColorSelect,
   MenuToggle,
@@ -15,7 +16,6 @@ import {
 } from "../../Themes/Appearance";
 import { NavSwitch } from "../../Themes/Layout";
 import { WatermarkToggle, ResetSetting } from "../../Themes/Common";
-import { useSelector } from "@/stores";
 
 type ConfigItemProps = {
   title: React.ReactNode;
