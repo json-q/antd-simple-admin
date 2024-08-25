@@ -6,7 +6,7 @@ const Login = lazy(() => import("@/pages/login"));
 const login: IRouteObject[] = [
   {
     path: "/login",
-    title: "登录页",
+    title: "menu.login",
     element: <Login />,
   },
 ];

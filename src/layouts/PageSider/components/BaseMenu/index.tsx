@@ -1,5 +1,6 @@
 import { memo, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { Menu } from "antd";
 import type { MenuItemType, SubMenuType } from "antd/es/menu/interface";
@@ -8,6 +9,7 @@ import { isArray } from "lodash-es";
 import { useSelector } from "@/stores";
 import { IRouteObject } from "@/routes";
 import { mergePath } from "@/routes/utils";
+import useLang from "@/locales/useLang";
 import useMenuWrapperStyles from "./styles";
 
 type MenusType = MenuItemType & Partial<SubMenuType>;
@@ -19,6 +21,8 @@ interface BaseMenuProps {
 
 const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll, mode = "inline" }) => {
   const { styles } = useMenuWrapperStyles();
+  const { lang } = useLang();
+  const { t } = useTranslation();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const { menuMode, collapsed, authRoutes, matchRoute } = useSelector([
@@ -35,7 +39,7 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll, mode = "inline" })
   useDeepCompareEffect(() => {
     // top Menu don't need openKeys
     if (mode === "horizontal") return;
-    // 若 sider 处于展开状态，则默认需要展开对应的子级菜单
+    // sider collapsed is false. open menu keys by matchRoute
     if (collapsed === false) {
       setOpenKeys(matchRoute.treeRoute.map((item) => item.path));
     } else {
@@ -49,8 +53,8 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll, mode = "inline" })
         .filter((item) => item.meta?.hideMenu !== true)
         .map((item) => {
           const path = mergePath(item.path, parentPath);
-
-          const label = item.title || item.meta?.title || item.path;
+          const _label = item.title || item.meta?.title;
+          const label = _label ? t(_label) : item.path;
           const hasChildren = isArray(item.children) && item.children.length > 0;
           const menuItem: MenusType = {
             label: hasChildren ? label : <Link to={path}>{label}</Link>,
@@ -65,7 +69,7 @@ const BaseMenu: React.FC<BaseMenuProps> = memo(({ hideScroll, mode = "inline" })
     }
 
     return genBaseMenus(authRoutes);
-  }, [authRoutes]);
+  }, [authRoutes, lang]);
 
   const menuDom = (
     <Menu

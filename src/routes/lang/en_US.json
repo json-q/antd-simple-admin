@@ -1,0 +1,13 @@
+{
+  "route.home": "Home",
+  "route.role": "Role Example",
+  "route.role.admin": "Admin Page",
+  "route.role.user": "User Page",
+  "route.nest": "Nested Menu",
+  "route.nest.menu1": "Menu 1",
+  "route.nest.menu2": "Menu 2",
+  "route.nest.menu1.m1": "Menu 1-1",
+  "route.nest.menu1.m2": "Menu 1-2",
+  "route.nest.menu1.m1.m1": "Menu 1-1-1",
+  "route.nest.menu1.m1.m2": "Menu 1-1-2"
+}

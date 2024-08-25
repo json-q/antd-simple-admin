@@ -11,38 +11,38 @@ const nested: IRouteObject[] = [
   {
     order: 9,
     path: "nested",
-    title: "嵌套菜单",
+    title: "route.nest",
     icon: <ProductOutlined />,
     children: [
       {
-        title: "菜单1",
+        title: "route.nest.menu1",
         path: "menu1",
         children: [
           {
-            title: "菜单1-1",
+            title: "route.nest.menu1.m1",
             path: "menu1-1",
             children: [
               {
-                title: "菜单1-1-1",
+                title: "route.nest.menu1.m1.m1",
                 path: "menu1-1-1",
                 element: <Menu111 />,
               },
               {
-                title: "菜单1-1-2",
+                title: "route.nest.menu1.m1.m2",
                 path: "menu1-1-2",
                 element: <Menu112 />,
               },
             ],
           },
           {
-            title: "菜单1-2",
+            title: "route.nest.menu1.m2",
             path: "menu1-2",
             element: <Menu12 />,
           },
         ],
       },
       {
-        title: "菜单2",
+        title: "route.nest.menu2",
         path: "menu2",
         element: <Menu2 />,
       },

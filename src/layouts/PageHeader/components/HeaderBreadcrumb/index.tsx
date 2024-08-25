@@ -1,12 +1,16 @@
 import { memo, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Breadcrumb, Space } from "antd";
 import type { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import { isArray } from "lodash-es";
 import { useSelector } from "@/stores";
-import { IRouteObject } from "@/routes";
+import type { IRouteObject } from "@/routes";
+import useLang from "@/locales/useLang";
 
 const HeaderBreadcrumb: React.FC = memo(() => {
+  const { lang } = useLang();
+  const { t } = useTranslation();
   const { authRoutes, matchRoute } = useSelector(["authRoutes", "matchRoute"]);
 
   const genBreadcumbs = useMemo(() => {
@@ -14,7 +18,8 @@ const HeaderBreadcrumb: React.FC = memo(() => {
 
     const genBaseBreadcumbs = (treeRoutes: IRouteObject[] = [], isChildren = false): ItemType[] => {
       const parentBreadcumbs = treeRoutes.map((item) => {
-        const title = item.title || item.meta?.title;
+        const _title = item.title || item.meta?.title;
+        const title = _title ? t(_title) : item.path;
         const icon = item.icon;
         const hasChildren = isArray(item.children) && item.children.length > 0;
 
@@ -50,7 +55,7 @@ const HeaderBreadcrumb: React.FC = memo(() => {
     };
 
     return genBaseBreadcumbs(matchRoute.treeRoute);
-  }, [authRoutes, matchRoute.treeRoute]);
+  }, [authRoutes, matchRoute.treeRoute, lang]);
 
   function itemRender(currentRoute: ItemType) {
     // 生成时已完全处理，这里返回仅仅是为了不让 antd 再二次处理

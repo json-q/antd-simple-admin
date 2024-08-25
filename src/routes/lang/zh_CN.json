@@ -1,0 +1,14 @@
+{
+  "route.login": "登录页",
+  "route.home": "首页",
+  "route.role": "权限示例",
+  "route.role.admin": "Admin 页面",
+  "route.role.user": "User 页面",
+  "route.nest": "嵌套菜单",
+  "route.nest.menu1": "菜单1",
+  "route.nest.menu2": "菜单2",
+  "route.nest.menu1.m1": "菜单1-1",
+  "route.nest.menu1.m2": "菜单1-2",
+  "route.nest.menu1.m1.m1": "菜单1-1-1",
+  "route.nest.menu1.m1.m2": "菜单1-1-2"
+}

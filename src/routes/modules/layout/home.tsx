@@ -8,7 +8,7 @@ const account: IRouteObject[] = [
   {
     order: 1,
     path: "home",
-    title: "首页",
+    title: "route.home",
     icon: <HomeOutlined />,
     element: <Home />,
   },

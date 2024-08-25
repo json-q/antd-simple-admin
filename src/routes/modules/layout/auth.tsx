@@ -9,17 +9,17 @@ const auth: IRouteObject[] = [
   {
     order: 2,
     path: "auth",
-    title: "权限示例",
+    title: "route.role",
     icon: <SafetyCertificateOutlined />,
     children: [
       {
-        title: "Admin页面",
+        title: "route.role.admin",
         path: "admin",
         element: <Admin />,
         meta: { access: "admin" },
       },
       {
-        title: "User页面",
+        title: "route.role.user",
         path: "user",
         element: <User />,
         meta: { access: ["admin", "user"] },
