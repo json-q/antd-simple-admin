@@ -9,6 +9,7 @@ import { useSelector } from "@/stores";
 import { PagePathEnum, StorageEnum } from "@/enums";
 import localCacha from "@/utils/cache/localCache";
 import { unAuthRoutes, type IRouteObject } from "..";
+import { useTranslation } from "react-i18next";
 
 const PageLayout = lazy(() => import("@/layouts"));
 
@@ -17,6 +18,7 @@ const PageLayout = lazy(() => import("@/layouts"));
  */
 const AuthGuard: React.FC = memo(() => {
   useRouteMatch(); // 自动同步当前路由
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { currentUser, getCurrentUserInfo } = useSelector(["currentUser", "getCurrentUserInfo"]);
@@ -63,10 +65,10 @@ const AuthGuard: React.FC = memo(() => {
   }
 
   // 认证期间，一直处于 loading 状态，不渲染页面路由，防止闪屏
-  if (loading) return <Loading tip="认证中" indicator={<LoadingOutlined />} />;
+  if (loading) return <Loading tip={t("common.authenticating")} indicator={<LoadingOutlined />} />;
 
   return (
-    <Suspense fallback={<Loading tip="加载中" />}>
+    <Suspense fallback={<Loading tip={t("common.loading")} />}>
       <GlobalHelmet />
       <PageLayout />
     </Suspense>

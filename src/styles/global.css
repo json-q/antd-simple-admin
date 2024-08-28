@@ -16,8 +16,8 @@
 
   /* default scrollbar width is thin  */
   * {
-    scrollbar-width: thin;
     scrollbar-color: unset;
+    scrollbar-width: thin;
   }
 
   body {

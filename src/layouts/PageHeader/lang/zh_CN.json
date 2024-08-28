@@ -1,0 +1,19 @@
+{
+  "setting.drawer.title": "系统本地设置",
+  "setting.appearance": "外观设置",
+  "setting.appearance.theme": "暗黑主题",
+  "setting.appearance.menu": "暗色菜单",
+  "setting.appearance.compact": "紧凑风格",
+  "setting.appearance.color": "主题颜色",
+  "setting.appearance.raduis": "圆角大小",
+  "setting.layout": "布局设置",
+  "setting.layout.nav": "导航模式",
+  "setting.common": "导航模式",
+  "setting.common.watermark": "导航模式",
+  "setting.common.reset": "导航模式",
+
+  "person.password.menu.label": "修改密码",
+  "person.logout.menu.label": "退出登录",
+  "logout.confirm.title": "温馨提示",
+  "logout.confirm.content": "是否确认退出登录?"
+}

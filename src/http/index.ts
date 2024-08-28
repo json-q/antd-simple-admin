@@ -1,9 +1,12 @@
 import axios from "axios";
 import type { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import { message } from "@/hooks/useStaticApp";
+import i18n from "@/locales/i18n";
 import localCacha from "@/utils/cache/localCache";
 import { StorageEnum } from "@/enums";
 import checkStatus from "./checkStatus";
+
+const { t } = i18n;
 
 enum HttpEnum {
   SUCCESS = 200,
@@ -54,7 +57,7 @@ class RequestHttp {
       (error: AxiosError) => {
         const { response } = error;
         // 请求超时没有 response
-        if (error.message.indexOf("timeout") !== -1) message.error("请求超时，请稍后再试");
+        if (error.message.indexOf("timeout") !== -1) message.error(t("request.timeout"));
         else if (response) checkStatus(response.status);
         return Promise.reject(error);
       },

@@ -1,0 +1,14 @@
+{
+  "request.400": "Request failed! Please try again later.",
+  "request.401": "Session expired! Please log in again.",
+  "request.403": "Access denied.",
+  "request.404": "Resource not found.",
+  "request.405": "Invalid request method! Please try again later.",
+  "request.408": "Request timed out! Please try again later.",
+  "request.500": "Server error!",
+  "request.502": "Gateway error.",
+  "request.503": "Service unavailable.",
+  "request.504": "Gateway timeout.",
+  "request.default": "Request failed.",
+  "request.timeout": "Request timeout! Please try again later"
+}

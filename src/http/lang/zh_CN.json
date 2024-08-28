@@ -1,0 +1,14 @@
+{
+  "request.400": "请求失败! 请稍后重试",
+  "request.401": "登录失效! 请重新登录",
+  "request.403": "无权访问",
+  "request.404": "资源不存在",
+  "request.405": "请求方式错误! 请稍后重试",
+  "request.408": "请求超时! 请稍后重试",
+  "request.500": "服务异常！",
+  "request.502": "网关错误",
+  "request.503": "服务不可用",
+  "request.504": "网关超时",
+  "request.default": "请求失败",
+  "request.timeout": "请求超时! 请稍后重试"
+}

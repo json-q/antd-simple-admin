@@ -1,0 +1,19 @@
+{
+  "setting.drawer.title": "System Local Settings",
+  "setting.appearance": "Appearance Settings",
+  "setting.appearance.theme": "Dark Theme",
+  "setting.appearance.menu": "Dark Menu",
+  "setting.appearance.compact": "Compact Style",
+  "setting.appearance.color": "Theme Color",
+  "setting.appearance.radius": "Corner Radius",
+  "setting.layout": "Layout Settings",
+  "setting.layout.nav": "Navigation Mode",
+  "setting.common": "Common Settings",
+  "setting.common.watermark": "Watermark",
+  "setting.common.reset": "Reset",
+
+  "person.password.menu.label": "Change Password",
+  "person.logout.menu.label": "Log Out",
+  "logout.confirm.title": "Notice",
+  "logout.confirm.content": "Are you sure you want to log out?"
+}

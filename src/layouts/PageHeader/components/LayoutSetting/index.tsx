@@ -1,4 +1,5 @@
 import { memo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Card, Divider, Drawer, Flex, Space, Tooltip, type FlexProps } from "antd";
 import {
   BgColorsOutlined,
@@ -23,7 +24,6 @@ type ConfigItemProps = {
   description?: React.ReactNode;
 } & Omit<FlexProps, "children" | "content">;
 
-/** 设置区域内容的 Card 组件 */
 const ConfigItem: React.FC<ConfigItemProps> = ({ title, content, description, ...rest }) => {
   return (
     <Card size="small" bordered={false} hoverable className="mb-4">
@@ -43,6 +43,7 @@ const ConfigItem: React.FC<ConfigItemProps> = ({ title, content, description, ..
 };
 
 const LayoutSetting: React.FC = memo(() => {
+  const { t } = useTranslation();
   const [openSetting, setOpenSetting] = useState(false);
   const { responsive } = useSelector(["responsive"]);
 
@@ -55,7 +56,7 @@ const LayoutSetting: React.FC = memo(() => {
         onClick={() => setOpenSetting(true)}
       />
       <Drawer
-        title="系统本地设置"
+        title={t("setting.drawer.title")}
         placement="right"
         open={openSetting}
         onClose={() => setOpenSetting(false)}
@@ -63,14 +64,19 @@ const LayoutSetting: React.FC = memo(() => {
         <Divider plain style={{ marginTop: 0 }}>
           <Space>
             <BgColorsOutlined />
-            <span>外观设置</span>
+            <span>{t("setting.appearance")}</span>
           </Space>
         </Divider>
-        <ConfigItem title="暗黑主题" content={<ThemeToggle />} />
-        <ConfigItem title="暗色菜单" content={<MenuToggle />} />
-        <ConfigItem title="紧凑风格" content={<SizeToggle />} />
-        <ConfigItem title="主题颜色" content={<ColorSelect />} vertical align="flex-start" />
-        <ConfigItem title="圆角大小" content={<RaduisAdjust />} />
+        <ConfigItem title={t("setting.appearance.theme")} content={<ThemeToggle />} />
+        <ConfigItem title={t("setting.appearance.menu")} content={<MenuToggle />} />
+        <ConfigItem title={t("setting.appearance.compact")} content={<SizeToggle />} />
+        <ConfigItem
+          title={t("setting.appearance.color")}
+          content={<ColorSelect />}
+          vertical
+          align="flex-start"
+        />
+        <ConfigItem title={t("setting.appearance.raduis")} content={<RaduisAdjust />} />
 
         {/* small screen only one layout */}
         {responsive.md && (
@@ -78,21 +84,21 @@ const LayoutSetting: React.FC = memo(() => {
             <Divider plain>
               <Space>
                 <LayoutOutlined />
-                <span>布局设置</span>
+                <span>{t("setting.layout")}</span>
               </Space>
             </Divider>
-            <ConfigItem title="导航模式" content={<NavSwitch />} />
+            <ConfigItem title={t("setting.layout.nav")} content={<NavSwitch />} />
           </>
         )}
 
         <Divider plain>
           <Space>
             <LayoutOutlined />
-            <span>通用设置</span>
+            <span>{t("setting.common")}</span>
           </Space>
         </Divider>
-        <ConfigItem title="水印" content={<WatermarkToggle />} />
-        <ConfigItem title="重置主题" content={<ResetSetting />} />
+        <ConfigItem title={t("setting.common.watermark")} content={<WatermarkToggle />} />
+        <ConfigItem title={t("setting.common.reset")} content={<ResetSetting />} />
       </Drawer>
     </>
   );

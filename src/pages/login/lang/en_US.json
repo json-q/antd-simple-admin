@@ -1,0 +1,16 @@
+{
+  "login": {
+    "description": "A sleek React admin dashboard",
+    "username": {
+      "placeholder": "Username: admin or user",
+      "required": "Please enter your username!"
+    },
+    "password": {
+      "placeholder": "Password: 123456",
+      "required": "Please enter your password!"
+    },
+    "submit": "Login",
+    "success": "Login successful!",
+    "fail": "Login failed!"
+  }
+}

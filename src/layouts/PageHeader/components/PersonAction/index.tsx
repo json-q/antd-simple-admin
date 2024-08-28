@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Avatar, Dropdown, Flex, type MenuProps } from "antd";
 import { LockOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { message, modal } from "@/hooks/useStaticApp";
@@ -16,6 +17,7 @@ enum MenuItemKey {
 
 const PersonAction: React.FC = memo(() => {
   const { styles } = usePersonActionStyles();
+  const { t } = useTranslation();
   const { currentUser, resetUserState, responsive } = useSelector([
     "currentUser",
     "resetUserState",
@@ -25,13 +27,13 @@ const PersonAction: React.FC = memo(() => {
 
   const items: MenuProps["items"] = [
     {
-      label: "修改密码",
+      label: t("person.password.menu.label"),
       key: MenuItemKey.PASSWORD,
       icon: <LockOutlined />,
     },
     { type: "divider" },
     {
-      label: "退出登录",
+      label: t("person.logout.menu.label"),
       key: MenuItemKey.LOGOUT,
       danger: true,
       icon: <LogoutOutlined />,
@@ -51,8 +53,8 @@ const PersonAction: React.FC = memo(() => {
 
   const onClickLogout = () => {
     modal.confirm({
-      title: "温馨提示",
-      content: "是否确认退出登录？",
+      title: t("logout.confirm.title"),
+      content: t("logout.confirm.content"),
       onOk: loginOut,
     });
 
@@ -60,7 +62,7 @@ const PersonAction: React.FC = memo(() => {
       const { code } = await logout();
       if (code === 200) {
         localCacha.remove(StorageEnum.Token);
-        message.success("退出成功");
+        message.success(t("common.logout.success"));
         resetUserState();
         navigate(PagePathEnum.Login);
       }

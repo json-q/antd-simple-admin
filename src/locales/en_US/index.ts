@@ -1,3 +1,5 @@
+import common from "./common.json";
+
 const en_USModule = import.meta.glob<true, string, Record<string, string>>(
   ["../../**/lang/en_US.json", "../../**/lang/en_US.ts"],
   { eager: true },
@@ -12,5 +14,6 @@ Object.keys(en_USModule).forEach((key) => {
 
 export default {
   // you can add your own locale here, eg: ...common
+  ...common,
   ...en_US,
 };

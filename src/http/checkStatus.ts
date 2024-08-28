@@ -1,4 +1,7 @@
 import { message } from "@/hooks/useStaticApp";
+import i18n from "@/locales/i18n";
+
+const { t } = i18n;
 
 /**
  * @description: 校验网络请求状态码
@@ -8,37 +11,37 @@ import { message } from "@/hooks/useStaticApp";
 const checkStatus = (status: number): void => {
   switch (status) {
     case 400:
-      message.error("请求失败！请您稍后重试");
+      message.error(t("request.400"));
       break;
     case 401:
-      message.error("登录失效！请您重新登录");
+      message.error(t("request.401"));
       break;
     case 403:
-      message.error("当前账号无权限访问！");
+      message.error(t("request.403"));
       break;
     case 404:
-      message.error("你所访问的资源不存在！");
+      message.error(t("request.404"));
       break;
     case 405:
-      message.error("请求方式错误！请您稍后重试");
+      message.error(t("request.405"));
       break;
     case 408:
-      message.error("请求超时！请您稍后重试");
+      message.error(t("request.408"));
       break;
     case 500:
-      message.error("服务异常！");
+      message.error(t("request.500"));
       break;
     case 502:
-      message.error("网关错误！");
+      message.error(t("request.502"));
       break;
     case 503:
-      message.error("服务不可用！");
+      message.error(t("request.503"));
       break;
     case 504:
-      message.error("网关超时！");
+      message.error(t("request.504"));
       break;
     default:
-      message.error("请求失败！");
+      message.error(t("request.default"));
   }
 };
 

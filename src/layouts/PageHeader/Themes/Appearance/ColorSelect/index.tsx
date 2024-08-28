@@ -3,7 +3,17 @@ import { ColorPicker, Space } from "antd";
 import { useTheme } from "antd-style";
 import { CheckOutlined } from "@ant-design/icons";
 import { useSelector } from "@/stores";
-import { themeColors } from "./color";
+
+const themeColors = [
+  "#1677ff",
+  "#1890ff",
+  "#f7531c",
+  "#f7ab14",
+  "#13bdbd",
+  "#51c11a",
+  "#2f54eb",
+  "#722ed1",
+];
 
 interface ColorItemProps {
   bgColor: string;
@@ -29,7 +39,7 @@ const ColorSelect: React.FC = memo(() => {
 
   return (
     <Space wrap size="small" direction="horizontal" className="mt-1">
-      {themeColors.map(({ color }) => (
+      {themeColors.map((color) => (
         <ColorItem
           borderRadius={borderRadius}
           key={color}
