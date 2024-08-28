@@ -36,7 +36,7 @@ export default defineFakeRoute([
 
       const data = {
         id: faker.string.uuid(),
-        nickName: faker.person.fullName(),
+        nickName: faker.person.middleName(),
         avatar: faker.image.avatar(),
         email: faker.internet.email(),
         sex: faker.person.sexType(),
